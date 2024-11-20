@@ -22,13 +22,21 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
 }) => {
   return (
     <Flex justify="space-between" alignItems="center" mt="4">
-      <Button onClick={onPrevious} isDisabled={isFirst}>
+      <Button
+        onClick={onPrevious}
+        disabled={isFirst}
+        colorScheme={isFirst ? "gray" : "blue"}
+      >
         Last Page
       </Button>
       <Text>
         Página {currentPage + 1} de {totalPages}
       </Text>
-      <Button onClick={onNext} isDisabled={isLast}>
+      <Button
+        onClick={onNext}
+        disabled={isLast}
+        colorScheme={isLast ? "gray" : "blue"}
+      >
         Next Page
       </Button>
     </Flex>

@@ -29,6 +29,8 @@ const RecordsTable = (): React.JSX.Element => {
     itemsPerPage
   );
 
+  console.log("isFirst: ", isFirst, "isLast: ", isLast);
+
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
     setCurrentPage(0);
@@ -130,8 +132,8 @@ const RecordsTable = (): React.JSX.Element => {
       <PaginationControls
         currentPage={currentPage}
         totalPages={totalPages}
-        isFirst={isFirst}
-        isLast={isLast}
+        isFirst={currentPage === 0}
+        isLast={currentPage + 1 === totalPages}
         onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
         onNext={() =>
           setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
