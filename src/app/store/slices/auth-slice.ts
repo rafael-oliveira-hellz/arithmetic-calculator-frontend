@@ -1,5 +1,5 @@
 import { storage } from "@/app/utils/storage";
-import { Record } from "@/shared/interfaces/record";
+import { Record } from "@/shared/interfaces/records";
 import { AuthState } from "@/shared/types/auth-state";
 import { IUser } from "@/shared/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";

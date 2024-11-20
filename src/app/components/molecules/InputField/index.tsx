@@ -11,11 +11,11 @@ import {
 } from "@chakra-ui/icons";
 import Text from "../../atoms/Text";
 
-interface InputFieldProps extends InputProps {
+interface InputFieldProps extends Omit<InputProps, "onChange"> {
   id: string;
   value: string;
   placeholder?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: (value: string) => void;
   iconType?: "name" | "email" | "password";
   isValid?: boolean;
   errorMessage?: string;
@@ -32,7 +32,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   placeholder,
   onChange,
-  iconType = "email",
+  iconType,
   isValid,
   errorMessage,
   ...rest
@@ -44,32 +44,34 @@ const InputField: React.FC<InputFieldProps> = ({
   const inputType =
     iconType === "password" && !showPassword ? "password" : "text";
 
-  const LeftIcon = iconComponents[iconType];
+  const LeftIcon = iconType && iconComponents[iconType];
 
   const borderColor =
     isValid === undefined ? "gray.300" : isValid ? "green.500" : "red.500";
 
   return (
     <Box mb={4} width="100%" position="relative">
-      <Box
-        position="absolute"
-        top="50%"
-        left="0.75rem"
-        transform="translateY(-50%)"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        pointerEvents="none"
-        zIndex={1}
-      >
-        <LeftIcon color="gray.600" />
-      </Box>
+      {LeftIcon && iconType && iconType !== "password" && (
+        <Box
+          position="absolute"
+          top="50%"
+          left="0.75rem"
+          transform="translateY(-50%)"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          pointerEvents="none"
+          zIndex={1}
+        >
+          <LeftIcon color="gray.600" />
+        </Box>
+      )}
 
       <Input
         id={id}
         value={value}
         type={inputType}
-        onChange={onChange}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete="on"
         pl="2.75rem"

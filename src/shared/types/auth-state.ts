@@ -1,4 +1,4 @@
-import { Record } from "../interfaces/record";
+import { Record } from "../interfaces/records";
 import { IUser } from "./user";
 
 export interface AuthState {

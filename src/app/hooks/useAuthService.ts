@@ -12,9 +12,10 @@ import {
 } from "../store/slices/auth-slice";
 import { AppDispatch } from "../store/store";
 import { IUser } from "@/shared/types/user";
-import { Record, RecordsResponse } from "@/shared/interfaces/record";
+import { Record, RecordsResponse } from "@/shared/interfaces/records";
 import { useRouter } from "next/navigation";
 import { useToast } from "./useToast";
+import { OperationsResponse } from "@/shared/interfaces/operations";
 
 export const useAuthService = () => {
   const api = useApi();
@@ -116,10 +117,7 @@ export const useAuthService = () => {
     return latestRecord.userBalance;
   };
 
-  const fetchRecords = async (
-    userId: string,
-    balance: number
-  ): Promise<void> => {
+  const fetchRecords = async (balance: number): Promise<Record[]> => {
     try {
       const response = await api.get<RecordsResponse>("/records");
 
@@ -127,10 +125,25 @@ export const useAuthService = () => {
 
       dispatch(updateRecords(response.content));
       dispatch(updateBalance(latestBalance));
+
+      return response.content;
     } catch (error) {
       toast.showToast({
         title: "Erro",
         description: "Falha ao buscar registros.",
+        status: "error",
+      });
+      throw error;
+    }
+  };
+
+  const fetchOperations = async (): Promise<OperationsResponse> => {
+    try {
+      return await api.get<OperationsResponse>("/operations");
+    } catch (error) {
+      toast.showToast({
+        title: "Erro",
+        description: "Falha ao buscar operações.",
         status: "error",
       });
       throw error;
@@ -167,5 +180,6 @@ export const useAuthService = () => {
     performOperation,
     fetchRecords,
     deleteRecord,
+    fetchOperations,
   };
 };

@@ -1,21 +1,13 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import {
-  Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Input,
-  Button,
-  Flex,
-  Text,
-} from "@chakra-ui/react";
-import { Record } from "@/shared/interfaces/record";
+import { Box, Table, Tbody, Flex, Text, Button } from "@chakra-ui/react";
+import { Record } from "@/shared/interfaces/records";
 import Dropdown from "../../atoms/Dropdown";
+import RecordTableHeader from "../../molecules/RecordTableHeader";
+import RecordTableRow from "../../molecules/RecordTableRow";
+import FilterInput from "../../molecules/FilterInput";
+import PaginationControls from "../../molecules/PaginationControls";
 
 interface RecordsTableProps {
   records: Record[];
@@ -31,10 +23,9 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const recordsPerPage = 10;
 
-  // Garante que records seja um array antes de usar
   const filteredRecords = useMemo(() => {
     return records
-      .filter((record) => !record.deleted) // Filtra apenas os que não estão deletados
+      .filter((record) => !record.deleted)
       .filter((record) =>
         filters.type ? record.operation.type.includes(filters.type) : true
       )
@@ -62,6 +53,8 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
     return sortedRecords.slice(start, end);
   }, [sortedRecords, currentPage]);
 
+  const totalPages = Math.ceil(sortedRecords.length / recordsPerPage);
+
   return (
     <Box>
       <Flex justify="space-between" mb="4" alignItems="center">
@@ -72,13 +65,14 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
           onClick={() =>
             setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
           }
-          colorScheme="teal"
+          bg="#14CFB1"
+          color="#FFF"
+          _hover={{ bg: "#12B49C" }}
         >
           Ordenar por Data ({sortOrder === "asc" ? "Asc" : "Desc"})
         </Button>
       </Flex>
 
-      {/* Filtros */}
       <Flex gap="4" mb="4">
         <Dropdown
           placeholder="Filtrar por Tipo"
@@ -94,74 +88,32 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
           onChange={(value) => setFilters((prev) => ({ ...prev, type: value }))}
         />
 
-        <Input
+        <FilterInput
           placeholder="Filtrar por Valor"
           value={filters.amount}
-          onChange={(e) =>
-            setFilters((prev) => ({ ...prev, amount: e.target.value }))
-          }
-        />
-
-        <Input
-          placeholder="Filtrar por Data"
-          value={filters.date}
-          onChange={(e) =>
-            setFilters((prev) => ({ ...prev, date: e.target.value }))
+          onChange={(value) =>
+            setFilters((prev) => ({ ...prev, amount: value }))
           }
         />
       </Flex>
 
-      {/* Tabela */}
       <Table variant="simple">
-        <Thead>
-          <Tr>
-            <Th>Tipo</Th>
-            <Th>Valor</Th>
-            <Th>Resposta</Th>
-            <Th>Saldo do Usuário</Th>
-            <Th>Data</Th>
-          </Tr>
-        </Thead>
+        <RecordTableHeader />
         <Tbody>
           {paginatedRecords.map((record) => (
-            <Tr key={record.id}>
-              <Td>{record.operation.type}</Td>
-              <Td>{record.amount}</Td>
-              <Td>{record.operationResponse}</Td>
-              <Td>{record.userBalance}</Td>
-              <Td>{new Date(record.date).toLocaleString()}</Td>
-            </Tr>
+            <RecordTableRow key={record.id} record={record} />
           ))}
         </Tbody>
       </Table>
 
-      {/* Paginação */}
-      <Flex justify="space-between" alignItems="center" mt="4">
-        <Button
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-          isDisabled={currentPage === 0}
-        >
-          Página Anterior
-        </Button>
-        <Text>
-          Página {currentPage + 1} de{" "}
-          {Math.ceil(sortedRecords.length / recordsPerPage)}
-        </Text>
-        <Button
-          onClick={() =>
-            setCurrentPage((prev) =>
-              prev + 1 < Math.ceil(sortedRecords.length / recordsPerPage)
-                ? prev + 1
-                : prev
-            )
-          }
-          isDisabled={
-            currentPage + 1 >= Math.ceil(sortedRecords.length / recordsPerPage)
-          }
-        >
-          Próxima Página
-        </Button>
-      </Flex>
+      <PaginationControls
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+        onNext={() =>
+          setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
+        }
+      />
     </Box>
   );
 };
