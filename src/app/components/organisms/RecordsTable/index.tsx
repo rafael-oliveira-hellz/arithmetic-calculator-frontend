@@ -1,46 +1,31 @@
 "use client";
 
-import React, { useCallback, useState, useMemo, useEffect } from "react";
-import { Box, Table, Tbody, Flex, Text, Select } from "@chakra-ui/react";
+import React, { useCallback, useState, useMemo } from "react";
+import {
+  Box,
+  Table,
+  Tbody,
+  Flex,
+  Text,
+  Select,
+  Spinner,
+} from "@chakra-ui/react";
 import RecordTableHeader from "../../molecules/RecordTableHeader";
 import RecordTableRow from "../../molecules/RecordTableRow";
 import PaginationControls from "../../molecules/PaginationControls";
 import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
-import { RootState } from "@/app/store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { setRecords } from "@/app/store/slices/record-slice";
 
 const RecordsTable = (): React.JSX.Element => {
-  const dispatch = useDispatch();
-
-  const { fetchRecords } = useRecordService();
-  const { records, totalPages, isFirst, isLast } = useSelector(
-    (state: RootState) => state.records
-  );
+  const { useRecords } = useRecordService();
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
-  useEffect(() => {
-    const loadRecords = async () => {
-      try {
-        const response = await fetchRecords(currentPage, itemsPerPage);
-        dispatch(
-          setRecords({
-            records: response.content,
-            totalPages: response.totalPages,
-            isFirst: response.first,
-            isLast: response.last,
-          })
-        );
-      } catch (error) {
-        console.error("Erro ao buscar registros:", error);
-      }
-    };
-
-    loadRecords();
-  }, [currentPage, itemsPerPage, fetchRecords, dispatch]);
+  const { records, totalPages, isFirst, isLast, isLoading, error } = useRecords(
+    currentPage,
+    itemsPerPage
+  );
 
   const [filters, setFilters] = useState({
     type: "",
@@ -70,6 +55,18 @@ const RecordsTable = (): React.JSX.Element => {
           : true
       );
   }, [records, filters]);
+
+  if (isLoading) {
+    return (
+      <Flex justify="center" align="center" h="100%">
+        <Spinner size="lg" color="blue.500" />
+      </Flex>
+    );
+  }
+
+  if (error) {
+    return <Text color="red.500">Erro ao carregar registros.</Text>;
+  }
 
   return (
     <Box>

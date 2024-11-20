@@ -1,11 +1,11 @@
 "use client";
 
 import { useToast } from "./useToast";
-
+import useSWR from "swr";
 import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { removeRecord, setRecords } from "../store/slices/record-slice";
+import { removeRecord } from "../store/slices/record-slice";
 import { RecordsResponse } from "@/shared/interfaces/records";
 
 export const useRecordService = () => {
@@ -13,23 +13,42 @@ export const useRecordService = () => {
   const toast = useToast();
   const dispatch: AppDispatch = useDispatch();
 
+  // Função de fetch para usar no SWR
   const fetchRecords = async (
     page: number,
     itemsPerPage: number
   ): Promise<RecordsResponse> => {
-    const response = await api.get<RecordsResponse>(
-      `/records?page=${page}&size=${itemsPerPage}`
-    );
-    dispatch(
-      setRecords({
-        records: response.content,
-        totalPages: response.totalPages,
-        isFirst: response.first,
-        isLast: response.last,
-      })
+    try {
+      const response = await api.get<RecordsResponse>(
+        `/records?page=${page}&size=${itemsPerPage}`
+      );
+      return response;
+    } catch (error) {
+      console.error("Erro ao buscar registros:", error);
+      throw error;
+    }
+  };
+
+  // Hook para gerenciar registros
+  const useRecords = (page: number, itemsPerPage: number) => {
+    const { data, error, isValidating } = useSWR(
+      [`/records`, page, itemsPerPage],
+      () => fetchRecords(page, itemsPerPage),
+      {
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        dedupingInterval: 5000,
+      }
     );
 
-    return response;
+    return {
+      records: data?.content || [],
+      totalPages: data?.totalPages || 0,
+      isFirst: data?.first || true,
+      isLast: data?.last || true,
+      isLoading: !data && !error && isValidating,
+      error,
+    };
   };
 
   const deleteRecord = async (recordId: string): Promise<void> => {
@@ -52,7 +71,7 @@ export const useRecordService = () => {
   };
 
   return {
-    fetchRecords,
     deleteRecord,
+    useRecords,
   };
 };

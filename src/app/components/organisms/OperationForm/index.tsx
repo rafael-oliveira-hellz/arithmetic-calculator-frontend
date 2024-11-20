@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Text,
@@ -15,10 +15,6 @@ import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
 import { v4 } from "uuid";
 import { useOperationService } from "@/app/hooks/useOperationService";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
-// import { useRecordService } from "@/app/hooks/useRecordService";
-import { setOperations } from "@/app/store/slices/operations-slice";
 
 const OperationsForm = () => {
   const [selectedOperation, setSelectedOperation] = useState<string>("");
@@ -28,27 +24,8 @@ const OperationsForm = () => {
   const [errors, setErrors] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const { fetchOperations, performOperation } = useOperationService();
-  // const { fetchRecords } = useRecordService();
-
-  const operations = useSelector(
-    (state: RootState) => state.operations.operations
-  );
-
-  useEffect(() => {
-    const loadOperations = async () => {
-      try {
-        const response = await fetchOperations();
-        dispatch(setOperations(response));
-      } catch (error) {
-        console.error("Erro ao buscar operações:", error);
-      }
-    };
-
-    loadOperations();
-  }, [dispatch, fetchOperations]);
+  const { performOperation, useOperations } = useOperationService();
+  const { operations, error, isLoading } = useOperations();
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
@@ -81,6 +58,22 @@ const OperationsForm = () => {
       setLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <Box p="6" textAlign="center">
+        <Spinner size="lg" />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box p="6" textAlign="center">
+        <Text color="red.500">Erro ao carregar operações.</Text>
+      </Box>
+    );
+  }
 
   return (
     <Box p="6" bg="gray.800" color="white" borderRadius="md" shadow="md">
