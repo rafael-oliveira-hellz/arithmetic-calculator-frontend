@@ -2,26 +2,26 @@
 
 import React, { useCallback, useState, useMemo, useEffect } from "react";
 import { Box, Table, Tbody, Flex, Text, Select } from "@chakra-ui/react";
-import { Record } from "@/shared/interfaces/records";
 import RecordTableHeader from "../../molecules/RecordTableHeader";
 import RecordTableRow from "../../molecules/RecordTableRow";
 import PaginationControls from "../../molecules/PaginationControls";
-import { useAuthService } from "@/app/hooks/useAuthService";
 import Filters from "../../molecules/Filters";
+import { useRecordService } from "@/app/hooks/useRecordService";
 import { RootState } from "@/app/store/store";
 import { useSelector } from "react-redux";
 
-const RecordsTable: React.FC = () => {
-  const { fetchRecords } = useAuthService();
+const RecordsTable = (): React.JSX.Element => {
+  const { fetchRecords } = useRecordService();
+  const { records, totalPages, isFirst, isLast } = useSelector(
+    (state: RootState) => state.records
+  );
 
-  const { balance } = useSelector((state: RootState) => state.auth);
-
-  const [records, setRecords] = useState<Record[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [isFirst, setIsFirst] = useState<boolean>(true);
-  const [isLast, setIsLast] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetchRecords(currentPage, itemsPerPage);
+  }, [currentPage, itemsPerPage, fetchRecords]);
 
   const [filters, setFilters] = useState({
     type: "",
@@ -29,33 +29,6 @@ const RecordsTable: React.FC = () => {
   });
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-
-  const fetchAndSetRecords = useCallback(async () => {
-    try {
-      const response = await fetchRecords(balance, currentPage, itemsPerPage);
-      setRecords(response.content);
-      setTotalPages(response.totalPages);
-      setIsFirst(response.first);
-      setIsLast(response.last);
-    } catch (error) {
-      console.error("Erro ao buscar registros:", error);
-    }
-  }, [fetchRecords, currentPage, itemsPerPage]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const handleFetchRecords = async () => {
-      if (!isMounted) return;
-      await fetchAndSetRecords();
-    };
-
-    handleFetchRecords();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [fetchAndSetRecords]);
 
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
@@ -89,10 +62,10 @@ const RecordsTable: React.FC = () => {
           value={itemsPerPage}
           onChange={(e) => setItemsPerPage(Number(e.target.value))}
           bg="gray.700"
-          color="white"
+          color="#FFF"
           maxW="150px"
         >
-          {[10, 20, 30, 50].map((size) => (
+          {[10, 20, 30, 50, 100].map((size) => (
             <option
               key={size}
               value={size}
@@ -118,7 +91,6 @@ const RecordsTable: React.FC = () => {
         </Tbody>
       </Table>
 
-      {/* Paginação */}
       <PaginationControls
         currentPage={currentPage}
         totalPages={totalPages}

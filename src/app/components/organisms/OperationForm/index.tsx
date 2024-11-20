@@ -10,12 +10,12 @@ import {
   Spinner,
   Button,
 } from "@chakra-ui/react";
-import { useAuthService } from "@/app/hooks/useAuthService";
 import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
 import { Operation } from "@/shared/interfaces/operations";
 import InputField from "../../molecules/InputField";
 import { v4 } from "uuid";
+import { useOperationService } from "@/app/hooks/useOperationService";
 
 const OperationsForm = () => {
   const [operations, setOperations] = useState<Operation[]>([]);
@@ -26,18 +26,20 @@ const OperationsForm = () => {
   const [errors, setErrors] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
-  const { fetchOperations, performOperation } = useAuthService();
+  const { fetchOperations, performOperation } = useOperationService();
 
   useEffect(() => {
-    (async () => {
+    const fetchInitialOperations = async () => {
       try {
         const result = await fetchOperations();
         setOperations(result);
       } catch (error) {
         console.error("Failed to fetch operations:", error);
       }
-    })();
-  });
+    };
+
+    fetchInitialOperations();
+  }, [fetchOperations]);
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(

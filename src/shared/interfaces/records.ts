@@ -1,3 +1,5 @@
+import { Operation } from "./operations";
+
 export interface RecordsResponse {
   content: Record[];
   pageable: Pageable;
@@ -21,12 +23,6 @@ export interface Record {
   operationResponse: string;
   date: string;
   deleted: boolean;
-}
-
-export interface Operation {
-  id: string;
-  type: string;
-  cost: number;
 }
 
 export interface Pageable {

@@ -1,5 +1,4 @@
 import { storage } from "@/app/utils/storage";
-import { Record } from "@/shared/interfaces/records";
 import { AuthState } from "@/shared/types/auth-state";
 import { IUser } from "@/shared/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -9,7 +8,6 @@ const initialState: AuthState = {
   user: null,
   balance: 0,
   accessToken: storage.getItem<string>("accessToken", "") || "",
-  records: [],
 };
 
 const authSlice = createSlice({
@@ -36,17 +34,8 @@ const authSlice = createSlice({
     updateBalance: (state, action: PayloadAction<number>) => {
       state.balance = action.payload;
     },
-    updateRecords: (state, action: PayloadAction<Record[]>) => {
-      state.records = action.payload;
-    },
-    removeRecord: (state, action: PayloadAction<string>) => {
-      state.records = state.records.filter(
-        (record: Record) => record.id !== action.payload
-      );
-    },
   },
 });
 
-export const { login, logout, updateBalance, updateRecords, removeRecord } =
-  authSlice.actions;
+export const { login, logout, updateBalance } = authSlice.actions;
 export default authSlice.reducer;

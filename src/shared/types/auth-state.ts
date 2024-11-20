@@ -1,4 +1,3 @@
-import { Record } from "../interfaces/records";
 import { IUser } from "./user";
 
 export interface AuthState {
@@ -6,5 +5,4 @@ export interface AuthState {
   user: IUser | null;
   balance: number;
   accessToken: string;
-  records: Record[];
 }
