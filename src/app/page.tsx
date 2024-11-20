@@ -7,9 +7,13 @@ import OperationsForm from "./components/organisms/OperationForm";
 import RecordsTable from "./components/organisms/RecordsTable";
 import { Record } from "@/shared/interfaces/record";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "./store/store";
 
 export default function Home() {
   const [records, setRecords] = useState<Record[]>([]);
+
+  const { balance } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     // fetch("/api/records")
@@ -79,7 +83,7 @@ export default function Home() {
         <GridItem bg="gray.800" p="4" borderRadius="md">
           <Box>
             <Text fontSize="lg" fontWeight="bold" textAlign="center">
-              Balance: $1000
+              Balance: {balance} credits
             </Text>
           </Box>
         </GridItem>
