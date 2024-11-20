@@ -35,7 +35,7 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
       <Td>
         <Tooltip label="Delete Record" aria-label="Delete Record">
           <Button
-            colorScheme="red.500"
+            colorScheme="red"
             size="sm"
             onClick={() => onDelete(record.id)}
             leftIcon={<DeleteIcon />}

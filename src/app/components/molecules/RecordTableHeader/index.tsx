@@ -16,10 +16,12 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
     <Thead>
       <Tr>
         <Th>TYPE</Th>
-        <Flex justify="space-between" align="center" gap="4">
-          <Text>OPERATION COST</Text>
-          <Text>USER BALANCE</Text>
-        </Flex>
+        <Th>
+          <Flex justify="space-between" align="center" gap="4">
+            <Text>OPERATION COST</Text>
+            <Text>USER BALANCE</Text>
+          </Flex>
+        </Th>
         <Th>USER BALANCE</Th>
         <Th>
           <Box display="flex" alignItems="center" gap="2">
