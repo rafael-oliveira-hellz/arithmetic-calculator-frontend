@@ -15,11 +15,46 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
   return (
     <Thead>
       <Tr>
-        <Th>TYPE</Th>
-        <Th colSpan={2}>OPERATION COST</Th>
-        <Th colSpan={2}>USER BALANCE</Th>
-        <Th>OPERATION RESPONSE</Th>
-        <Th>
+        <Th
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
+          TYPE
+        </Th>
+        <Th
+          colSpan={2}
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
+          OPERATION COST
+        </Th>
+        <Th
+          colSpan={2}
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
+          USER BALANCE
+        </Th>
+        <Th
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
+          OPERATION RESPONSE
+        </Th>
+        <Th
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
           <Text>DATE</Text>
           <IconButton
             aria-label="Sort operation by date"
@@ -32,7 +67,14 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             _hover={{ bg: "#12B49C" }}
           />
         </Th>
-        <Th>ACTIONS</Th>
+        <Th
+          whiteSpace="nowrap"
+          fontWeight="bold"
+          fontSize="lg"
+          textAlign="center"
+        >
+          ACTIONS
+        </Th>
       </Tr>
     </Thead>
   );
