@@ -37,6 +37,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
           _hover={{ bg: "gray.600" }}
           _active={{ bg: "gray.600" }}
           minW="250px"
+          aria-label="Filter by operation type"
         >
           {selectedLabel}
         </MenuButton>
@@ -46,6 +47,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
             _hover={{ bg: "gray.600" }}
             bg="gray.700"
             color="#FFF"
+            fontWeight="bold"
           >
             SHOW ALL
           </MenuItem>
