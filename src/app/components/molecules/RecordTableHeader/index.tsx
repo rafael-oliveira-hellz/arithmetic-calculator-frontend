@@ -1,5 +1,5 @@
 import React from "react";
-import { Thead, Tr, Th, IconButton } from "@chakra-ui/react";
+import { Thead, Tr, Th, IconButton, Box } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import Text from "../../atoms/Text";
 
@@ -49,23 +49,20 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
         >
           OPERATION RESPONSE
         </Th>
-        <Th
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          <Text>DATE</Text>
-          <IconButton
-            aria-label="Sort operation by date"
-            icon={sortOrder === "asc" ? <ArrowUpIcon /> : <ArrowDownIcon />}
-            onClick={onSortChange}
-            size="sm"
-            variant="ghost"
-            bg="#14CFB1"
-            color="#FFF"
-            _hover={{ bg: "#12B49C" }}
-          />
+        <Th fontWeight="bold" fontSize="lg" textAlign="center">
+          <Box display="flex" alignItems="center" gap="2">
+            DATE
+            <IconButton
+              aria-label="Sort operation by date"
+              icon={sortOrder === "asc" ? <ArrowUpIcon /> : <ArrowDownIcon />}
+              onClick={onSortChange}
+              size="sm"
+              variant="ghost"
+              bg="#14CFB1"
+              color="#FFF"
+              _hover={{ bg: "#12B49C" }}
+            />
+          </Box>
         </Th>
         <Th
           whiteSpace="nowrap"
