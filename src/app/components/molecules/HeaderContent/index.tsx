@@ -1,6 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import Logo from "../../atoms/Logo";
-import Text from "../../atoms/Text";
+import Link from "next/link";
 
 interface HeaderContentProps {
   appName: string;
@@ -8,10 +7,9 @@ interface HeaderContentProps {
 
 const HeaderContent = ({ appName }: HeaderContentProps): JSX.Element => (
   <Flex align="center" gap="4">
-    <Logo text="Logo" />
-    <Text variant="large" fontWeight="bold">
+    <Link href="/" passHref aria-readonly className="font-bold text-2xl">
       {appName}
-    </Text>
+    </Link>
   </Flex>
 );
 

@@ -1,13 +1,14 @@
+import { storage } from "@/app/utils/storage";
 import { Record } from "@/shared/interfaces/record";
 import { AuthState } from "@/shared/types/auth-state";
 import { IUser } from "@/shared/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: AuthState = {
-  isAuthenticated: false,
+  isAuthenticated: !!storage.getItem<string>("accessToken"),
   user: null,
   balance: 0,
-  accessToken: "",
+  accessToken: storage.getItem<string>("accessToken", "") || "",
   records: [],
 };
 
@@ -22,15 +23,15 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.balance = action.payload.user.balance;
-      state.accessToken = action.payload.user.accessToken;
-      sessionStorage.setItem("accessToken", action.payload.user.accessToken);
+      state.accessToken = action.payload.accessToken;
+      storage.setItem("accessToken", action.payload.accessToken);
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.balance = 0;
       state.accessToken = "";
-      sessionStorage.removeItem("accessToken");
+      storage.clear();
     },
     updateBalance: (state, action: PayloadAction<number>) => {
       state.balance = action.payload;

@@ -1,7 +1,7 @@
-import { FiHome, FiList, FiUser } from "react-icons/fi";
+import { FaCalculator } from "react-icons/fa";
+import { FiHome } from "react-icons/fi";
 
 export const menuItems = [
-  { label: "Dashboard", icon: FiHome, path: "/dashboard" },
-  { label: "Operations", icon: FiList, path: "/operations" },
-  { label: "Profile", icon: FiUser, path: "/profile" },
+  { label: "Dashboard", icon: FiHome, path: "/" },
+  { label: "Operations", icon: FaCalculator, path: "/operations" },
 ];

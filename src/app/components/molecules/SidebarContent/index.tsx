@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import SidebarItem from "../SidebarItem";
-import { menuItems } from "../../config/menu-items";
+import { useRouter } from 'next/navigation';
+import SidebarItem from '../SidebarItem';
+import { menuItems } from '../../config/menu-items';
 
 interface SidebarContentProps {
   isExpanded: boolean;
@@ -12,7 +12,7 @@ const SidebarContent = ({ isExpanded }: SidebarContentProps) => {
   const router = useRouter();
 
   return (
-    <div>
+    <div className='flex flex-col justify-evenly'>
       {menuItems.map((item) => (
         <SidebarItem
           key={item.label}

@@ -1,30 +1,28 @@
 import React from "react";
 import Text from "../../atoms/Text";
-import Button from "../../atoms/Button";
-import { Flex, Box } from "@chakra-ui/react";
+import { FiLogOut } from "react-icons/fi";
+import { Flex, IconButton, Tooltip } from "@chakra-ui/react";
+import { UserActionsProps } from "@/shared/interfaces/user-actions-props";
 
-interface UserActionsProps {
-  username: string;
-  balance: number;
-  onLogout: () => void;
-}
-
-const UserActions = ({
-  username,
-  balance,
-  onLogout,
-}: UserActionsProps): JSX.Element => (
+const UserActions = ({ username, onLogout }: UserActionsProps): JSX.Element => (
   <Flex align="center" gap="4">
-    <Text>{username}</Text>
-    <Box>
-      <Text color="gray.200">Balance:</Text>
-      <Text color="green.400" fontWeight="bold">
-        {balance}
-      </Text>
-    </Box>
-    <Button buttonType="danger" onClick={onLogout}>
-      Logout
-    </Button>
+    <Text variant="large">Welcome, {username}</Text>
+    <Tooltip
+      label="Logout"
+      aria-label="Logout tooltip"
+      placement="bottom"
+      hasArrow
+    >
+      <IconButton
+        aria-label="Logout"
+        icon={<FiLogOut />}
+        onClick={onLogout}
+        bg="#14CFB1"
+        color="#FFF"
+        _hover={{ bg: "#12B49C" }}
+        variant="solid"
+      />
+    </Tooltip>
   </Flex>
 );
 

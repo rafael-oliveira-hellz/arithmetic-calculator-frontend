@@ -1,13 +1,10 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
-
-interface AuthGuardProps {
-  children: ReactNode;
-}
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import { AuthGuardProps } from '@/shared/interfaces/auth-guard-props';
 
 const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
@@ -16,7 +13,7 @@ const AuthGuard: React.FC<AuthGuardProps> = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      router.push("/login");
+      router.push('/login');
     } else {
       setLoading(false);
     }

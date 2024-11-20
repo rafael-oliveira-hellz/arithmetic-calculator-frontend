@@ -25,7 +25,6 @@ const Layout = ({ children }: LayoutProps) => {
           flex="1"
           p={6}
           mx="auto"
-          maxWidth="1200px"
           role="main"
           bg="white"
           boxShadow="sm"

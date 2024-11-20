@@ -5,7 +5,7 @@ import Form from "../../atoms/Form";
 import { Box } from "@chakra-ui/react";
 import Button from "../../atoms/Button";
 import { RegisterFormProps } from "@/shared/interfaces/register-props";
-import { getInputFieldsConfig } from "@/app/utils/inputFieldConfig";
+import { getInputFieldsConfig } from "@/app/utils/input-field-config";
 import FormInputField from "../FormInputField";
 import AuthLink from "../AuthLink";
 

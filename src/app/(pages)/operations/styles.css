@@ -1,0 +1,16 @@
+.custom-grid {
+  @apply h-[90%] max-w-full w-[80%] grid grid-cols-4 gap-2 grid-rows-6 p-3 items-center justify-center content-center;
+  @apply sm-md:h-[80%] sm-md:grid-cols-3 sm-md:gap-7 min-w-[250px];
+}
+
+.custom-grid .custom-textarea {
+  @apply col-span-4 mb-3 resize-none cursor-pointer pointer-events-none text-2xl font-semibold;
+}
+
+.custom-grid-items {
+  @apply flex items-center justify-center self-center rounded-lg  w-full h-full;
+}
+
+.custom-grid-items button {
+  @apply flex items-center justify-center self-center bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-bold text-lg w-full h-full;
+}

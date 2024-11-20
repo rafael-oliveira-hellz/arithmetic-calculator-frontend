@@ -1,7 +1,7 @@
-import { Flex, Icon } from "@chakra-ui/react";
-import { IconType } from "react-icons";
-import { twclsx } from "@/app/utils/twclsx";
-import Text from "../../atoms/Text";
+import { Flex, Icon } from '@chakra-ui/react';
+import { IconType } from 'react-icons';
+import { twclsx } from '@/app/utils/twclsx';
+import Text from '../../atoms/Text';
 
 interface SidebarItemProps {
   icon: IconType;
@@ -14,17 +14,17 @@ const SidebarItem = ({
   icon,
   label,
   isExpanded,
-  onClick,
+  onClick
 }: SidebarItemProps): JSX.Element => (
   <Flex
-    align="center"
-    p="3"
-    className={twclsx("hover:bg-gray-700 cursor-pointer")}
+    align='center'
+    p='3'
+    className={twclsx('hover:bg-gray-700 cursor-pointer')}
     onClick={onClick}
   >
-    <Icon as={icon} fontSize="xl" />
+    <Icon as={icon} fontSize='xl' />
     {isExpanded && (
-      <Text ml="3" fontSize="md">
+      <Text ml='3' fontSize='md'>
         {label}
       </Text>
     )}

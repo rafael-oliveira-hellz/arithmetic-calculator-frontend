@@ -7,18 +7,9 @@ import { RootState } from "@/app/store/store";
 // import { useToast } from "@/app/hooks/useToast";
 import BalanceCard from "../../molecules/BalanceCard";
 import DataTable from "../DataTable";
-import OperationForm from "../../molecules/OperationForm";
+import OperationForm from "../OperationForm";
 import ConfirmationModal from "../../molecules/ConfirmationModal";
 import { useAuthService } from "@/app/hooks/useAuthService";
-
-export interface Record {
-  id: string;
-  operation_id: string;
-  amount: number;
-  user_balance: number;
-  operation_response: string;
-  date: string;
-}
 
 const Dashboard: React.FC = () => {
   // const { showToast } = useToast();
@@ -26,12 +17,10 @@ const Dashboard: React.FC = () => {
   const [isOperationModalOpen, setIsOperationModalOpen] =
     useState<boolean>(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
-  const { performOperation, fetchRecords, deleteRecord } = useAuthService();
+  const { fetchRecords, deleteRecord } = useAuthService();
   const { user, balance, isAuthenticated, records } = useSelector(
     (state: RootState) => state.auth
   );
-
-  const userId = user?.id;
 
   useEffect(() => {
     if (isAuthenticated && user?.id) {
@@ -40,27 +29,6 @@ const Dashboard: React.FC = () => {
       });
     }
   }, [isAuthenticated, user?.id, balance, fetchRecords]);
-
-  const handleOperationSubmit = async (
-    type: string,
-    operand1: number,
-    operand2?: number
-  ): Promise<void> => {
-    if (userId) {
-      try {
-        await performOperation(type, { operand1, operand2, userId });
-
-        setIsOperationModalOpen(false);
-      } catch (error) {
-        console.error("Error performing operation:", error);
-        // showToast({
-        //   title: "Operation Failed",
-        //   description: "An error occurred while performing the operation.",
-        //   status: "error",
-        // });
-      }
-    }
-  };
 
   const handleDeleteRecord = async (recordId: string) => {
     try {
@@ -114,7 +82,7 @@ const Dashboard: React.FC = () => {
           alignItems="center"
         >
           <Box bg="white" p={6} borderRadius="md" w="400px" boxShadow="lg">
-            <OperationForm onSubmit={handleOperationSubmit} />
+            <OperationForm />
             <Button
               mt={4}
               colorScheme="red"
