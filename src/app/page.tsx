@@ -34,7 +34,7 @@ export default function Home() {
 
         <GridItem bg="gray.800" p="4" borderRadius="md">
           <Box>
-            <RecordsTable balance={balance} />
+            <RecordsTable />
           </Box>
         </GridItem>
       </Grid>
