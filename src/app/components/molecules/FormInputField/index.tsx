@@ -15,7 +15,13 @@ const FormInputField: React.FC<FormInputFieldProps> = ({
     <InputField
       id={field.id}
       value={field.value}
-      onChange={field.onChange}
+      onChange={(value) => {
+        if (field.onChange) {
+          field.onChange({
+            target: { value },
+          } as React.ChangeEvent<HTMLInputElement>);
+        }
+      }}
       iconType={field.iconType}
       placeholder={field.placeholder}
       isValid={field.isValid}
