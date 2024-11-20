@@ -88,7 +88,7 @@ const OperationsForm = () => {
           </Text>
           <OperationSelect
             options={operations}
-            placeholder="Selecione uma operação"
+            placeholder="Select an operation"
             value={selectedOperation}
             onChange={(value) => {
               setSelectedOperation(value);

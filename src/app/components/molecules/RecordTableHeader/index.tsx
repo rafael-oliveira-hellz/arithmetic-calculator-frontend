@@ -1,6 +1,7 @@
 import React from "react";
-import { Thead, Tr, Th, IconButton, Box } from "@chakra-ui/react";
+import { Thead, Tr, Th, IconButton, Box, Flex } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import Text from "../../atoms/Text";
 
 interface RecordTableHeaderProps {
   sortOrder: "asc" | "desc";
@@ -14,13 +15,15 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
   return (
     <Thead>
       <Tr>
-        <Th>Type</Th>
-        <Th>Operation Cost</Th>
-        <Th>Operation Response</Th>
-        <Th>User Balance</Th>
+        <Th>TYPE</Th>
+        <Flex justify="space-between" align="center" gap="4">
+          <Text>OPERATION COST</Text>
+          <Text>USER BALANCE</Text>
+        </Flex>
+        <Th>USER BALANCE</Th>
         <Th>
           <Box display="flex" alignItems="center" gap="2">
-            Date
+            DATE
             <IconButton
               aria-label="Sort operation by date"
               icon={sortOrder === "asc" ? <ArrowUpIcon /> : <ArrowDownIcon />}
@@ -33,7 +36,7 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
-        <Th>Actions</Th>
+        <Th>ACTIONS</Th>
       </Tr>
     </Thead>
   );

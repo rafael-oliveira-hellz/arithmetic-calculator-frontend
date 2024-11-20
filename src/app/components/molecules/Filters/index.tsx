@@ -36,10 +36,19 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
           color="white"
           _hover={{ bg: "gray.600" }}
           _active={{ bg: "gray.600" }}
+          minW="250px"
         >
           {selectedLabel}
         </MenuButton>
         <MenuList bg="gray.700" borderColor="gray.600">
+          <MenuItem
+            onClick={() => onFilterChange("type", "")}
+            _hover={{ bg: "gray.600" }}
+            bg="gray.700"
+            color="#FFF"
+          >
+            SHOW ALL
+          </MenuItem>
           {options.map((option) => (
             <MenuItem
               key={option.value}

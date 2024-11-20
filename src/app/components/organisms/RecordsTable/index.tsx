@@ -88,7 +88,7 @@ const RecordsTable = (): React.JSX.Element => {
     <Box>
       <Flex justify="space-between" mb="4" alignItems="center">
         <Text fontSize="lg" fontWeight="bold">
-          Registros de Operações
+          Operation Records
         </Text>
         <Select
           value={itemsPerPage}
