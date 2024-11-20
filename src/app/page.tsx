@@ -16,14 +16,18 @@ export default function Home() {
       <Grid
         templateRows="auto auto 1fr"
         minH="100vh"
+        bg={"gray.100"}
         color="#FFF"
         gap="4"
         p="4"
       >
-        <GridItem bg="#FFF" p="4" borderRadius="md">
+        <GridItem bg="gray.800" p="4" borderRadius="md">
           <Box>
             <Heading fontSize="2xl" fontWeight="bold" textAlign="center" my={6}>
-              Balance: <Text color="green.500">{balance}</Text>
+              Balance{" "}
+              <Text fontSize="2xl" color="green.500">
+                {balance}
+              </Text>
             </Heading>
           </Box>
         </GridItem>

@@ -86,7 +86,7 @@ const OperationsForm = () => {
   return (
     <Box p="6" bg="gray.800" color="#FFF" borderRadius="md" shadow="md">
       <Text fontSize="2xl" fontWeight="bold" mb="6" textAlign="center">
-        Mathematical Operations
+        Arithmetic Operations
       </Text>
 
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
