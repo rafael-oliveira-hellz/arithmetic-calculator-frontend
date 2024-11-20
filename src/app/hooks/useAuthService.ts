@@ -117,16 +117,22 @@ export const useAuthService = () => {
     return latestRecord.userBalance;
   };
 
-  const fetchRecords = async (balance: number): Promise<Record[]> => {
+  const fetchRecords = async (
+    balance: number,
+    page: number = 0,
+    itemsPerPage: number = 10
+  ): Promise<RecordsResponse> => {
     try {
-      const response = await api.get<RecordsResponse>("/records");
+      const response = await api.get<RecordsResponse>(
+        `/records?page=${page}&size=${itemsPerPage}`
+      );
 
       const latestBalance = getLatestUserBalance(response.content, balance);
 
       dispatch(updateRecords(response.content));
       dispatch(updateBalance(latestBalance));
 
-      return response.content;
+      return response;
     } catch (error) {
       toast.showToast({
         title: "Erro",

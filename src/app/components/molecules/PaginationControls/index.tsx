@@ -8,6 +8,8 @@ interface PaginationControlsProps {
   totalPages: number;
   onPrevious: () => void;
   onNext: () => void;
+  isFirst: boolean;
+  isLast: boolean;
 }
 
 const PaginationControls: React.FC<PaginationControlsProps> = ({
@@ -15,17 +17,19 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
   totalPages,
   onPrevious,
   onNext,
+  isFirst,
+  isLast,
 }) => {
   return (
     <Flex justify="space-between" alignItems="center" mt="4">
-      <Button onClick={onPrevious} isDisabled={currentPage === 0}>
-        Página Anterior
+      <Button onClick={onPrevious} isDisabled={isFirst}>
+        Last Page
       </Button>
       <Text>
         Página {currentPage + 1} de {totalPages}
       </Text>
-      <Button onClick={onNext} isDisabled={currentPage + 1 >= totalPages}>
-        Próxima Página
+      <Button onClick={onNext} isDisabled={isLast}>
+        Next Page
       </Button>
     </Flex>
   );
