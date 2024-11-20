@@ -27,10 +27,10 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         disabled={isFirst}
         colorScheme={isFirst ? "gray" : "blue"}
       >
-        Last Page
+        Previous Page
       </Button>
       <Text>
-        Página {currentPage + 1} de {totalPages}
+        Page {currentPage + 1} of {totalPages}
       </Text>
       <Button
         onClick={onNext}

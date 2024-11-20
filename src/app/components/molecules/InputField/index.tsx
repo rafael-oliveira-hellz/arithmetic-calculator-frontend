@@ -9,7 +9,7 @@ import {
   ViewOffIcon,
   InfoIcon,
 } from "@chakra-ui/icons";
-import Text from "../../atoms/Text";
+import ErrorMessage from "../../atoms/ErrorMessage";
 
 interface InputFieldProps extends Omit<InputProps, "onChange"> {
   id: string;
@@ -32,7 +32,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   placeholder,
   onChange,
-  iconType,
+  iconType = "email",
   isValid,
   errorMessage,
   ...rest
@@ -44,14 +44,14 @@ const InputField: React.FC<InputFieldProps> = ({
   const inputType =
     iconType === "password" && !showPassword ? "password" : "text";
 
-  const LeftIcon = iconType && iconComponents[iconType];
+  const LeftIcon = iconComponents[iconType];
 
   const borderColor =
-    isValid === undefined ? "gray.300" : isValid ? "green.500" : "red.500";
+    isValid === undefined ? "gray.400" : isValid ? "green.500" : "red.500";
 
   return (
     <Box mb={4} width="100%" position="relative">
-      {LeftIcon && iconType && iconType !== "password" && (
+      {iconType && (
         <Box
           position="absolute"
           top="50%"
@@ -63,7 +63,7 @@ const InputField: React.FC<InputFieldProps> = ({
           pointerEvents="none"
           zIndex={10}
         >
-          <LeftIcon color="gray.600" />
+          <LeftIcon color="gray.800" />
         </Box>
       )}
 
@@ -79,7 +79,11 @@ const InputField: React.FC<InputFieldProps> = ({
         border="1px solid"
         borderColor={borderColor}
         borderRadius="md"
-        color="gray.800"
+        color="gray.700"
+        _placeholder={{ color: "gray.400" }}
+        bg="gray.200"
+        _hover={{ borderColor: "gray.500" }}
+        _focus={{ borderColor: "blue.400", boxShadow: "0 0 0 1px #14CFB1" }}
         {...rest}
       />
 
@@ -94,18 +98,14 @@ const InputField: React.FC<InputFieldProps> = ({
           zIndex={10}
         >
           {showPassword ? (
-            <ViewOffIcon color="gray.600" />
+            <ViewOffIcon color="gray.800" _hover={{ color: "#14CFB1" }} />
           ) : (
-            <ViewIcon color="gray.600" />
+            <ViewIcon color="gray.800" _hover={{ color: "#14CFB1" }} />
           )}
         </Box>
       )}
 
-      {errorMessage && (
-        <Text color="red.500" mt={1} fontSize="sm">
-          {errorMessage}
-        </Text>
-      )}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Box>
   );
 };

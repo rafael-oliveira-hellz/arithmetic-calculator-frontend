@@ -44,7 +44,7 @@ const OperationSelect: React.FC<OperationSelectProps> = ({
             bg="gray.700"
             color="white"
           >
-            {option.type} (Custo: {option.cost})
+            {option.type} (Cost: {option.cost})
           </MenuItem>
         ))}
       </MenuList>

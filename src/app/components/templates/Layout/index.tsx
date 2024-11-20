@@ -23,10 +23,9 @@ const Layout = ({ children }: LayoutProps) => {
         <Box
           as="main"
           flex="1"
-          p={6}
           mx="auto"
           role="main"
-          bg="white"
+          bg="#FFF"
           boxShadow="sm"
           borderRadius="md"
         >

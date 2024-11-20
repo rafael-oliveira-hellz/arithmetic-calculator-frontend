@@ -28,7 +28,6 @@ class AxiosApiClient implements ApiClient {
     this.client.interceptors.response.use(
       (response) => response,
       async (error: AxiosError) => {
-        this.showErrorMessage(error);
         return Promise.reject(error);
       }
     );
@@ -63,15 +62,6 @@ class AxiosApiClient implements ApiClient {
   }
   async delete(url: string, config?: ApiRequestConfig): Promise<void> {
     await this.client.delete(url, this.transformConfig(config));
-  }
-
-  private showErrorMessage(error: AxiosError) {
-    // this.showToast({
-    //   title: "Erro",
-    //   description: error.message || "Erro inesperado",
-    //   status: "error",
-    // });
-    console.log(JSON.stringify(error, null, 2));
   }
 
   private transformConfig(config?: ApiRequestConfig): AxiosRequestConfig {

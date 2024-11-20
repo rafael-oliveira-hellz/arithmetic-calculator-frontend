@@ -9,6 +9,7 @@ import {
   GridItem,
   Spinner,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
@@ -26,6 +27,7 @@ const OperationsForm = () => {
 
   const { performOperation, useOperations } = useOperationService();
   const { operations, error, isLoading } = useOperations();
+  const toast = useToast();
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
@@ -33,9 +35,7 @@ const OperationsForm = () => {
     );
 
   const validateInput = (value: string) =>
-    /^\d*\.?\d*$/.test(value)
-      ? undefined
-      : "Apenas valores numéricos são permitidos.";
+    /^\d*\.?\d*$/.test(value) ? undefined : "Only numeric values are allowed.";
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -53,7 +53,13 @@ const OperationsForm = () => {
       );
       setResult(operationResult?.operationResponse);
     } catch (error) {
-      console.error("Erro ao realizar a operação:", error);
+      toast({
+        title: "Error performing operation",
+        description: `${error instanceof Error ? error.message : error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     } finally {
       setLoading(false);
     }
@@ -68,17 +74,19 @@ const OperationsForm = () => {
   }
 
   if (error) {
-    return (
-      <Box p="6" textAlign="center">
-        <Text color="red.500">Erro ao carregar operações.</Text>
-      </Box>
-    );
+    toast({
+      title: "Failed to fetch operations",
+      description: `${error instanceof Error ? error.message : error}`,
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+    });
   }
 
   return (
     <Box p="6" bg="gray.800" color="white" borderRadius="md" shadow="md">
       <Text fontSize="2xl" fontWeight="bold" mb="6" textAlign="center">
-        Operações Matemáticas
+        Mathematical Operations
       </Text>
 
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
@@ -106,7 +114,7 @@ const OperationsForm = () => {
           <VStack spacing="4">
             <InputField
               id={v4()}
-              placeholder="Digite o primeiro valor"
+              placeholder="Enter the first value"
               value={value1}
               errorMessage={errors}
               onChange={(value) => {
@@ -117,7 +125,7 @@ const OperationsForm = () => {
             {requiresTwoInputs(selectedOperation) && (
               <InputField
                 id={v4()}
-                placeholder="Digite o segundo valor"
+                placeholder="Enter the second value"
                 value={value2}
                 errorMessage={errors}
                 onChange={(value) => {
@@ -143,7 +151,7 @@ const OperationsForm = () => {
 
             {result && (
               <Text fontSize="lg" fontWeight="bold" textAlign="center" my={6}>
-                Resultado: {result}
+                Result: {result}
               </Text>
             )}
 
@@ -155,7 +163,7 @@ const OperationsForm = () => {
               onClick={handleSubmit}
               isDisabled={!selectedOperation || !!errors}
             >
-              {loading ? <Spinner size="md" /> : "Realizar Operação"}
+              {loading ? <Spinner size="md" /> : "Perform Operation"}
             </Button>
           </VStack>
         </GridItem>

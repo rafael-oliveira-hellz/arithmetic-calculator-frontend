@@ -9,6 +9,7 @@ import {
   Text,
   Select,
   Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import RecordTableHeader from "../../molecules/RecordTableHeader";
 import RecordTableRow from "../../molecules/RecordTableRow";
@@ -19,17 +20,17 @@ import { useRecordService } from "@/app/hooks/useRecordService";
 const RecordsTable = (): React.JSX.Element => {
   const { useRecords, deleteRecord, revalidateRecords } = useRecordService();
 
+  const toast = useToast();
+
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [filters, setFilters] = useState({ type: "", amount: "" });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
-  const { records, totalPages, isFirst, isLast, isLoading, error } = useRecords(
+  const { records, totalPages, isLoading, error } = useRecords(
     currentPage,
     itemsPerPage
   );
-
-  console.log("isFirst: ", isFirst, "isLast: ", isLast);
 
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
@@ -41,7 +42,13 @@ const RecordsTable = (): React.JSX.Element => {
       await deleteRecord(recordId);
       await revalidateRecords();
     } catch (error) {
-      console.error("Erro ao deletar registro:", error);
+      toast({
+        title: "Action failed",
+        description: `${error instanceof Error ? error.message : error}`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -83,7 +90,7 @@ const RecordsTable = (): React.JSX.Element => {
   }
 
   if (error) {
-    return <Text color="red.500">Erro ao carregar registros.</Text>;
+    return <Text color="red.500">Error loading records.</Text>;
   }
 
   return (
@@ -105,7 +112,7 @@ const RecordsTable = (): React.JSX.Element => {
               value={size}
               style={{ backgroundColor: "#1A202C", color: "#FFF" }}
             >
-              {size} por página
+              {size} per page
             </option>
           ))}
         </Select>

@@ -12,15 +12,15 @@ const EmailRules: React.FC<EmailRulesProps> = ({ email }) => {
   const rules = [
     {
       test: (em: string) => /\S+@\S+\.\S+/.test(em),
-      message: "Formato de email válido (ex: exemplo@dominio.com)",
+      message: "Valid email format (e.g., example@domain.com)",
     },
     {
       test: (em: string) => !/[\s]/.test(em),
-      message: "Não conter espaços",
+      message: "Must not contain spaces",
     },
     {
       test: (em: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em),
-      message: "Conter um domínio válido",
+      message: "Must contain a valid domain",
     },
   ];
 
@@ -28,7 +28,6 @@ const EmailRules: React.FC<EmailRulesProps> = ({ email }) => {
     <Box mt={2}>
       {rules.map((rule, index) => {
         const isValid = rule.test(email);
-        console.log("index: Email rules: ", index);
         return (
           <Box
             key={index}

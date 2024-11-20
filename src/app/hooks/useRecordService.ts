@@ -1,12 +1,12 @@
 "use client";
 
-import { useToast } from "./useToast";
 import useSWR, { mutate } from "swr";
 import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { removeRecord } from "../store/slices/record-slice";
 import { RecordsResponse } from "@/shared/interfaces/records";
+import { useToast } from "@chakra-ui/react";
 
 export const useRecordService = () => {
   const api = useApi();
@@ -22,7 +22,6 @@ export const useRecordService = () => {
         `/records?page=${page}&size=${itemsPerPage}`
       );
     } catch (error) {
-      console.error("Erro ao buscar registros:", error);
       throw error;
     }
   };
@@ -56,16 +55,22 @@ export const useRecordService = () => {
     try {
       await api.delete(`/records/${recordId}`);
       dispatch(removeRecord(recordId));
-      toast.showToast({
-        title: "Sucesso",
-        description: "Registro excluído com sucesso.",
+      toast({
+        title: "Success",
+        description: "Record deleted successfully",
         status: "success",
+        duration: 5000,
+        isClosable: true,
       });
     } catch (error) {
-      toast.showToast({
-        title: "Erro",
-        description: "Erro ao excluir registro.",
+      toast({
+        title: "Action failed",
+        description: `Record deletion failed: ${
+          error instanceof Error ? error.message : error
+        }`,
         status: "error",
+        duration: 5000,
+        isClosable: true,
       });
       throw error;
     }

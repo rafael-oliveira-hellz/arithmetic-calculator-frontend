@@ -1,4 +1,3 @@
-// PasswordRules.tsx
 "use client";
 
 import React from "react";
@@ -13,27 +12,27 @@ const PasswordRules: React.FC<PasswordRulesProps> = ({ password }) => {
   const rules = [
     {
       test: (pw: string) => pw.length >= 8,
-      message: "Mínimo de 8 caracteres",
+      message: "Minimum of 8 characters",
     },
     {
       test: (pw: string) => /[A-Z]/.test(pw),
-      message: "Pelo menos uma letra maiúscula",
+      message: "At least one uppercase letter",
     },
     {
       test: (pw: string) => /[a-z]/.test(pw),
-      message: "Pelo menos uma letra minúscula",
+      message: "At least one lowercase letter",
     },
     {
       test: (pw: string) => /[0-9]/.test(pw),
-      message: "Pelo menos um número",
+      message: "At least one number",
     },
     {
       test: (pw: string) => /[^A-Za-z0-9]/.test(pw),
-      message: "Pelo menos um caractere especial",
+      message: "At least one special character",
     },
     {
       test: (pw: string) => !/[\sáàâãäéèêëíìîïóòôõöúùûüçñ]/i.test(pw),
-      message: "Não conter espaços ou caracteres acentuados",
+      message: "No spaces or accented characters allowed",
     },
   ];
 

@@ -1,5 +1,3 @@
-// FormLayout.tsx
-
 import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import FormHeader from "../../atoms/FormHeader";
@@ -31,6 +29,7 @@ const FormLayout: React.FC<FormLayoutProps> = ({
         maxW="lg"
         boxShadow="lg"
         className="transition-all hover:shadow-xl"
+        color="gray.200"
       >
         <FormHeader
           title={title}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useToast } from "./useToast";
 import useSWR from "swr";
 import useApi from "./useApi";
 import { AppDispatch } from "../store/store";
@@ -10,6 +9,7 @@ import { setOperations } from "../store/slices/operations-slice";
 import { OperationsResponse } from "@/shared/interfaces/operations";
 import { Record } from "@/shared/interfaces/records";
 import { useRecordService } from "./useRecordService";
+import { useToast } from "@chakra-ui/react";
 
 export const useOperationService = () => {
   const api = useApi();
@@ -21,7 +21,6 @@ export const useOperationService = () => {
     try {
       return await api.get<OperationsResponse>("/operations");
     } catch (error) {
-      console.error("Erro ao buscar operações:", error);
       throw error;
     }
   };
@@ -59,20 +58,26 @@ export const useOperationService = () => {
 
       dispatch(updateBalance(operationResponse.userBalance));
 
-      toast.showToast({
-        title: "Sucesso",
-        description: "Operação realizada com sucesso!",
+      toast({
+        title: "Success",
+        description: "Operation successful.",
         status: "success",
+        duration: 5000,
+        isClosable: true,
       });
 
       await revalidateRecords();
 
       return operationResponse;
     } catch (error) {
-      toast.showToast({
-        title: "Erro",
-        description: "Erro ao realizar operação.",
+      toast({
+        title: "Action failed",
+        description: `Operation failed: ${
+          error instanceof Error ? error.message : error
+        }`,
         status: "error",
+        duration: 5000,
+        isClosable: true,
       });
       throw error;
     }

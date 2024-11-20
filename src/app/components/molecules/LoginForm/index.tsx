@@ -31,7 +31,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               } as React.ChangeEvent<HTMLInputElement>)
             }
             iconType="email"
-            placeholder="Digite seu email"
+            placeholder="Type your e-mail"
           />
           <InputField
             id="password"
@@ -42,12 +42,15 @@ const LoginForm: React.FC<LoginFormProps> = ({
               } as React.ChangeEvent<HTMLInputElement>)
             }
             iconType="password"
-            placeholder="Digite sua senha"
+            placeholder="Type your password"
           />
           <Button
             type="submit"
             className="w-full mt-4"
-            buttonType="primary"
+            bg="gray.700"
+            _hover={{ bg: "#14CFB1", color: "gray.700" }}
+            color="#FFF"
+            buttonType="secondary"
             isLoading={isLoading}
             isDisabled={!isFormValid}
           >

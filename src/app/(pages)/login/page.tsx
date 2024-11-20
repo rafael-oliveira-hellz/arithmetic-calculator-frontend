@@ -11,7 +11,8 @@ const LoginPage = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      bgGradient="linear(to-br, gray.900, gray.800)"
+      bgGradient="linear(to-br, #FFFFFF, gray.500)"
+      boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
     >
       <LoginBox />
     </Box>

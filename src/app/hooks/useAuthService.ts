@@ -3,10 +3,10 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import useApi from "./useApi";
-import { useToast } from "./useToast";
 import { login, logout } from "../store/slices/auth-slice";
 import { AppDispatch } from "../store/store";
 import { IUser } from "@/shared/types/user";
+import { useToast } from "@chakra-ui/react";
 
 export const useAuthService = () => {
   const api = useApi();
@@ -25,10 +25,12 @@ export const useAuthService = () => {
       });
 
       if (!response.active) {
-        toast.showToast({
-          title: "Erro",
-          description: "Usuário não existe. Acesso negado.",
+        toast({
+          title: "Action failed",
+          description: "Access denied. User does not exist.",
           status: "error",
+          duration: 5000,
+          isClosable: true,
         });
         throw new Error("Access denied. User does not exist.");
       }
@@ -37,10 +39,12 @@ export const useAuthService = () => {
 
       sessionStorage.setItem("accessToken", response.accessToken);
     } catch (error) {
-      toast.showToast({
-        title: "Erro",
-        description: "Falha ao realizar login.",
+      toast({
+        title: "Action failed",
+        description: `Login failed: ${error}`,
         status: "error",
+        duration: 5000,
+        isClosable: true,
       });
       throw error;
     }
@@ -51,10 +55,12 @@ export const useAuthService = () => {
       dispatch(logout());
       router.push("/login");
     } catch (error) {
-      toast.showToast({
-        title: "Erro",
-        description: "Erro ao realizar logout.",
+      toast({
+        title: "Action failed",
+        description: "Logout failed.",
         status: "error",
+        duration: 5000,
+        isClosable: true,
       });
       throw error;
     }
