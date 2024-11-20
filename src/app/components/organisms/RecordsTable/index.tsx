@@ -17,35 +17,31 @@ import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
 
 const RecordsTable = (): React.JSX.Element => {
-  const { useRecords } = useRecordService();
+  const { useRecords, deleteRecord, revalidateRecords } = useRecordService();
 
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+  const [filters, setFilters] = useState({ type: "", amount: "" });
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const { records, totalPages, isFirst, isLast, isLoading, error } = useRecords(
     currentPage,
     itemsPerPage
   );
 
-  const safeRecords = records.map((record) => ({
-    ...record,
-    operation: record.operation || {},
-  }));
-
-  console.log("RecordsTable safeRecords:", safeRecords);
-
-  const [filters, setFilters] = useState({
-    type: "",
-    amount: "",
-  });
-
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-
   const handleFilterChange = useCallback((field: string, value: string) => {
-    console.log(`Updating filter: ${field} = ${value}`);
     setFilters((prev) => ({ ...prev, [field]: value }));
     setCurrentPage(0);
   }, []);
+
+  const handleDelete = async (recordId: string) => {
+    try {
+      await deleteRecord(recordId);
+      await revalidateRecords();
+    } catch (error) {
+      console.error("Erro ao deletar registro:", error);
+    }
+  };
 
   const handleSortToggle = useCallback(() => {
     setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -122,7 +118,11 @@ const RecordsTable = (): React.JSX.Element => {
         />
         <Tbody>
           {filteredRecords.map((record) => (
-            <RecordTableRow key={record.id} record={record} />
+            <RecordTableRow
+              key={record.id}
+              record={record}
+              onDelete={handleDelete}
+            />
           ))}
         </Tbody>
       </Table>

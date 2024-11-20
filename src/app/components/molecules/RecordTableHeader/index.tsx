@@ -33,6 +33,7 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
+        <Th>Actions</Th>
       </Tr>
     </Thead>
   );
