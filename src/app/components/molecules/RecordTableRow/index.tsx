@@ -17,7 +17,7 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
   return (
     <Tr>
       <Td>{record.operation.type}</Td>
-      <Td>
+      <Td colSpan={2}>
         <Flex
           justify="space-between"
           align="center"
