@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Text,
@@ -28,18 +28,16 @@ const OperationsForm = () => {
 
   const { fetchOperations, performOperation } = useAuthService();
 
-  const loadOperations = useCallback(async () => {
-    try {
-      const result = await fetchOperations();
-      setOperations(result);
-    } catch (error) {
-      console.error("Failed to fetch operations:", error);
-    }
-  }, [fetchOperations]);
-
   useEffect(() => {
-    loadOperations();
-  }, [loadOperations]);
+    (async () => {
+      try {
+        const result = await fetchOperations();
+        setOperations(result);
+      } catch (error) {
+        console.error("Failed to fetch operations:", error);
+      }
+    })();
+  });
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
