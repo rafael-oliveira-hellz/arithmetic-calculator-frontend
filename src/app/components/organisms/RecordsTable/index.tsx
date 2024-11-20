@@ -38,6 +38,10 @@ const RecordsTable: React.FC = () => {
     }
   }, [fetchRecords, currentPage, itemsPerPage]);
 
+  useEffect(() => {
+    handleFetchRecords();
+  }, [handleFetchRecords]);
+
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
     setCurrentPage(0);

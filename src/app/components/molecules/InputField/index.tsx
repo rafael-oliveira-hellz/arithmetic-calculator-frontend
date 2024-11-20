@@ -61,7 +61,7 @@ const InputField: React.FC<InputFieldProps> = ({
           alignItems="center"
           justifyContent="center"
           pointerEvents="none"
-          zIndex={1}
+          zIndex={10}
         >
           <LeftIcon color="gray.600" />
         </Box>
@@ -91,7 +91,7 @@ const InputField: React.FC<InputFieldProps> = ({
           transform="translateY(-50%)"
           cursor="pointer"
           onClick={togglePasswordVisibility}
-          zIndex={1}
+          zIndex={10}
         >
           {showPassword ? (
             <ViewOffIcon color="gray.600" />

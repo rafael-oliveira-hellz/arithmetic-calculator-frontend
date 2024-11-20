@@ -38,7 +38,7 @@ const OperationsForm = () => {
   }, [fetchOperations]);
 
   useEffect(() => {
-    loadOperations(); // Chama apenas uma vez
+    loadOperations();
   }, [loadOperations]);
 
   const requiresTwoInputs = (operationType: string) =>
