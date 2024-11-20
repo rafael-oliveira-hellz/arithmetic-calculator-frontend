@@ -127,6 +127,8 @@ export const useAuthService = () => {
         `/records?page=${page}&size=${itemsPerPage}`
       );
 
+      console.log(JSON.stringify(response, null, 2));
+
       const latestBalance = getLatestUserBalance(response.content, balance);
 
       dispatch(updateRecords(response.content));

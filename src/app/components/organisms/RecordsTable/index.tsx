@@ -26,21 +26,32 @@ const RecordsTable: React.FC = () => {
 
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
+  const fetchAndSetRecords = useCallback(async () => {
+    try {
+      const response = await fetchRecords(currentPage, itemsPerPage);
+      setRecords(response.content);
+      setTotalPages(response.totalPages);
+      setIsFirst(response.first);
+      setIsLast(response.last);
+    } catch (error) {
+      console.error("Erro ao buscar registros:", error);
+    }
+  }, [fetchRecords, currentPage, itemsPerPage]);
+
   useEffect(() => {
-    const fetchAndSetRecords = async () => {
-      try {
-        const response = await fetchRecords(currentPage, itemsPerPage);
-        setRecords(response.content);
-        setTotalPages(response.totalPages);
-        setIsFirst(response.first);
-        setIsLast(response.last);
-      } catch (error) {
-        console.error("Erro ao buscar registros:", error);
-      }
+    let isMounted = true;
+
+    const handleFetchRecords = async () => {
+      if (!isMounted) return;
+      await fetchAndSetRecords();
     };
 
-    fetchAndSetRecords();
-  }, [currentPage, itemsPerPage, fetchRecords]);
+    handleFetchRecords();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [fetchAndSetRecords]);
 
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
