@@ -1,5 +1,5 @@
 import React from "react";
-import { Thead, Tr, Th, IconButton, Flex } from "@chakra-ui/react";
+import { Thead, Tr, Th, IconButton } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import Text from "../../atoms/Text";
 
@@ -16,12 +16,8 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
     <Thead>
       <Tr>
         <Th>TYPE</Th>
-        <Th>
-          <Flex justify="space-between" align="center" gap="4">
-            <Text>OPERATION COST</Text>
-            <Text>USER BALANCE</Text>
-          </Flex>
-        </Th>
+        <Th colSpan={2}>OPERATION COST</Th>
+        <Th colSpan={2}>USER BALANCE</Th>
         <Th>OPERATION RESPONSE</Th>
         <Th>
           <Text>DATE</Text>
