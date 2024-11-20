@@ -8,9 +8,12 @@ import PaginationControls from "../../molecules/PaginationControls";
 import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
 import { RootState } from "@/app/store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecords } from "@/app/store/slices/record-slice";
 
 const RecordsTable = (): React.JSX.Element => {
+  const dispatch = useDispatch();
+
   const { fetchRecords } = useRecordService();
   const { records, totalPages, isFirst, isLast } = useSelector(
     (state: RootState) => state.records
@@ -20,8 +23,24 @@ const RecordsTable = (): React.JSX.Element => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
   useEffect(() => {
-    fetchRecords(currentPage, itemsPerPage);
-  }, [currentPage, itemsPerPage, fetchRecords]);
+    const loadRecords = async () => {
+      try {
+        const response = await fetchRecords(currentPage, itemsPerPage);
+        dispatch(
+          setRecords({
+            records: response.content,
+            totalPages: response.totalPages,
+            isFirst: response.first,
+            isLast: response.last,
+          })
+        );
+      } catch (error) {
+        console.error("Erro ao buscar registros:", error);
+      }
+    };
+
+    loadRecords();
+  }, [currentPage, itemsPerPage, fetchRecords, dispatch]);
 
   const [filters, setFilters] = useState({
     type: "",

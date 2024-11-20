@@ -15,9 +15,10 @@ import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
 import { v4 } from "uuid";
 import { useOperationService } from "@/app/hooks/useOperationService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/store";
-import { useRecordService } from "@/app/hooks/useRecordService";
+// import { useRecordService } from "@/app/hooks/useRecordService";
+import { setOperations } from "@/app/store/slices/operations-slice";
 
 const OperationsForm = () => {
   const [selectedOperation, setSelectedOperation] = useState<string>("");
@@ -27,17 +28,27 @@ const OperationsForm = () => {
   const [errors, setErrors] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   const { fetchOperations, performOperation } = useOperationService();
-  const { fetchRecords } = useRecordService();
+  // const { fetchRecords } = useRecordService();
 
   const operations = useSelector(
     (state: RootState) => state.operations.operations
   );
 
   useEffect(() => {
-    fetchOperations();
-    fetchRecords(0, 10);
-  }, [fetchOperations, fetchRecords]);
+    const loadOperations = async () => {
+      try {
+        const response = await fetchOperations();
+        dispatch(setOperations(response));
+      } catch (error) {
+        console.error("Erro ao buscar operações:", error);
+      }
+    };
+
+    loadOperations();
+  }, [dispatch, fetchOperations]);
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(

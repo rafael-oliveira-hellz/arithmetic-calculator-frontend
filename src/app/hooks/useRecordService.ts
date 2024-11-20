@@ -16,7 +16,7 @@ export const useRecordService = () => {
   const fetchRecords = async (
     page: number,
     itemsPerPage: number
-  ): Promise<void> => {
+  ): Promise<RecordsResponse> => {
     const response = await api.get<RecordsResponse>(
       `/records?page=${page}&size=${itemsPerPage}`
     );
@@ -28,6 +28,8 @@ export const useRecordService = () => {
         isLast: response.last,
       })
     );
+
+    return response;
   };
 
   const deleteRecord = async (recordId: string): Promise<void> => {
