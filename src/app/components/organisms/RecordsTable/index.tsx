@@ -8,9 +8,13 @@ import RecordTableRow from "../../molecules/RecordTableRow";
 import PaginationControls from "../../molecules/PaginationControls";
 import { useAuthService } from "@/app/hooks/useAuthService";
 import Filters from "../../molecules/Filters";
+import { RootState } from "@/app/store/store";
+import { useSelector } from "react-redux";
 
 const RecordsTable: React.FC = () => {
   const { fetchRecords } = useAuthService();
+
+  const { balance } = useSelector((state: RootState) => state.auth);
 
   const [records, setRecords] = useState<Record[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -28,7 +32,7 @@ const RecordsTable: React.FC = () => {
 
   const fetchAndSetRecords = useCallback(async () => {
     try {
-      const response = await fetchRecords(currentPage, itemsPerPage);
+      const response = await fetchRecords(balance, currentPage, itemsPerPage);
       setRecords(response.content);
       setTotalPages(response.totalPages);
       setIsFirst(response.first);
