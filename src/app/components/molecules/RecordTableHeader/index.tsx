@@ -1,7 +1,6 @@
 import React from "react";
 import { Thead, Tr, Th, IconButton, Box } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import Text from "../../atoms/Text";
 
 interface RecordTableHeaderProps {
   sortOrder: "asc" | "desc";
