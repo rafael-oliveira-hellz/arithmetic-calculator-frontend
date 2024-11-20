@@ -27,6 +27,13 @@ const RecordsTable = (): React.JSX.Element => {
     itemsPerPage
   );
 
+  const safeRecords = records.map((record) => ({
+    ...record,
+    operation: record.operation || {},
+  }));
+
+  console.log("RecordsTable safeRecords:", safeRecords);
+
   const [filters, setFilters] = useState({
     type: "",
     amount: "",
@@ -35,6 +42,7 @@ const RecordsTable = (): React.JSX.Element => {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   const handleFilterChange = useCallback((field: string, value: string) => {
+    console.log(`Updating filter: ${field} = ${value}`);
     setFilters((prev) => ({ ...prev, [field]: value }));
     setCurrentPage(0);
   }, []);
@@ -44,17 +52,29 @@ const RecordsTable = (): React.JSX.Element => {
   }, []);
 
   const filteredRecords = useMemo(() => {
-    return records
+    const sortedRecords = [...records];
+
+    if (sortOrder === "asc") {
+      sortedRecords.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+      );
+    } else {
+      sortedRecords.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+    }
+
+    return sortedRecords
       .filter((record) => !record.deleted)
       .filter((record) =>
-        filters.type ? record.operation.type.includes(filters.type) : true
+        filters.type ? record.operation?.type?.includes(filters.type) : true
       )
       .filter((record) =>
         filters.amount
-          ? record.amount.toString().includes(filters.amount)
+          ? record.amount?.toString().includes(filters.amount)
           : true
       );
-  }, [records, filters]);
+  }, [records, filters, sortOrder]);
 
   if (isLoading) {
     return (

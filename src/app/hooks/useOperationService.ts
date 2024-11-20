@@ -9,17 +9,17 @@ import { updateBalance } from "../store/slices/auth-slice";
 import { setOperations } from "../store/slices/operations-slice";
 import { OperationsResponse } from "@/shared/interfaces/operations";
 import { Record } from "@/shared/interfaces/records";
+import { useRecordService } from "./useRecordService";
 
 export const useOperationService = () => {
   const api = useApi();
   const toast = useToast();
   const dispatch: AppDispatch = useDispatch();
+  const { revalidateRecords } = useRecordService();
 
-  // Fetch a lista de operações
   const fetchOperations = async (): Promise<OperationsResponse> => {
     try {
-      const response = await api.get<OperationsResponse>("/operations");
-      return response;
+      return await api.get<OperationsResponse>("/operations");
     } catch (error) {
       console.error("Erro ao buscar operações:", error);
       throw error;
@@ -58,11 +58,14 @@ export const useOperationService = () => {
       );
 
       dispatch(updateBalance(operationResponse.userBalance));
+
       toast.showToast({
         title: "Sucesso",
         description: "Operação realizada com sucesso!",
         status: "success",
       });
+
+      await revalidateRecords();
 
       return operationResponse;
     } catch (error) {

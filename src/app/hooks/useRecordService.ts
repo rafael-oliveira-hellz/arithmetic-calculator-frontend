@@ -1,7 +1,7 @@
 "use client";
 
 import { useToast } from "./useToast";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
@@ -13,23 +13,24 @@ export const useRecordService = () => {
   const toast = useToast();
   const dispatch: AppDispatch = useDispatch();
 
-  // Função de fetch para usar no SWR
   const fetchRecords = async (
     page: number,
     itemsPerPage: number
   ): Promise<RecordsResponse> => {
     try {
-      const response = await api.get<RecordsResponse>(
+      return await api.get<RecordsResponse>(
         `/records?page=${page}&size=${itemsPerPage}`
       );
-      return response;
     } catch (error) {
       console.error("Erro ao buscar registros:", error);
       throw error;
     }
   };
 
-  // Hook para gerenciar registros
+  const revalidateRecords = async () => {
+    await mutate(`/records`);
+  };
+
   const useRecords = (page: number, itemsPerPage: number) => {
     const { data, error, isValidating } = useSWR(
       [`/records`, page, itemsPerPage],
@@ -73,5 +74,6 @@ export const useRecordService = () => {
   return {
     deleteRecord,
     useRecords,
+    revalidateRecords,
   };
 };
