@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "proxy": "https://vs336jy84j.execute-api.sa-east-1.amazonaws.com",
   "dependencies": {
     "@chakra-ui/icons": "^2.2.5",
     "@chakra-ui/react": "^2.7.1",
@@ -18,7 +17,6 @@
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.11",
-    "install": "^0.13.0",
     "mathjs": "^13.2.2",
     "next": "15.0.3",
     "next-themes": "^0.4.3",

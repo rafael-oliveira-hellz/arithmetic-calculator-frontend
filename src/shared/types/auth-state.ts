@@ -1,4 +1,4 @@
-import { Record } from "@/app/components/organisms/Dashboard";
+import { Record } from "../interfaces/record";
 import { IUser } from "./user";
 
 export interface AuthState {
