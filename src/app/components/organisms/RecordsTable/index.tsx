@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Box, Table, Tbody, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Table, Tbody, Flex, Text } from "@chakra-ui/react";
 import { Record } from "@/shared/interfaces/records";
 import Dropdown from "../../atoms/Dropdown";
 import RecordTableHeader from "../../molecules/RecordTableHeader";
@@ -22,6 +22,10 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
   });
   const [currentPage, setCurrentPage] = useState(0);
   const recordsPerPage = 10;
+
+  const toggleSortOrder = () => {
+    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+  };
 
   const filteredRecords = useMemo(() => {
     return records
@@ -61,16 +65,6 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
         <Text fontSize="lg" fontWeight="bold">
           Registros de Operações
         </Text>
-        <Button
-          onClick={() =>
-            setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
-          }
-          bg="#14CFB1"
-          color="#FFF"
-          _hover={{ bg: "#12B49C" }}
-        >
-          Ordenar por Data ({sortOrder === "asc" ? "Asc" : "Desc"})
-        </Button>
       </Flex>
 
       <Flex gap="4" mb="4">
@@ -98,7 +92,10 @@ const RecordsTable: React.FC<RecordsTableProps> = ({ records = [] }) => {
       </Flex>
 
       <Table variant="simple">
-        <RecordTableHeader />
+        <RecordTableHeader
+          sortOrder={sortOrder}
+          onSortChange={toggleSortOrder}
+        />
         <Tbody>
           {paginatedRecords.map((record) => (
             <RecordTableRow key={record.id} record={record} />
