@@ -12,13 +12,14 @@ import {
 } from "@chakra-ui/react";
 import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
-import { Operation } from "@/shared/interfaces/operations";
 import InputField from "../../molecules/InputField";
 import { v4 } from "uuid";
 import { useOperationService } from "@/app/hooks/useOperationService";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/store";
+import { useRecordService } from "@/app/hooks/useRecordService";
 
 const OperationsForm = () => {
-  const [operations, setOperations] = useState<Operation[]>([]);
   const [selectedOperation, setSelectedOperation] = useState<string>("");
   const [value1, setValue1] = useState<string>("");
   const [value2, setValue2] = useState<string>("");
@@ -27,19 +28,16 @@ const OperationsForm = () => {
   const [loading, setLoading] = useState(false);
 
   const { fetchOperations, performOperation } = useOperationService();
+  const { fetchRecords } = useRecordService();
+
+  const operations = useSelector(
+    (state: RootState) => state.operations.operations
+  );
 
   useEffect(() => {
-    const fetchInitialOperations = async () => {
-      try {
-        const result = await fetchOperations();
-        setOperations(result);
-      } catch (error) {
-        console.error("Failed to fetch operations:", error);
-      }
-    };
-
-    fetchInitialOperations();
-  }, [fetchOperations]);
+    fetchOperations();
+    fetchRecords(0, 10);
+  }, [fetchOperations, fetchRecords]);
 
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
