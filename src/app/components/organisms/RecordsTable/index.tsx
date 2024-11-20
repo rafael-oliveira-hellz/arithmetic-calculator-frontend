@@ -84,7 +84,7 @@ const RecordsTable = (): React.JSX.Element => {
   if (isLoading) {
     return (
       <Flex justify="center" align="center" h="100%">
-        <Spinner size="lg" color="blue.500" />
+        <Spinner size="lg" color="#14CFB1" />
       </Flex>
     );
   }

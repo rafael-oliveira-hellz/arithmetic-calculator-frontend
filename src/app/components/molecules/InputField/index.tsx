@@ -83,7 +83,7 @@ const InputField: React.FC<InputFieldProps> = ({
         _placeholder={{ color: "gray.400" }}
         bg="gray.200"
         _hover={{ borderColor: "gray.500" }}
-        _focus={{ borderColor: "blue.400", boxShadow: "0 0 0 1px #14CFB1" }}
+        _focus={{ borderColor: "#14CFB1", boxShadow: "0 0 0 1px #12CFB1" }}
         {...rest}
       />
 

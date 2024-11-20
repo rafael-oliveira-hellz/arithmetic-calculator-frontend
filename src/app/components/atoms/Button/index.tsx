@@ -28,7 +28,7 @@ const Button: React.FC<ButtonProps> = ({
 }): React.JSX.Element => {
   const variantClasses: Record<ButtonVariant, string> = useMemo(
     () => ({
-      primary: "bg-blue-500 hover:bg-blue-600 text-white rounded-md",
+      primary: "bg-[#14CFB1] hover:bg-[#12B89E] text-white rounded-md",
       secondary: "bg-gray-600 hover:bg-gray-500 text-white rounded-md",
       danger: "bg-red-500 hover:bg-red-600 text-white rounded-md",
     }),

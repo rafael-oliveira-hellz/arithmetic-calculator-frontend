@@ -84,7 +84,7 @@ const OperationsForm = () => {
   }
 
   return (
-    <Box p="6" bg="gray.800" color="white" borderRadius="md" shadow="md">
+    <Box p="6" bg="gray.800" color="#FFF" borderRadius="md" shadow="md">
       <Text fontSize="2xl" fontWeight="bold" mb="6" textAlign="center">
         Mathematical Operations
       </Text>
