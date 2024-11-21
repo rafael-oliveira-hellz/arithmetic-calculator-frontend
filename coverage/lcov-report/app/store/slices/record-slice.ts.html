@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,68 +97,68 @@
 <a name='L32'></a><a href='#L32'>32</a>
 <a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Record } from "@/shared/interfaces/records";
 import { RecordsState } from "@/shared/types/record-state";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from <span class="cstat-no" title="statement not covered" >"@reduxjs/toolkit";</span>
 &nbsp;
-const initialState: RecordsState = {
+const initialState: RecordsState = <span class="cstat-no" title="statement not covered" >{</span>
   records: [],
   totalPages: 0,
   isFirst: true,
   isLast: true,
 };
 &nbsp;
-const recordsSlice = createSlice({
+const recordsSlice = <span class="cstat-no" title="statement not covered" >createSlice({</span>
   name: "records",
   initialState,
   reducers: {
-    setRecords(state, action: PayloadAction&lt;RecordsState&gt;) {
-      state.records = action.payload.records;
-      state.totalPages = action.payload.totalPages;
-      state.isFirst = action.payload.isFirst;
-      state.isLast = action.payload.isLast;
+<span class="fstat-no" title="function not covered" >    setRecords(s</span>tate, action: PayloadAction&lt;RecordsState&gt;) {
+<span class="cstat-no" title="statement not covered" >      state.records = action.payload.records;</span>
+<span class="cstat-no" title="statement not covered" >      state.totalPages = action.payload.totalPages;</span>
+<span class="cstat-no" title="statement not covered" >      state.isFirst = action.payload.isFirst;</span>
+<span class="cstat-no" title="statement not covered" >      state.isLast = action.payload.isLast;</span>
     },
 &nbsp;
-    removeRecord: (state, action: PayloadAction&lt;string&gt;) =&gt; {
-      state.records = state.records.filter(
-        (record: Record) =&gt; record.id !== action.payload
+    removeRecord: <span class="fstat-no" title="function not covered" >(s</span>tate, action: PayloadAction&lt;string&gt;) =&gt; {
+<span class="cstat-no" title="statement not covered" >      state.records = state.records.filter(</span>
+<span class="fstat-no" title="function not covered" >        (r</span>ecord: Record) =&gt; <span class="cstat-no" title="statement not covered" >record.id !== action.payload</span>
       );
     },
   },
 });
 &nbsp;
-export const { setRecords, removeRecord } = recordsSlice.actions;
-export default recordsSlice.reducer;
+export const { <span class="cstat-no" title="statement not covered" >setRecords,</span> <span class="cstat-no" title="statement not covered" >removeRecord </span>} = <span class="cstat-no" title="statement not covered" >recordsSlice.actions;</span>
+<span class="cstat-no" title="statement not covered" >export default <span class="cstat-no" title="statement not covered" >r</span>ecordsSlice.reducer;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -166,7 +166,7 @@ export default recordsSlice.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-21T06:48:02.952Z
+                at 2024-11-21T10:38:03.018Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

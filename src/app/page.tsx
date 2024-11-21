@@ -33,7 +33,7 @@ export default function Home() {
         </GridItem>
 
         <GridItem bg="gray.800" p="4" borderRadius="md">
-          <OperationsForm />
+          <OperationsForm balance={balance} />
         </GridItem>
 
         <GridItem bg="gray.800" p="4" borderRadius="md">

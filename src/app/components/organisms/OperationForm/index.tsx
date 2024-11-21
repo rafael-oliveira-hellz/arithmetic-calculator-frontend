@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Box,
   Text,
@@ -16,55 +16,78 @@ import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
 import { useOperationService } from "@/app/hooks/useOperationService";
 import { mutate } from "swr";
+import { ValidationService } from "@/app/services/validation-service";
 
-/**
- * Renders a form to perform arithmetic operations.
- *
- * The OperationsForm component allows users to select an arithmetic operation
- * (addition, subtraction, multiplication, division) from a dropdown menu and
- * input one or two numeric values depending on the selected operation.
- * It validates the inputs to ensure they are numeric, displays a preview of
- * the operation, and performs the operation upon submission. The result is
- * shown to the user, and errors (if any) are displayed using a toast notification.
- *
- * State:
- * - selectedOperation: The currently selected arithmetic operation.
- * - value1: The first numeric input value.
- * - value2: The second numeric input value, required for some operations.
- * - result: The result of the performed operation.
- * - errors: Validation errors for the numeric inputs.
- * - loading: Indicates if the operation is being performed.
- *
- * Hooks:
- * - useOperationService: Provides methods to fetch operations and perform them.
- * - useToast: Displays toast notifications for success or error messages.
- *
- * UI:
- * - Displays a grid layout with steps to select an operation, input values,
- *   preview the operation, and perform the operation.
- * - Contains a loading spinner and error handling.
- */
-const OperationsForm = (): React.JSX.Element => {
+const OperationsForm = ({
+  balance,
+}: {
+  balance: number;
+}): React.JSX.Element => {
   const [selectedOperation, setSelectedOperation] = useState<string>("");
   const [value1, setValue1] = useState<string>("");
   const [value2, setValue2] = useState<string>("");
   const [result, setResult] = useState<string | undefined>(undefined);
-  const [errors, setErrors] = useState<{ value1?: string; value2?: string }>(
-    {}
-  );
+  const [errors, setErrors] = useState<{
+    value1?: string;
+    value2?: string;
+    general?: string;
+  }>({});
   const [loading, setLoading] = useState<boolean>(false);
 
   const { performOperation, useOperations } = useOperationService();
   const { operations, error, isLoading } = useOperations();
   const toast = useToast();
 
+  const validationService = useMemo(
+    () => new ValidationService(balance),
+    [balance]
+  );
+
+  const handleValidation = () => {
+    const parsedValue1 = parseFloat(value1);
+    const parsedValue2 = parseFloat(value2);
+
+    const generalError = validationService.validateOperation(
+      selectedOperation,
+      parsedValue1,
+      parsedValue2
+    );
+
+    setErrors((prev) => ({
+      ...prev,
+      general: generalError,
+    }));
+
+    if (generalError) {
+      toast({
+        title: "Validation Error",
+        description: generalError,
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
+
   const requiresTwoInputs = (operationType: string) =>
     ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
       operationType
     );
 
-  const validateInput = (value: string) =>
-    /^\d*\.?\d*$/.test(value) ? undefined : "Only numeric values are allowed.";
+  const handleInputChange =
+    (
+      setter: React.Dispatch<React.SetStateAction<string>>,
+      key: "value1" | "value2"
+    ) =>
+    (value: string) => {
+      setter(value);
+      const error = validationService.validateInput(value);
+      setErrors((prev) => ({
+        ...prev,
+        [key]: error,
+      }));
+      handleValidation();
+    };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -105,6 +128,14 @@ const OperationsForm = (): React.JSX.Element => {
     }
   };
 
+  const resetState = () => {
+    setSelectedOperation("");
+    setValue1("");
+    setValue2("");
+    setResult(undefined);
+    setErrors({});
+  };
+
   if (isLoading) {
     return (
       <Box p="6" textAlign="center">
@@ -127,7 +158,7 @@ const OperationsForm = (): React.JSX.Element => {
         Arithmetic Operations
       </Text>
 
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+      <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={6}>
         <GridItem bg="gray.700" p="4" borderRadius="md">
           <Text fontSize="lg" fontWeight="bold" mb="4" textAlign="center">
             STEP 1
@@ -137,10 +168,8 @@ const OperationsForm = (): React.JSX.Element => {
             placeholder="Select an operation"
             value={selectedOperation}
             onChange={(value) => {
+              resetState();
               setSelectedOperation(value);
-              setValue1("");
-              setValue2("");
-              setResult(undefined);
             }}
           />
         </GridItem>
@@ -157,13 +186,7 @@ const OperationsForm = (): React.JSX.Element => {
               aria-invalid={!!errors.value1}
               value={value1}
               errorMessage={errors.value1}
-              onChange={(value) => {
-                setValue1(value);
-                setErrors((prev) => ({
-                  ...prev,
-                  value1: validateInput(value),
-                }));
-              }}
+              onChange={handleInputChange(setValue1, "value1")}
             />
 
             {requiresTwoInputs(selectedOperation) && (
@@ -174,13 +197,7 @@ const OperationsForm = (): React.JSX.Element => {
                 aria-invalid={!!errors.value2}
                 value={value2}
                 errorMessage={errors.value2}
-                onChange={(value) => {
-                  setValue2(value);
-                  setErrors((prev) => ({
-                    ...prev,
-                    value2: validateInput(value),
-                  }));
-                }}
+                onChange={handleInputChange(setValue2, "value2")}
               />
             )}
           </VStack>
@@ -204,6 +221,18 @@ const OperationsForm = (): React.JSX.Element => {
               </Text>
             )}
 
+            {errors.general && (
+              <Text
+                role="alert"
+                data-testid="error-message"
+                color="red.400"
+                fontWeight="bold"
+                aria-label={errors.general}
+              >
+                {errors.general}
+              </Text>
+            )}
+
             <Button
               bg="#14CFB1"
               color="#FFF"
@@ -214,6 +243,7 @@ const OperationsForm = (): React.JSX.Element => {
                 !selectedOperation ||
                 !!errors.value1 ||
                 !!errors.value2 ||
+                !!errors.general ||
                 loading
               }
             >
