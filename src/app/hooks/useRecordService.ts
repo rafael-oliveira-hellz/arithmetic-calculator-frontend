@@ -7,11 +7,13 @@ import { AppDispatch } from "../store/store";
 import { removeRecord } from "../store/slices/record-slice";
 import { RecordsResponse } from "@/shared/interfaces/records";
 import { useToast } from "@chakra-ui/react";
+import { useState } from "react";
 
 export const useRecordService = () => {
   const api = useApi();
   const toast = useToast();
   const dispatch: AppDispatch = useDispatch();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchRecords = async (
     page: number,
@@ -35,8 +37,8 @@ export const useRecordService = () => {
       [`/records`, page, itemsPerPage],
       () => fetchRecords(page, itemsPerPage),
       {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
+        revalidateOnFocus: true,
+        revalidateOnReconnect: true,
         dedupingInterval: 5000,
       }
     );
@@ -52,9 +54,23 @@ export const useRecordService = () => {
   };
 
   const deleteRecord = async (recordId: string): Promise<void> => {
+    setIsDeleting(true);
     try {
+      await mutate(
+        `/records`,
+        async (data: RecordsResponse | undefined) => {
+          if (!data) return data;
+          return {
+            ...data,
+            content: data.content.filter((record) => record.id !== recordId),
+          };
+        },
+        false
+      );
+
       await api.delete(`/records/${recordId}`);
       dispatch(removeRecord(recordId));
+
       toast({
         title: "Success",
         description: "Record deleted successfully",
@@ -62,7 +78,10 @@ export const useRecordService = () => {
         duration: 5000,
         isClosable: true,
       });
+
+      await revalidateRecords();
     } catch (error) {
+      await mutate(`/records`);
       toast({
         title: "Action failed",
         description: `Record deletion failed: ${
@@ -73,6 +92,8 @@ export const useRecordService = () => {
         isClosable: true,
       });
       throw error;
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -80,5 +101,6 @@ export const useRecordService = () => {
     deleteRecord,
     useRecords,
     revalidateRecords,
+    isDeleting,
   };
 };

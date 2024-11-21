@@ -15,6 +15,7 @@ import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
 import { useOperationService } from "@/app/hooks/useOperationService";
+import { mutate } from "swr";
 
 /**
  * Renders a form to perform arithmetic operations.
@@ -79,7 +80,18 @@ const OperationsForm = (): React.JSX.Element => {
         selectedOperation.toLowerCase(),
         payload
       );
+
       setResult(operationResult?.operationResponse);
+
+      await mutate("/records");
+
+      toast({
+        title: "Success",
+        description: "Operation performed successfully.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
     } catch (error) {
       toast({
         title: "Error performing operation",

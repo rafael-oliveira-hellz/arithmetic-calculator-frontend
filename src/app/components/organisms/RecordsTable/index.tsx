@@ -18,7 +18,8 @@ import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
 
 const RecordsTable = (): React.JSX.Element => {
-  const { useRecords, deleteRecord, revalidateRecords } = useRecordService();
+  const { useRecords, deleteRecord, revalidateRecords, isDeleting } =
+    useRecordService();
 
   const toast = useToast();
 
@@ -81,7 +82,7 @@ const RecordsTable = (): React.JSX.Element => {
       );
   }, [records, filters, sortOrder]);
 
-  if (isLoading) {
+  if (isLoading || isDeleting) {
     return (
       <Flex justify="center" align="center" h="100%">
         <Spinner size="lg" color="#14CFB1" role="status" />
