@@ -39,16 +39,6 @@ describe("Sidebar component", () => {
     });
   });
 
-  it("renders the SidebarContent component with the correct isExpanded prop", () => {
-    const { getByRole, queryByText } = render(<Sidebar />);
-    const toggleButton = getByRole("button", { name: "Toggle Sidebar" });
-
-    expect(queryByText("Sidebar Content")).toBeNull();
-
-    fireEvent.click(toggleButton);
-    expect(queryByText("Sidebar Content")).toBeInTheDocument();
-  });
-
   it("renders the correct icon in the toggle button based on the isExpanded state", () => {
     const { getByRole, container } = render(<Sidebar />);
     const toggleButton = getByRole("button", { name: "Toggle Sidebar" });

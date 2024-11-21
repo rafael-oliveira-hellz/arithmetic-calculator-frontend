@@ -18,7 +18,7 @@ const Sidebar = (): React.JSX.Element => {
     <Box
       as="nav"
       bg="gray.800"
-      color="white"
+      color="#FFF"
       width={isExpanded ? "200px" : "60px"}
       className={twclsx("min-h-full")}
       role="navigation"

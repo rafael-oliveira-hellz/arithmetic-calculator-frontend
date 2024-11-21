@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import SidebarItem from "../SidebarItem";
 import { menuItems } from "../../config/menu-items";
-import Text from "../../atoms/Text";
+import { Box } from "@chakra-ui/react";
 
 interface SidebarContentProps {
   isExpanded: boolean;
@@ -13,8 +13,7 @@ const SidebarContent = ({ isExpanded }: SidebarContentProps) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col justify-evenly">
-      {isExpanded && <Text>Sidebar Content</Text>}
+    <Box className="flex flex-col justify-evenly">
       {menuItems.map((item) => (
         <SidebarItem
           key={item.label}
@@ -24,7 +23,7 @@ const SidebarContent = ({ isExpanded }: SidebarContentProps) => {
           onClick={() => router.push(item.path)}
         />
       ))}
-    </div>
+    </Box>
   );
 };
 

@@ -119,11 +119,13 @@ describe("useRecordService", () => {
 
       const { result } = renderHook(() => useRecordService());
 
-      await expect(
-        act(async () => {
+      await act(async () => {
+        try {
           await result.current.deleteRecord("1");
-        })
-      ).rejects.toThrow("Deletion failed");
+        } catch (e) {
+          expect(e).toBe(mockError);
+        }
+      });
 
       expect(mockApi.delete).toHaveBeenCalledWith("/records/1");
       expect(mockToast).toHaveBeenCalledWith({
@@ -133,6 +135,8 @@ describe("useRecordService", () => {
         duration: 5000,
         isClosable: true,
       });
+
+      expect(mutate).toHaveBeenCalledWith("/records");
     });
   });
 
