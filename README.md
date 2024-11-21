@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Arithmetic Calculator
 
-## Getting Started
+This is a web application for performing arithmetic calculations. It consists of a front-end built with Next.js and a back-end implemented in Java.
 
-First, run the development server:
+## Requirements
+
+Ensure your environment meets the following requirements before starting:
+
+- Node.js: v20 or higher
+- npm: v8.x or higher (or Yarn v1.x)
+- Next.js: v15
+- Java: JDK 21
+  Back-end server: Java application must be running to handle local API requests
+
+## Installation
+
+Clone the Repository
+git clone https://github.com/rafael-oliveira-hellz/arithmetic-calculator-frontend
+
+cd arithmetic-calculator-frontend
+
+### Install Dependencies
+
+Using npm:
+
+```bash
+npm install
+```
+
+or
+
+using Yarn:
+
+```bash
+yarn install
+```
+
+## Environment Configuration
+
+Create a .env file in the root directory of the project.
+
+Add the following environment variables:
+
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:${PORT}
+```
+
+`${PORT} is where your backend is running`
+
+## Start the Front-end Server
+
+To start the front-end development server, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+or
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application will be accessible at http://localhost:3000.
 
-## Learn More
+## Start the Back-end Server
 
-To learn more about Next.js, take a look at the following resources:
+Ensure the Java back-end server is running:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Navigate to your Java project directory.
+- Build and run the Java application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Build the application (if not already built)
 
-## Deploy on Vercel
+```bash
+mvn clean package
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Run the application
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+java -jar target/your-backend.jar
+```
+
+The back-end server will be accessible at http://localhost:${PORT}.
+
+## Running Tests
+
+If you have tests configured, you can run them using:
+
+```bash
+npm test
+```
+
+or
+
+```bash
+yarn test
+```
+
+## Technologies Used
+
+### Front-end
+
+- Next.js v15
+- Tailwind CSS
+- Chakra UI
+- React.js
+
+### Back-end:
+
+- Java 21
+- Spring Boot
+- AWS Lambda
+- AWS RDS PostgreSQL
+- AWS API Gateway

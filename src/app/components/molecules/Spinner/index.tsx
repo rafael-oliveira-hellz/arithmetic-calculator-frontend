@@ -1,7 +1,7 @@
-import React from 'react';
-import SpinnerIcon from '../../atoms/SpinnerIcon';
-import Text from '../../atoms/Text';
-import { Box } from '@chakra-ui/react';
+import React from "react";
+import SpinnerIcon from "../../atoms/SpinnerIcon";
+import Text from "../../atoms/Text";
+import { Box } from "@chakra-ui/react";
 
 interface SpinnerProps {
   loadingText?: string;
@@ -9,6 +9,7 @@ interface SpinnerProps {
   className?: string;
   width?: string;
   height?: string;
+  dataTestId?: string;
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
@@ -16,16 +17,18 @@ const Spinner: React.FC<SpinnerProps> = ({
   textStyle,
   className,
   width,
-  height
+  height,
+  dataTestId = "spinner",
 }) => {
   return (
     <Box
       className={className}
-      style={{ display: 'flex', alignItems: 'center' }}
+      style={{ display: "flex", alignItems: "center" }}
+      data-testid={dataTestId}
     >
-      <SpinnerIcon width={width} height={height} />
+      <SpinnerIcon width={width} height={height} data-testid="spinner-icon" />
       {loadingText && (
-        <Text style={{ marginLeft: '8px', ...textStyle }}>{loadingText}</Text>
+        <Text style={{ marginLeft: "8px", ...textStyle }}>{loadingText}</Text>
       )}
     </Box>
   );

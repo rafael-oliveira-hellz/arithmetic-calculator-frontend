@@ -17,16 +17,26 @@ const geistMono = localFont({
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  withHtmlAndBody = true,
+}: {
   children: React.ReactNode;
-}>) {
+  withHtmlAndBody?: boolean;
+}) {
+  if (withHtmlAndBody) {
+    return (
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <AppProvider>{children}</AppProvider>
+        </body>
+      </html>
+    );
+  }
+
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <AppProvider>{children}</AppProvider>
-      </body>
-    </html>
+    <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <AppProvider>{children}</AppProvider>
+    </div>
   );
 }

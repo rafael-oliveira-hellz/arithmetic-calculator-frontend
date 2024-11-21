@@ -8,7 +8,13 @@ import { useAuthService } from "@/app/hooks/useAuthService";
 import { useRouter } from "next/navigation";
 import { useToast } from "@chakra-ui/react";
 
-const LoginBox: React.FC = () => {
+/**
+ * A login box component that displays a login form and handles the
+ * submission of the form using the {@link useAuthService} hook.
+ *
+ * @returns A login box component containing a login form.
+ */
+const LoginBox: React.FC = (): React.JSX.Element => {
   const { loginUser } = useAuthService();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -18,6 +24,18 @@ const LoginBox: React.FC = () => {
   const toast = useToast();
   const router = useRouter();
 
+  /**
+   * Handles the login form submission.
+   *
+   * Prevents the default form submission action, shows a loading indicator, and
+   * attempts to log in using the provided username and password.
+   *
+   * If the login is successful, shows a success toast and redirects to the
+   * homepage. If the login fails, shows an error toast with the error message.
+   * Finally, hides the loading indicator regardless of the login outcome.
+   *
+   * @param {React.FormEvent<HTMLFormElement>} e The form submission event.
+   */
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -38,7 +56,7 @@ const LoginBox: React.FC = () => {
       toast({
         title: "Error",
         description: `Login failed: ${err}`,
-        status: "success",
+        status: "error",
         duration: 5000,
         isClosable: true,
       });

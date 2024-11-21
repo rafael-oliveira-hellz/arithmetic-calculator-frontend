@@ -1,8 +1,8 @@
 import React from "react";
 import { Tr, Td, Tooltip } from "@chakra-ui/react";
 import { Record } from "@/shared/interfaces/records";
-import Button from "../../atoms/Button";
 import { DeleteIcon } from "@chakra-ui/icons";
+import Button from "../../atoms/Button";
 
 interface RecordTableRowProps {
   record: Record;
@@ -23,6 +23,7 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
       <Td>
         <Tooltip label="Delete Record" aria-label="Delete Record">
           <Button
+            aria-label="Delete"
             colorScheme="red"
             size="sm"
             onClick={() => onDelete(record.id)}

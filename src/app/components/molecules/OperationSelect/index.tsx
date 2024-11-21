@@ -8,10 +8,10 @@ interface Option {
 }
 
 interface OperationSelectProps {
-  options: Option[]; // Lista de opções
-  placeholder: string; // Placeholder do dropdown
-  value: string; // Valor selecionado
-  onChange: (value: string) => void; // Callback para mudança
+  options: Option[];
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 
 const OperationSelect: React.FC<OperationSelectProps> = ({
@@ -27,9 +27,14 @@ const OperationSelect: React.FC<OperationSelectProps> = ({
     <Menu>
       <MenuButton
         as={Button}
+        data-testid="operation-select"
+        role="combobox"
+        aria-haspopup="listbox"
+        aria-expanded={false}
+        aria-label="Select an operation"
         rightIcon={<ChevronDownIcon />}
         bg="gray.700"
-        color="white"
+        color="#FFF"
         _hover={{ bg: "gray.600" }}
         _active={{ bg: "gray.600" }}
       >

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Box, Input, InputProps } from "@chakra-ui/react";
+import { Box, InputProps } from "@chakra-ui/react";
 import {
   EmailIcon,
   LockIcon,
@@ -10,6 +10,7 @@ import {
   InfoIcon,
 } from "@chakra-ui/icons";
 import ErrorMessage from "../../atoms/ErrorMessage";
+import Input from "../../atoms/Input";
 
 interface InputFieldProps extends Omit<InputProps, "onChange"> {
   id: string;
@@ -18,6 +19,7 @@ interface InputFieldProps extends Omit<InputProps, "onChange"> {
   onChange: (value: string) => void;
   iconType?: "name" | "email" | "password";
   isValid?: boolean;
+  dataTestId?: string;
   errorMessage?: string;
 }
 
@@ -34,6 +36,7 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   iconType = "email",
   isValid,
+  dataTestId,
   errorMessage,
   ...rest
 }) => {
@@ -62,6 +65,7 @@ const InputField: React.FC<InputFieldProps> = ({
           justifyContent="center"
           pointerEvents="none"
           zIndex={10}
+          data-testid={`chakra-${iconType}-icon`}
         >
           <LeftIcon color="gray.800" />
         </Box>
@@ -74,6 +78,8 @@ const InputField: React.FC<InputFieldProps> = ({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete="on"
+        data-testid={dataTestId}
+        aria-invalid={errorMessage ? "true" : "false"}
         pl="2.75rem"
         pr={iconType === "password" ? "2.5rem" : "0.75rem"}
         border="1px solid"
@@ -96,6 +102,9 @@ const InputField: React.FC<InputFieldProps> = ({
           cursor="pointer"
           onClick={togglePasswordVisibility}
           zIndex={10}
+          role="button"
+          aria-label="Toggle password visibility"
+          data-testid="toggle-password-visibility"
         >
           {showPassword ? (
             <ViewOffIcon color="gray.800" _hover={{ color: "#14CFB1" }} />

@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Box, IconButton, Flex } from "@chakra-ui/react";
 import { MdOutlineMenu, MdMenuOpen } from "react-icons/md";
 import { twclsx } from "@/app/utils/twclsx";
 import SidebarContent from "../../molecules/SidebarContent";
 
-const Sidebar = () => {
+/**
+ * A responsive sidebar component with toggle button.
+ *
+ * @returns {React.JSX.Element} A responsive sidebar component with toggle button.
+ */
+const Sidebar = (): React.JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -16,12 +21,15 @@ const Sidebar = () => {
       color="white"
       width={isExpanded ? "200px" : "60px"}
       className={twclsx("min-h-full")}
-      aria-expanded={isExpanded}
+      role="navigation"
       transition="width 0.3s ease-in-out"
+      aria-label="Sidebar"
     >
       <Flex direction="column" h="full" align={isExpanded ? "start" : "center"}>
         <IconButton
           aria-label="Toggle Sidebar"
+          aria-expanded={isExpanded ? "true" : "false"}
+          role="button"
           onClick={() => setIsExpanded(!isExpanded)}
           className={twclsx("m-2")}
           style={{
@@ -30,9 +38,9 @@ const Sidebar = () => {
           }}
         >
           {isExpanded ? (
-            <MdMenuOpen fill="#14CFB1" size={40} />
+            <MdMenuOpen fill="#14CFB1" size={40} data-icon="MdMenuOpen" />
           ) : (
-            <MdOutlineMenu fill="#14CFB1" size={35} />
+            <MdOutlineMenu fill="#14CFB1" size={35} data-icon="MdOutlineMenu" />
           )}
         </IconButton>
         <SidebarContent isExpanded={isExpanded} />

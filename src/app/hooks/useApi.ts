@@ -4,17 +4,9 @@ import AxiosApiClient from "../api/AxiosApiClient";
 // import { useToast } from "./useToast";
 
 const useApi = (): ApiClient => {
-  // const { showToast } = useToast();
-
-  const client = useMemo(
-    () => {
-      return new AxiosApiClient();
-      // showToast
-    },
-    [
-      // showToast
-    ]
-  );
+  const client = useMemo(() => {
+    return new AxiosApiClient();
+  }, []);
 
   return client;
 };

@@ -14,16 +14,44 @@ import {
 import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
-import { v4 } from "uuid";
 import { useOperationService } from "@/app/hooks/useOperationService";
 
-const OperationsForm = () => {
+/**
+ * Renders a form to perform arithmetic operations.
+ *
+ * The OperationsForm component allows users to select an arithmetic operation
+ * (addition, subtraction, multiplication, division) from a dropdown menu and
+ * input one or two numeric values depending on the selected operation.
+ * It validates the inputs to ensure they are numeric, displays a preview of
+ * the operation, and performs the operation upon submission. The result is
+ * shown to the user, and errors (if any) are displayed using a toast notification.
+ *
+ * State:
+ * - selectedOperation: The currently selected arithmetic operation.
+ * - value1: The first numeric input value.
+ * - value2: The second numeric input value, required for some operations.
+ * - result: The result of the performed operation.
+ * - errors: Validation errors for the numeric inputs.
+ * - loading: Indicates if the operation is being performed.
+ *
+ * Hooks:
+ * - useOperationService: Provides methods to fetch operations and perform them.
+ * - useToast: Displays toast notifications for success or error messages.
+ *
+ * UI:
+ * - Displays a grid layout with steps to select an operation, input values,
+ *   preview the operation, and perform the operation.
+ * - Contains a loading spinner and error handling.
+ */
+const OperationsForm = (): React.JSX.Element => {
   const [selectedOperation, setSelectedOperation] = useState<string>("");
   const [value1, setValue1] = useState<string>("");
   const [value2, setValue2] = useState<string>("");
   const [result, setResult] = useState<string | undefined>(undefined);
-  const [errors, setErrors] = useState<string | undefined>(undefined);
-  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState<{ value1?: string; value2?: string }>(
+    {}
+  );
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { performOperation, useOperations } = useOperationService();
   const { operations, error, isLoading } = useOperations();
@@ -68,19 +96,17 @@ const OperationsForm = () => {
   if (isLoading) {
     return (
       <Box p="6" textAlign="center">
-        <Spinner size="lg" />
+        <Spinner size="lg" data-testid="spinner" />
       </Box>
     );
   }
 
   if (error) {
-    toast({
-      title: "Failed to fetch operations",
-      description: `${error instanceof Error ? error.message : error}`,
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-    });
+    return (
+      <Box p="6" textAlign="center">
+        <Text color="red.500">Failed to fetch operations</Text>
+      </Box>
+    );
   }
 
   return (
@@ -113,24 +139,35 @@ const OperationsForm = () => {
           </Text>
           <VStack spacing="4">
             <InputField
-              id={v4()}
+              id="input-field-1"
               placeholder="Enter the first value"
+              dataTestId="input-field-1"
+              aria-invalid={!!errors.value1}
               value={value1}
-              errorMessage={errors}
+              errorMessage={errors.value1}
               onChange={(value) => {
                 setValue1(value);
-                setErrors(validateInput(value));
+                setErrors((prev) => ({
+                  ...prev,
+                  value1: validateInput(value),
+                }));
               }}
             />
+
             {requiresTwoInputs(selectedOperation) && (
               <InputField
-                id={v4()}
+                id="input-field-2"
                 placeholder="Enter the second value"
+                dataTestId="input-field-2"
+                aria-invalid={!!errors.value2}
                 value={value2}
-                errorMessage={errors}
+                errorMessage={errors.value2}
                 onChange={(value) => {
                   setValue2(value);
-                  setErrors(validateInput(value));
+                  setErrors((prev) => ({
+                    ...prev,
+                    value2: validateInput(value),
+                  }));
                 }}
               />
             )}
@@ -161,7 +198,12 @@ const OperationsForm = () => {
               _hover={{ bg: "#12B49C" }}
               size="lg"
               onClick={handleSubmit}
-              isDisabled={!selectedOperation || !!errors}
+              isDisabled={
+                !selectedOperation ||
+                !!errors.value1 ||
+                !!errors.value2 ||
+                loading
+              }
             >
               {loading ? <Spinner size="md" /> : "Perform Operation"}
             </Button>

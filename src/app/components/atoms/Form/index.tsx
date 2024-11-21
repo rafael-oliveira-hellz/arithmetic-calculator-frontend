@@ -22,6 +22,8 @@ const Form: React.FC<FormAtomProps> = ({
     <form
       className={twclsx("space-y-4", className)}
       onSubmit={handleSubmit}
+      role="form"
+      aria-label="form"
       {...rest}
     >
       {children}

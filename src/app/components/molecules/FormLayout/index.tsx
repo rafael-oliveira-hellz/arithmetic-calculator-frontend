@@ -15,6 +15,8 @@ const FormLayout: React.FC<FormLayoutProps> = ({
 }) => {
   return (
     <Flex
+      role="article"
+      data-testid="layout-container"
       width="full"
       align="center"
       justifyContent="center"

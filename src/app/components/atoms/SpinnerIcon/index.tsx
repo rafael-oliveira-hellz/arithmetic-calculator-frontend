@@ -1,14 +1,18 @@
 import React from "react";
 import "./styles.css";
+import { Box } from "@chakra-ui/react";
 const SpinnerIcon = ({
   width,
   height,
+  dataTestId = "spinner-icon",
 }: {
   width?: string;
   height?: string;
+  dataTestId?: string;
 }) => {
   return (
-    <div
+    <Box
+      data-testid={dataTestId}
       style={{
         width: `${width ? width : "24px"}`,
         height: `${height ? height : "24px"}`,
@@ -17,7 +21,7 @@ const SpinnerIcon = ({
         borderRadius: "50%",
         animation: "spin 0.8s linear infinite",
       }}
-    ></div>
+    ></Box>
   );
 };
 

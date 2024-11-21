@@ -2,15 +2,27 @@ import { Flex } from "@chakra-ui/react";
 import Text from "../../atoms/Text";
 import { twclsx } from "@/app/utils/twclsx";
 
-const Footer = ({ className }: { className?: string }) => {
+/**
+ * Footer component, containing the copyright information.
+ *
+ * @example
+ * <Footer />
+ *
+ * @param {string} [className] - Additional CSS class names to apply to the component.
+ *
+ * @returns {React.JSX.Element} The rendered Footer component.
+ */
+const Footer = ({ className }: { className?: string }): React.JSX.Element => {
   const currentYear = new Date().getFullYear();
   return (
     <Flex
       as="footer"
+      aria-label="Footer"
+      role="contentinfo"
       className={twclsx("bg-gray-800 text-white p-4", className)}
       justify="center"
     >
-      <Text>
+      <Text aria-label="Copyright" aria-description="Copyright" variant="large">
         &copy; {currentYear} Arithmetic Calculator. All rights reserved.
       </Text>
     </Flex>

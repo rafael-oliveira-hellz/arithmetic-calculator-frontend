@@ -20,7 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   return (
     <>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} role="form">
         <Box>
           <InputField
             id="username"
@@ -45,6 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             placeholder="Type your password"
           />
           <Button
+            // role="button"
             type="submit"
             className="w-full mt-4"
             bg="gray.700"
@@ -59,7 +60,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </Box>
       </Form>
       {isLoading && (
-        <Box className="absolute flex justify-center items-center bg-[#00000030] w-full h-full top-0 bottom-0 right-0 left-0 z-40">
+        <Box
+          data-testid="button-spinner"
+          className="absolute flex justify-center items-center bg-[#00000030] w-full h-full top-0 bottom-0 right-0 left-0 z-40"
+        >
           <Spinner className="relative z-50" width="50px" height="50px" />
         </Box>
       )}

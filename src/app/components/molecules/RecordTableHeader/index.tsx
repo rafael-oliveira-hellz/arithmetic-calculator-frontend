@@ -53,6 +53,9 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             DATE
             <IconButton
               aria-label="Sort operation by date"
+              data-testid={
+                sortOrder === "asc" ? "arrow-up-icon" : "arrow-down-icon"
+              }
               icon={sortOrder === "asc" ? <ArrowUpIcon /> : <ArrowDownIcon />}
               onClick={onSortChange}
               size="sm"

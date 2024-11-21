@@ -45,7 +45,7 @@ export const useRecordService = () => {
       records: data?.content || [],
       totalPages: data?.totalPages || 0,
       isFirst: data?.first || true,
-      isLast: data?.last || true,
+      isLast: data?.last || false,
       isLoading: !data && !error && isValidating,
       error,
     };
