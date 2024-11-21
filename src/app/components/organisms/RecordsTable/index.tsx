@@ -49,6 +49,7 @@ const RecordsTable = (): React.JSX.Element => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     }
   };

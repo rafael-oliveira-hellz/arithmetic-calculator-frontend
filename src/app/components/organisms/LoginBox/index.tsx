@@ -49,6 +49,7 @@ const LoginBox: React.FC = (): React.JSX.Element => {
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
 
       router.push("/");
@@ -59,6 +60,7 @@ const LoginBox: React.FC = (): React.JSX.Element => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     } finally {
       setIsLoading(false);

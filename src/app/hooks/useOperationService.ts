@@ -64,6 +64,7 @@ export const useOperationService = () => {
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
 
       await revalidateRecords();
@@ -78,6 +79,7 @@ export const useOperationService = () => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
       throw error;
     }

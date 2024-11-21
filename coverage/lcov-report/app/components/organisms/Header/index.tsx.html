@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>12/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -113,27 +113,25 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,12 +143,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,15 +151,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use client";
 &nbsp;
-import { useSelector } from <span class="cstat-no" title="statement not covered" >"react-redux";</span>
-import { Flex } from <span class="cstat-no" title="statement not covered" >"@chakra-ui/react";</span>
+import { useSelector } from "react-redux";
+import { Flex } from "@chakra-ui/react";
 import { RootState } from "@/app/store/store";
-import HeaderContent from <span class="cstat-no" title="statement not covered" >"../../molecules/HeaderContent";</span>
-import UserActions from <span class="cstat-no" title="statement not covered" >"../../molecules/UserActions";</span>
-import { useAuthService } from <span class="cstat-no" title="statement not covered" >"@/app/hooks/useAuthService";</span>
-import React from <span class="cstat-no" title="statement not covered" >"react";</span>
+import HeaderContent from "../../molecules/HeaderContent";
+import UserActions from "../../molecules/UserActions";
+import { useAuthService } from "@/app/hooks/useAuthService";
+import React from "react";
 &nbsp;
 /**
  * The Header component renders the header of the application with
@@ -176,10 +176,10 @@ import React from <span class="cstat-no" title="statement not covered" >"react";
  *
  * @returns The Header component.
  */
-const Header = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(): React.JSX.Element =&gt; {</span></span>
-  const { logoutUser } = <span class="cstat-no" title="statement not covered" >useAuthService();</span>
-  const { isAuthenticated, user } = <span class="cstat-no" title="statement not covered" >useSelector(</span>
-<span class="fstat-no" title="function not covered" >    (s</span>tate: RootState) =&gt; <span class="cstat-no" title="statement not covered" >state.auth</span>
+const Header = (): React.JSX.Element =&gt; {
+  const { logoutUser } = useAuthService();
+  const { isAuthenticated, user } = useSelector(
+    (state: RootState) =&gt; state.auth
   );
 &nbsp;
   return (
@@ -194,10 +194,10 @@ const Header = <span class="cstat-no" title="statement not covered" ><span class
         color="#FFF"
       &gt;
         &lt;HeaderContent appName="Arithmetic Calculator" /&gt;
-        {<span class="branch-0 cbranch-no" title="branch not covered" >isAuthenticated &amp;&amp; (</span>
+        {isAuthenticated &amp;&amp; (
           &lt;UserActions
             data-testid="user-actions"
-            username={user?.username ?? "Guest"}
+            username={user?.username ?? <span class="branch-1 cbranch-no" title="branch not covered" >"Guest"}</span>
             onLogout={<span class="fstat-no" title="function not covered" >async () =&gt; <span class="cstat-no" title="statement not covered" >a</span>wait logoutUser()}</span>
           /&gt;
         )}
@@ -206,7 +206,7 @@ const Header = <span class="cstat-no" title="statement not covered" ><span class
   );
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default <span class="cstat-no" title="statement not covered" >H</span>eader;</span>
+export default Header;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -214,7 +214,7 @@ const Header = <span class="cstat-no" title="statement not covered" ><span class
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-21T10:38:03.018Z
+                at 2024-11-21T10:42:13.983Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

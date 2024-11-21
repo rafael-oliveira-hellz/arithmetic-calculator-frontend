@@ -3,7 +3,6 @@
 import React, { useMemo, useState } from "react";
 import {
   Box,
-  Text,
   VStack,
   Grid,
   GridItem,
@@ -17,6 +16,7 @@ import InputField from "../../molecules/InputField";
 import { useOperationService } from "@/app/hooks/useOperationService";
 import { mutate } from "swr";
 import { ValidationService } from "@/app/services/validation-service";
+import Text from "../../atoms/Text";
 
 const OperationsForm = ({
   balance,
@@ -65,6 +65,7 @@ const OperationsForm = ({
         status: "warning",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     }
   };
@@ -114,6 +115,7 @@ const OperationsForm = ({
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     } catch (error) {
       toast({
@@ -122,6 +124,7 @@ const OperationsForm = ({
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     } finally {
       setLoading(false);
