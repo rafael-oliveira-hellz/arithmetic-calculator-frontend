@@ -90,6 +90,16 @@ const OperationsForm = ({
       handleValidation();
     };
 
+  const isFormValid = (): boolean => {
+    if (!selectedOperation) return false;
+    if (!!errors.value1 || !!errors.value2 || !!errors.general) return false;
+    if (loading) return false;
+    if (requiresTwoInputs(selectedOperation)) {
+      return !!value1 && !!value2;
+    }
+    return !!value1;
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
     const payload = {
@@ -242,13 +252,7 @@ const OperationsForm = ({
               _hover={{ bg: "#12B49C" }}
               size="lg"
               onClick={handleSubmit}
-              isDisabled={
-                !selectedOperation ||
-                !!errors.value1 ||
-                !!errors.value2 ||
-                !!errors.general ||
-                loading
-              }
+              isDisabled={!isFormValid() || loading}
             >
               {loading ? <Spinner size="md" /> : "Perform Operation"}
             </Button>
