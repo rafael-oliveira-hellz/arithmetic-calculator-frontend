@@ -253,6 +253,7 @@ const OperationsForm = ({
               size="lg"
               onClick={handleSubmit}
               isDisabled={!isFormValid() || loading}
+              width="100%"
             >
               {loading ? <Spinner size="md" /> : "Perform Operation"}
             </Button>
