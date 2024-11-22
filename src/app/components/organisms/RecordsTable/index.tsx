@@ -141,8 +141,6 @@ const RecordsTable = (): React.JSX.Element => {
       <PaginationControls
         currentPage={currentPage}
         totalPages={totalPages === 0 ? 1 : totalPages}
-        isFirst={currentPage === 0}
-        isLast={currentPage + 1 === totalPages}
         onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
         onNext={() =>
           setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
