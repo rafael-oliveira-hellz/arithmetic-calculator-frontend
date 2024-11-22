@@ -21,6 +21,7 @@ const SidebarContent = ({ isExpanded }: SidebarContentProps) => {
           label={item.label}
           isExpanded={isExpanded}
           onClick={() => router.push(item.path)}
+          path={item.path}
         />
       ))}
     </Box>
