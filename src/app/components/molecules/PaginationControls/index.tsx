@@ -31,7 +31,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         Previous Page
       </Button>
       <Text>
-        Page {currentPage + 1} of {totalPages}
+        Page {currentPage} of {totalPages}
       </Text>
       <Button
         onClick={onNext}
