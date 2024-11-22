@@ -26,7 +26,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         onClick={onPrevious}
         disabled={isFirst || isSinglePage}
         aria-disabled={isFirst || isSinglePage}
-        colorScheme={isFirst || isSinglePage ? "gray" : "blue"}
+        colorScheme={isFirst || isSinglePage ? "gray" : "#14CFB1"}
       >
         Previous Page
       </Button>
@@ -37,7 +37,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         onClick={onNext}
         disabled={isLast || isSinglePage}
         aria-disabled={isLast || isSinglePage}
-        colorScheme={isLast || isSinglePage ? "gray" : "blue"}
+        colorScheme={isLast || isSinglePage ? "gray" : "#14CFB1"}
       >
         Next Page
       </Button>
