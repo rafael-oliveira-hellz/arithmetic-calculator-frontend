@@ -23,7 +23,13 @@ const SidebarItem = ({
     onClick={onClick}
     data-testid="sidebar-item"
   >
-    <Icon as={icon} fontSize="xl" role="img" aria-label={label} />
+    <Icon
+      as={icon}
+      fontSize="xl"
+      role="img"
+      aria-label={label}
+      className={twclsx("hover:text-[#14CFB1] transition-colors duration-200")}
+    />
     {isExpanded && (
       <Text ml="3" fontSize="md">
         {label}
