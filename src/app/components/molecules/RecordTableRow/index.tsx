@@ -1,8 +1,9 @@
 import React from "react";
-import { Tr, Td, Tooltip } from "@chakra-ui/react";
+import { Td, Tooltip } from "@chakra-ui/react";
 import { Record } from "@/shared/interfaces/records";
 import { DeleteIcon } from "@chakra-ui/icons";
 import Button from "../../atoms/Button";
+import CenteredRow from "../../atoms/CenteredRow";
 
 interface RecordTableRowProps {
   record: Record;
@@ -14,17 +15,10 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
   onDelete,
 }) => {
   return (
-    <Tr
-      sx={{
-        "& > td": {
-          textAlign: "center",
-          verticalAlign: "middle",
-        },
-      }}
-    >
+    <CenteredRow>
       <Td>{record.operation.type}</Td>
-      <Td>{record.operation.cost}</Td>
-      <Td>{record.userBalance}</Td>
+      <Td colSpan={2}>{record.operation.cost}</Td>
+      <Td colSpan={2}>{record.userBalance}</Td>
       <Td>{record.operationResponse}</Td>
       <Td>{new Date(record.date).toLocaleString()}</Td>
       <Td>
@@ -40,7 +34,7 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
           </Button>
         </Tooltip>
       </Td>
-    </Tr>
+    </CenteredRow>
   );
 };
 
