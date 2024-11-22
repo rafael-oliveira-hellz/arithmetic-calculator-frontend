@@ -14,10 +14,17 @@ const RecordTableRow: React.FC<RecordTableRowProps> = ({
   onDelete,
 }) => {
   return (
-    <Tr>
+    <Tr
+      sx={{
+        "& > td": {
+          textAlign: "center",
+          verticalAlign: "middle",
+        },
+      }}
+    >
       <Td>{record.operation.type}</Td>
-      <Td colSpan={2}>{record.operation.cost}</Td>
-      <Td colSpan={2}>{record.userBalance}</Td>
+      <Td>{record.operation.cost}</Td>
+      <Td>{record.userBalance}</Td>
       <Td>{record.operationResponse}</Td>
       <Td>{new Date(record.date).toLocaleString()}</Td>
       <Td>
