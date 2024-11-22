@@ -139,10 +139,11 @@ describe("useOperationService", () => {
       expect(mockDispatch).toHaveBeenCalledWith(updateBalance(100));
       expect(mockToast).toHaveBeenCalledWith({
         title: "Success",
-        description: "Operation successful.",
+        description: "Operation performed successfully.",
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
       expect(mockRevalidateRecords).toHaveBeenCalled();
     });

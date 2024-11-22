@@ -60,7 +60,7 @@ export const useOperationService = () => {
 
       toast({
         title: "Success",
-        description: "Operation successful.",
+        description: "Operation performed successfully.",
         status: "success",
         duration: 5000,
         isClosable: true,

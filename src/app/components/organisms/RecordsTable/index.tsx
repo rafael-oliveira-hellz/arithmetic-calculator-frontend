@@ -23,13 +23,13 @@ const RecordsTable = (): React.JSX.Element => {
 
   const toast = useToast();
 
-  const [currentPage, setCurrentPage] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [filters, setFilters] = useState({ type: "", amount: "" });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const { records, totalPages, isLoading, error } = useRecords(
-    currentPage,
+    currentPage - 1,
     itemsPerPage
   );
 

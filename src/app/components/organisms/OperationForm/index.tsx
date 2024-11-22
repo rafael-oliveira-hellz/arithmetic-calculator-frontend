@@ -118,15 +118,6 @@ const OperationsForm = ({
       setResult(operationResult?.operationResponse);
 
       await mutate("/records");
-
-      toast({
-        title: "Success",
-        description: "Operation performed successfully.",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "top-right",
-      });
     } catch (error) {
       toast({
         title: "Error performing operation",
