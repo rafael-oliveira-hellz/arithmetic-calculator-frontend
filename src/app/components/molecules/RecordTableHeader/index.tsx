@@ -1,6 +1,7 @@
 import React from "react";
-import { Thead, Tr, Th, IconButton, Box } from "@chakra-ui/react";
+import { Thead, Th, IconButton, Box } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import CenteredRow from "../../atoms/CenteredRow";
 
 interface RecordTableHeaderProps {
   sortOrder: "asc" | "desc";
@@ -13,43 +14,18 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
 }) => {
   return (
     <Thead>
-      <Tr>
-        <Th
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          TYPE
-        </Th>
-        <Th
-          colSpan={2}
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          OPERATION COST
-        </Th>
-        <Th
-          colSpan={2}
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          USER BALANCE
-        </Th>
-        <Th
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          OPERATION RESPONSE
-        </Th>
-        <Th fontWeight="bold" fontSize="lg" textAlign="center">
-          <Box display="flex" alignItems="center" gap="2">
+      <CenteredRow>
+        <Th>TYPE</Th>
+        <Th colSpan={2}>OPERATION COST</Th>
+        <Th colSpan={2}>USER BALANCE</Th>
+        <Th>OPERATION RESPONSE</Th>
+        <Th>
+          <Box
+            display="flex"
+            alignItems="center"
+            gap="2"
+            justifyContent="center"
+          >
             DATE
             <IconButton
               aria-label="Sort operation by date"
@@ -66,15 +42,8 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
-        <Th
-          whiteSpace="nowrap"
-          fontWeight="bold"
-          fontSize="lg"
-          textAlign="center"
-        >
-          ACTIONS
-        </Th>
-      </Tr>
+        <Th>ACTIONS</Th>
+      </CenteredRow>
     </Thead>
   );
 };
