@@ -22,6 +22,8 @@ import {
   OperationsFormProps,
   Option,
 } from "@/shared/interfaces/operations";
+import { Record } from "@/shared/interfaces/records";
+import { cache } from "swr/_internal";
 
 const OperationsForm = ({
   balance,
@@ -31,7 +33,7 @@ const OperationsForm = ({
   );
   const [value1, setValue1] = useState<string>("");
   const [value2, setValue2] = useState<string>("");
-  const [result, setResult] = useState<string | undefined>(undefined);
+  const [result, setResult] = useState<Record | undefined>(undefined);
   const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -129,8 +131,8 @@ const OperationsForm = ({
         payload
       );
 
-      setResult(operationResult?.operationResponse);
-      await mutate("/records");
+      setResult(operationResult);
+      await mutate("/records", operationResult, false);
     } catch (error) {
       toast({
         title: "Error performing operation",
@@ -168,6 +170,8 @@ const OperationsForm = ({
       </Box>
     );
   }
+
+  console.log(cache.get("/records"));
 
   return (
     <Box p="6" bg="gray.800" color="#FFF" borderRadius="md" shadow="md">
@@ -241,7 +245,7 @@ const OperationsForm = ({
 
             {result && (
               <Text fontSize="lg" fontWeight="bold" textAlign="center" my={6}>
-                Result: {result}
+                Result: {result.operationResponse}
               </Text>
             )}
 
