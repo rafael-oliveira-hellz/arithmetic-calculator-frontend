@@ -172,12 +172,16 @@ const OperationsForm = ({
   }
 
   return (
-    <Box p="6" bg="gray.800" color="#FFF" borderRadius="md" shadow="md">
+    <Box p="6" bg="gray.800" color="#FFF" borderRadius="md">
       <Text fontSize="2xl" fontWeight="bold" mb="6" textAlign="center">
         Arithmetic Operations
       </Text>
 
-      <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={6}>
+      <Grid
+        templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+        gap={6}
+        mt={16}
+      >
         <GridItem bg="gray.700" p="4" borderRadius="md">
           <Text fontSize="lg" fontWeight="bold" mb="4" textAlign="center">
             STEP 1
