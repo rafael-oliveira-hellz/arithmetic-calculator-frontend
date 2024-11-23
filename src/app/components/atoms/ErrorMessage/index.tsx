@@ -1,5 +1,6 @@
 import { twclsx } from "@/app/utils/twclsx";
 import React from "react";
+import Text from "../Text";
 
 interface ErrorMessageAtomProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -12,9 +13,15 @@ const ErrorMessage: React.FC<ErrorMessageAtomProps> = ({
   ...rest
 }): React.JSX.Element => {
   return (
-    <div className={twclsx("text-red-500 text-sm", className)} {...rest}>
+    <Text
+      aria-label="Error Message"
+      role="alert"
+      data-testid="error-message"
+      className={twclsx("text-red-500 text-sm", className)}
+      {...rest}
+    >
       {children}
-    </div>
+    </Text>
   );
 };
 

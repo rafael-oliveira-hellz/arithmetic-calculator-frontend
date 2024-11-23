@@ -10,10 +10,8 @@ const RecordsPage: React.FC = () => {
     <AuthGuard>
       <Box
         bg="gray.800"
-        p="6"
         borderRadius="md"
         boxShadow="md"
-        maxWidth="1200px"
         margin="0 auto"
         mt="6"
       >

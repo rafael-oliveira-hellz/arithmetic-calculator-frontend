@@ -90,7 +90,11 @@ describe("RecordsTable Component", () => {
 
     render(<RecordsTable />);
 
-    expect(screen.getByText("Error loading records.")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Unable to load records. Please try again later or contact support."
+      )
+    ).toBeInTheDocument();
   });
 
   it("renders records and table headers", () => {

@@ -20,6 +20,13 @@ describe("ErrorMessage Component", () => {
     expect(errorMessageElement).toHaveClass("custom-class");
   });
 
+  it("renders with default styles for error text", () => {
+    render(<ErrorMessage>Something went wrong</ErrorMessage>);
+
+    const errorMessageElement = screen.getByText("Something went wrong");
+    expect(errorMessageElement).toHaveClass("text-red-500 text-sm");
+  });
+
   it("supports additional HTML attributes", () => {
     render(
       <ErrorMessage data-testid="error-message" role="alert">

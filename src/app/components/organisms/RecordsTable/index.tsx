@@ -16,6 +16,7 @@ import RecordTableRow from "../../molecules/RecordTableRow";
 import PaginationControls from "../../molecules/PaginationControls";
 import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
+import ErrorMessage from "../../molecules/RecordsErrorMessage";
 
 const RecordsTable = (): React.JSX.Element => {
   const { useRecords, deleteRecord, revalidateRecords, isDeleting } =
@@ -92,7 +93,9 @@ const RecordsTable = (): React.JSX.Element => {
   }
 
   if (error) {
-    return <Text color="red.500">Error loading records.</Text>;
+    return (
+      <ErrorMessage message="Unable to load records. Please try again later or contact support." />
+    );
   }
 
   return (

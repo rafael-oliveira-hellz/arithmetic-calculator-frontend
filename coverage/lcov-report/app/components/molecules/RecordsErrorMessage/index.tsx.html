@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for app/components/atoms/Label/index.tsx</title>
+    <title>Code coverage report for app/components/molecules/RecordsErrorMessage/index.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">app/components/atoms/Label</a> index.tsx</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">app/components/molecules/RecordsErrorMessage</a> index.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -95,16 +95,35 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,41 +143,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { chakra } from "@chakra-ui/react";
-import { twclsx } from "@/app/utils/twclsx";
-import React from "react";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use client";
 &nbsp;
-export interface LabelAtomProps
-  extends React.LabelHTMLAttributes&lt;HTMLLabelElement&gt; {
-  className?: string;
+import React from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+&nbsp;
+interface ErrorMessageProps {
+  message: string;
 }
 &nbsp;
-const Label: React.FC&lt;LabelAtomProps&gt; = ({
-  className,
-  children,
-  ...rest
-}): React.JSX.Element =&gt; {
+const RecordsErrorMessage: React.FC&lt;ErrorMessageProps&gt; = ({ message }) =&gt; {
   return (
-    &lt;chakra.label
-      className={twclsx(
-        "left-3 top-2 text-gray-500 bg-white px-1 transition-all duration-200 ease-in-out",
-        "transform origin-[0] scale-100 peer-placeholder-shown:scale-100 peer-placeholder-shown:top-3 peer-placeholder-shown:left-3",
-        "peer-focus:top-1 peer-focus:left-2 peer-focus:scale-75 peer-focus:text-blue-600",
-        className
-      )}
-      {...rest}
+    &lt;Flex
+      justify="center"
+      align="center"
+      minH="calc(100vh - 180px)"
+      bg="gray.800"
+      p="6"
     &gt;
-      {children}
-    &lt;/chakra.label&gt;
+      &lt;Box
+        bg="red.600"
+        color="#FFF"
+        p="6"
+        borderRadius="md"
+        textAlign="center"
+        boxShadow="lg"
+        maxW="600px"
+        width="100%"
+      &gt;
+        &lt;Text
+          aria-label="Error"
+          role="alert"
+          data-testid="error-message"
+          fontSize="2xl"
+          fontWeight="bold"
+          mb="4"
+        &gt;
+          Error
+        &lt;/Text&gt;
+        &lt;Text fontSize="lg"&gt;{message}&lt;/Text&gt;
+      &lt;/Box&gt;
+    &lt;/Flex&gt;
   );
 };
 &nbsp;
-Label.displayName = "Label";
-&nbsp;
-export default Label;
+export default RecordsErrorMessage;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
