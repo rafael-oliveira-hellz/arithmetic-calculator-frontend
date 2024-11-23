@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/9</span>
+                <span class='fraction'>0/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/7</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -125,13 +125,11 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,17 +137,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,14 +180,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use client";
 &nbsp;
-import { Flex, Icon } from "@chakra-ui/react";
+import { Flex, Icon } from <span class="cstat-no" title="statement not covered" >"@chakra-ui/react";</span>
 import { IconType } from "react-icons";
-import { twclsx } from "@/app/utils/twclsx";
-import Text from "../../atoms/Text";
-import { usePathname } from "next/navigation";
+import { twclsx } from <span class="cstat-no" title="statement not covered" >"@/app/utils/twclsx";</span>
+import Text from <span class="cstat-no" title="statement not covered" >"../../atoms/Text";</span>
+import { usePathname } from <span class="cstat-no" title="statement not covered" >"next/navigation";</span>
 &nbsp;
 interface SidebarItemProps {
   icon: IconType;
@@ -199,15 +199,15 @@ interface SidebarItemProps {
   path: string;
 }
 &nbsp;
-const SidebarItem = ({
+const SidebarItem = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
   icon,
   label,
   isExpanded,
   onClick,
   path,
 }: SidebarItemProps): JSX.Element =&gt; {
-  const pathname = usePathname();
-  const isActive = pathname === path;
+  const pathname = <span class="cstat-no" title="statement not covered" >usePathname();</span>
+  const isActive = <span class="cstat-no" title="statement not covered" >pathname === path;</span>
   return (
     &lt;Flex
       align="center"
@@ -225,11 +225,11 @@ const SidebarItem = ({
         role="img"
         aria-label={label}
         className={twclsx(
-          isActive ? "text-[#14CFB1]" : <span class="branch-1 cbranch-no" title="branch not covered" >"text-gray-400",</span>
+          isActive ? "text-[#14CFB1]" : "text-gray-400",
           "hover:text-[#14CFB1]"
         )}
       /&gt;
-      {isExpanded &amp;&amp; (
+      {<span class="branch-0 cbranch-no" title="branch not covered" >isExpanded &amp;&amp; (</span>
         &lt;Text
           ml="3"
           fontSize="md"
@@ -242,7 +242,7 @@ const SidebarItem = ({
   );
 };
 &nbsp;
-export default SidebarItem;
+<span class="cstat-no" title="statement not covered" >export default <span class="cstat-no" title="statement not covered" >S</span>idebarItem;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -250,7 +250,7 @@ export default SidebarItem;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-23T13:01:49.649Z
+                at 2024-11-23T13:46:22.184Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

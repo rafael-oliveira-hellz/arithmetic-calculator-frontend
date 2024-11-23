@@ -4,7 +4,7 @@ import useSWR, { mutate } from "swr";
 import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { removeRecord } from "../store/slices/record-slice";
+import { removeRecord, setRecords } from "../store/slices/record-slice";
 import { RecordsResponse } from "@/shared/interfaces/records";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
@@ -43,11 +43,16 @@ export const useRecordService = () => {
       }
     );
 
+    dispatch(
+      setRecords({
+        records: data?.content || [],
+        totalPages: data?.totalPages || 1,
+        isFirst: data?.first || true,
+        isLast: data?.last || false,
+      })
+    );
+
     return {
-      records: data?.content || [],
-      totalPages: data?.totalPages || 0,
-      isFirst: data?.first || true,
-      isLast: data?.last || false,
       isLoading: !data && !error && isValidating,
       error,
     };
@@ -56,19 +61,6 @@ export const useRecordService = () => {
   const deleteRecord = async (recordId: string): Promise<void> => {
     setIsDeleting(true);
     try {
-      await mutate(
-        `/records`,
-        async (data: RecordsResponse | undefined) => {
-          console.log("Cache before mutation:", data);
-          if (!data || !data.content) return data;
-          return {
-            ...data,
-            content: data.content.filter((record) => record.id !== recordId),
-          };
-        },
-        false
-      );
-
       await api.delete(`/records/${recordId}`);
       dispatch(removeRecord(recordId));
 
