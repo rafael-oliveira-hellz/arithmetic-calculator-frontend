@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import AuthGuard from "@/app/components/guards/auth-guard";
 import RecordsTable from "@/app/components/organisms/RecordsTable";
-import Text from "@/app/components/atoms/Text";
 
 const RecordsPage: React.FC = () => {
   return (
@@ -18,11 +17,6 @@ const RecordsPage: React.FC = () => {
         maxWidth="100%"
         minHeight={"calc(100vh - 180px)"}
       >
-        <Heading>
-          <Text fontSize="2xl" color="#FFF">
-            Operation Records
-          </Text>
-        </Heading>
         <RecordsTable />
       </Box>
     </AuthGuard>

@@ -109,7 +109,7 @@ const RecordsTable = (): React.JSX.Element => {
       minH="80vh"
     >
       <Flex justify="space-between" mb="4" alignItems="center">
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize="lg" fontWeight="bold" color="#FFF">
           Operation Records
         </Text>
         <Select
