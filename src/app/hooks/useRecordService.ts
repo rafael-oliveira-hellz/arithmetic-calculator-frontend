@@ -5,7 +5,7 @@ import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
 import { removeRecord, setRecords } from "../store/slices/record-slice";
-import { RecordsResponse } from "@/shared/interfaces/records";
+import { Record, RecordsResponse } from "@/shared/interfaces/records";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -65,6 +65,18 @@ export const useRecordService = () => {
   const deleteRecord = async (recordId: string): Promise<void> => {
     setIsDeleting(true);
     try {
+      await mutate(
+        `/records`,
+        (data: RecordsResponse | undefined) => {
+          if (!data || !data.content) return data;
+          return {
+            ...data,
+            content: data.content.filter((record) => record.id !== recordId),
+          };
+        },
+        false
+      );
+
       await api.delete(`/records/${recordId}`);
       dispatch(removeRecord(recordId));
 
@@ -76,6 +88,7 @@ export const useRecordService = () => {
         isClosable: true,
         position: "top-right",
       });
+
       await revalidateRecords();
     } catch (error) {
       console.error("Error during deletion:", error);
@@ -95,10 +108,41 @@ export const useRecordService = () => {
     }
   };
 
+  const addRecord = async (newRecord: Record): Promise<void> => {
+    try {
+      await mutate(
+        `/records`,
+        (data: RecordsResponse | undefined) => {
+          if (!data || !data.content) return data;
+          return {
+            ...data,
+            content: [newRecord, ...data.content],
+          };
+        },
+        false
+      );
+
+      await revalidateRecords();
+    } catch (error) {
+      console.error("Error adding record:", error);
+      toast({
+        title: "Action failed",
+        description: `Failed to add record: ${
+          error instanceof Error ? error.message : error
+        }`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
+
   return {
     deleteRecord,
     useRecords,
     revalidateRecords,
     isDeleting,
+    addRecord,
   };
 };
