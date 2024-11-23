@@ -1,12 +1,19 @@
 import React from "react";
-import { Thead, Th, IconButton, Box } from "@chakra-ui/react";
+import { Thead, Th, Tr, IconButton, Box } from "@chakra-ui/react";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import CenteredRow from "../../atoms/CenteredRow";
 
 interface RecordTableHeaderProps {
   sortOrder: "asc" | "desc";
   onSortChange: () => void;
 }
+
+const headers = [
+  { label: "TYPE", colSpan: 1 },
+  { label: "OPERATION COST", colSpan: 2 },
+  { label: "USER BALANCE", colSpan: 2 },
+  { label: "OPERATION RESPONSE", colSpan: 1 },
+  { label: "ACTIONS", colSpan: 1 },
+];
 
 const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
   sortOrder,
@@ -14,17 +21,18 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
 }) => {
   return (
     <Thead>
-      <CenteredRow>
-        <Th>TYPE</Th>
-        <Th colSpan={2}>OPERATION COST</Th>
-        <Th colSpan={2}>USER BALANCE</Th>
-        <Th>OPERATION RESPONSE</Th>
-        <Th>
+      <Tr>
+        {headers.map((header, index) => (
+          <Th key={index} colSpan={header.colSpan} textAlign="center">
+            {header.label}
+          </Th>
+        ))}
+        <Th textAlign="center">
           <Box
             display="flex"
             alignItems="center"
-            gap="2"
             justifyContent="center"
+            gap="2"
           >
             DATE
             <IconButton
@@ -42,10 +50,7 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
-        <Th textAlign="center" verticalAlign="middle">
-          ACTIONS
-        </Th>
-      </CenteredRow>
+      </Tr>
     </Thead>
   );
 };
