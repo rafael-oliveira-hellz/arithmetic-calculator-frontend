@@ -10,6 +10,7 @@ import {
   Select,
   Spinner,
   useToast,
+  Grid,
 } from "@chakra-ui/react";
 import RecordTableHeader from "../../molecules/RecordTableHeader";
 import RecordTableRow from "../../molecules/RecordTableRow";
@@ -99,7 +100,14 @@ const RecordsTable = (): React.JSX.Element => {
   }
 
   return (
-    <Box mt="4" bg="gray.800" p="6" borderRadius="md" boxShadow="lg">
+    <Box
+      maxW="85%"
+      margin="0 auto"
+      mt="4"
+      bg="gray.800"
+      p="6"
+      borderRadius="md"
+    >
       <Flex justify="space-between" mb="4" alignItems="center">
         <Text fontSize="lg" fontWeight="bold">
           Operation Records
@@ -125,33 +133,38 @@ const RecordsTable = (): React.JSX.Element => {
 
       <Filters filters={filters} onFilterChange={handleFilterChange} />
 
-      <Table variant="simple">
-        <RecordTableHeader
-          sortOrder={sortOrder}
-          onSortChange={handleSortToggle}
-        />
-        <Tbody>
-          {filteredRecords.map((record) => {
-            JSON.stringify(record, null, 2);
-            return (
-              <RecordTableRow
-                key={record.id}
-                record={record}
-                onDelete={handleDelete}
-              />
-            );
-          })}
-        </Tbody>
-      </Table>
+      <Grid templateRows="80% 20%">
+        <Box overflow="auto">
+          <Table variant="simple">
+            <RecordTableHeader
+              sortOrder={sortOrder}
+              onSortChange={handleSortToggle}
+            />
+            <Tbody>
+              {filteredRecords.map((record) => (
+                <RecordTableRow
+                  key={record.id}
+                  record={record}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
 
-      <PaginationControls
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
-        onNext={() =>
-          setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
-        }
-      />
+        <Flex justify="center" align="center" mt="4">
+          <PaginationControls
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            onNext={() =>
+              setCurrentPage((prev) =>
+                prev + 1 < totalPages ? prev + 1 : prev
+              )
+            }
+          />
+        </Flex>
+      </Grid>
     </Box>
   );
 };
