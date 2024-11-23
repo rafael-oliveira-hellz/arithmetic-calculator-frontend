@@ -16,9 +16,6 @@ class AxiosApiClient implements ApiClient {
         const token = sessionStorage.getItem("accessToken");
         if (token) {
           config.headers["accessToken"] = `${token}`;
-          console.log("AccessToken header added:", token);
-        } else {
-          console.log("No AccessToken found in sessionStorage.");
         }
         return config;
       },

@@ -122,7 +122,6 @@ const OperationsForm = ({
         ? parseFloat(value2)
         : undefined,
     };
-    console.log("Payload being submitted:", payload);
 
     try {
       const operationResult = await performOperation(
