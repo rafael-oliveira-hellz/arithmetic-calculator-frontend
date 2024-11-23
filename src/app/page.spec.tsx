@@ -69,9 +69,4 @@ describe("Home Component", () => {
     renderComponent({ auth: initialState });
     expect(screen.getByTestId("operations-form")).toBeInTheDocument();
   });
-
-  it("should render RecordsTable", () => {
-    renderComponent({ auth: initialState });
-    expect(screen.getByTestId("records-table")).toBeInTheDocument();
-  });
 });

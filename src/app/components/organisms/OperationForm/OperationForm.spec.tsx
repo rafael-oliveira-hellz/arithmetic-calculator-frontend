@@ -4,6 +4,7 @@ import OperationsForm from ".";
 import { useOperationService } from "@/app/hooks/useOperationService";
 import { useToast } from "@chakra-ui/react";
 import userEvent from "@testing-library/user-event";
+import { useRouter } from "next/navigation";
 
 Object.defineProperty(window.HTMLElement.prototype, "scrollTo", {
   configurable: true,
@@ -15,6 +16,16 @@ jest.mock("@chakra-ui/react", () => ({
   ...jest.requireActual("@chakra-ui/react"),
   useToast: jest.fn(),
 }));
+
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+
+const mockPush = jest.fn();
+
+(useRouter as jest.Mock).mockReturnValue({
+  push: mockPush,
+});
 
 describe("OperationsForm Component", () => {
   const mockPerformOperation = jest.fn();
@@ -188,7 +199,7 @@ describe("OperationsForm Component", () => {
     });
   });
 
-  it("calls performOperation when form is submitted", async () => {
+  it("calls performOperation and redirects to /records when form is submitted", async () => {
     mockPerformOperation.mockResolvedValue({
       id: "c2b5c399-a453-4687-9e4d-096d4349a3b4",
       operation: {
@@ -230,8 +241,7 @@ describe("OperationsForm Component", () => {
     });
 
     await waitFor(() => {
-      const resultText = screen.getByText(/Result:\s*5/i);
-      expect(resultText).toBeInTheDocument();
+      expect(mockPush).toHaveBeenCalledWith("/records");
     });
   });
 

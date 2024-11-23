@@ -3,7 +3,6 @@
 import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
 import AuthGuard from "./components/guards/auth-guard";
 import OperationsForm from "./components/organisms/OperationForm";
-import RecordsTable from "./components/organisms/RecordsTable";
 import { useSelector } from "react-redux";
 import { RootState } from "./store/store";
 import Text from "./components/atoms/Text";
@@ -14,7 +13,7 @@ export default function Home() {
   return (
     <AuthGuard>
       <Grid
-        templateRows="auto auto 1fr"
+        templateRows="auto auto 2fr"
         minH="100vh"
         bg={"gray.100"}
         color="#FFF"
@@ -34,12 +33,6 @@ export default function Home() {
 
         <GridItem bg="gray.800" p="4" borderRadius="md">
           <OperationsForm balance={balance} />
-        </GridItem>
-
-        <GridItem bg="gray.800" p="4" borderRadius="md">
-          <Box>
-            <RecordsTable />
-          </Box>
         </GridItem>
       </Grid>
     </AuthGuard>
