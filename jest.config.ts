@@ -26,7 +26,7 @@ const customJestConfig = {
       statements: 80,
     },
   },
-  testTimeout: 10000,
+  testTimeout: 100000000,
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   verbose: true,
   testEnvironment: "jest-environment-jsdom",

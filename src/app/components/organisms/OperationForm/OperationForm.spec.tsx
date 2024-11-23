@@ -189,7 +189,21 @@ describe("OperationsForm Component", () => {
   });
 
   it("calls performOperation when form is submitted", async () => {
-    mockPerformOperation.mockResolvedValue({ operationResponse: "5" });
+    mockPerformOperation.mockResolvedValue({
+      id: "c2b5c399-a453-4687-9e4d-096d4349a3b4",
+      operation: {
+        id: "a7b9cf26-0e77-446c-ac15-eddd5f1dbd9f",
+        type: "ADDITION",
+        cost: 1,
+      },
+      user: "23ac8a9a-d0e1-70b8-d06e-8e1fd86269fd",
+      amount: 1,
+      userBalance: 25,
+      operationResponse: "5",
+      date: "2024-11-23T12:42:07",
+      deleted: false,
+    });
+
     render(<OperationsForm balance={10} />);
     const user = userEvent.setup();
 
@@ -214,8 +228,11 @@ describe("OperationsForm Component", () => {
         value2: 3,
       });
     });
-    const resultText = await screen.findByText("Result: 5");
-    expect(resultText).toBeInTheDocument();
+
+    await waitFor(() => {
+      const resultText = screen.getByText(/Result:\s*5/i);
+      expect(resultText).toBeInTheDocument();
+    });
   });
 
   it("does not show second input field when operation requires one input", async () => {

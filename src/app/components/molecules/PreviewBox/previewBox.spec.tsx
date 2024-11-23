@@ -15,11 +15,11 @@ describe("PreviewBox Component", () => {
     );
 
     expect(screen.getByText("Preview")).toBeInTheDocument();
-    expect(screen.getByText("Operação selecionada:")).toBeInTheDocument();
+    expect(screen.getByText("Selected operation:")).toBeInTheDocument();
     expect(screen.getByText("Soma")).toBeInTheDocument();
-    expect(screen.getByText("Valor 1:")).toBeInTheDocument();
+    expect(screen.getByText("Value 1:")).toBeInTheDocument();
     expect(screen.getByText("10")).toBeInTheDocument();
-    expect(screen.getByText("Valor 2:")).toBeInTheDocument();
+    expect(screen.getByText("Value 2:")).toBeInTheDocument();
     expect(screen.getByText("20")).toBeInTheDocument();
   });
 
@@ -34,11 +34,11 @@ describe("PreviewBox Component", () => {
     );
 
     expect(screen.getByText("Preview")).toBeInTheDocument();
-    expect(screen.getByText("Operação selecionada:")).toBeInTheDocument();
+    expect(screen.getByText("Selected operation:")).toBeInTheDocument();
     expect(screen.getByText("Subtração")).toBeInTheDocument();
-    expect(screen.getByText("Valor 1:")).toBeInTheDocument();
+    expect(screen.getByText("Value 1:")).toBeInTheDocument();
     expect(screen.getByText("30")).toBeInTheDocument();
-    expect(screen.queryByText("Valor 2:")).not.toBeInTheDocument();
+    expect(screen.queryByText("Value 2:")).not.toBeInTheDocument();
     expect(screen.queryByText("15")).not.toBeInTheDocument();
   });
 
@@ -50,8 +50,8 @@ describe("PreviewBox Component", () => {
     const allNAElements = screen.getAllByText("N/A");
     expect(allNAElements.length).toBe(3);
 
-    expect(screen.getByText("Operação selecionada:")).toBeInTheDocument();
-    expect(screen.getByText("Valor 1:")).toBeInTheDocument();
-    expect(screen.getByText("Valor 2:")).toBeInTheDocument();
+    expect(screen.getByText("Selected operation:")).toBeInTheDocument();
+    expect(screen.getByText("Value 1:")).toBeInTheDocument();
+    expect(screen.getByText("Value 2:")).toBeInTheDocument();
   });
 });

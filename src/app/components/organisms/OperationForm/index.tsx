@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Box,
   VStack,
@@ -45,6 +45,18 @@ const OperationsForm = ({
     () => new ValidationService(balance),
     [balance]
   );
+
+  const getCachedRecords = useCallback(() => {
+    return cache.get("/records") as Record | undefined;
+  }, []);
+
+  const cachedRecords = useMemo(() => getCachedRecords(), [getCachedRecords]);
+
+  useEffect(() => {
+    if (cachedRecords) {
+      setResult((prevResult) => prevResult || cachedRecords);
+    }
+  }, [cachedRecords]);
 
   const requiresTwoInputs = useMemo(
     () => (operationType: string | undefined) =>
