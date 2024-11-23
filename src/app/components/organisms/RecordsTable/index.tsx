@@ -16,22 +16,22 @@ import RecordTableRow from "../../molecules/RecordTableRow";
 import PaginationControls from "../../molecules/PaginationControls";
 import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
-import { RootState } from "@/app/store/store";
-import { useSelector } from "react-redux";
 
 const RecordsTable = (): React.JSX.Element => {
   const { useRecords, deleteRecord, revalidateRecords, isDeleting } =
     useRecordService();
 
   const toast = useToast();
-  const records = useSelector((state: RootState) => state.records);
 
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [filters, setFilters] = useState({ type: "", amount: "" });
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { isLoading, error } = useRecords(currentPage - 1, itemsPerPage);
+  const { records, totalPages, isLoading, error } = useRecords(
+    currentPage - 1,
+    itemsPerPage
+  );
 
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
@@ -59,7 +59,7 @@ const RecordsTable = (): React.JSX.Element => {
   }, []);
 
   const filteredRecords = useMemo(() => {
-    const sortedRecords = [...records.records];
+    const sortedRecords = [...records];
 
     if (sortOrder === "asc") {
       sortedRecords.sort(
@@ -143,12 +143,10 @@ const RecordsTable = (): React.JSX.Element => {
 
       <PaginationControls
         currentPage={currentPage}
-        totalPages={records.totalPages}
+        totalPages={totalPages}
         onPrevious={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
         onNext={() =>
-          setCurrentPage((prev) =>
-            prev + 1 < records.totalPages ? prev + 1 : prev
-          )
+          setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev))
         }
       />
     </Box>
