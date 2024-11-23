@@ -21,7 +21,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
   const isLast = currentPage === totalPages;
 
   return (
-    <Flex justify="space-evenly" alignItems="center" mt="4">
+    <Flex justify="space-around" alignItems="center" mt="4" mx="8">
       <Button
         onClick={onPrevious}
         disabled={isFirst || isSinglePage}
