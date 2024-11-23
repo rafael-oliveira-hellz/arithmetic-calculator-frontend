@@ -37,8 +37,8 @@ export const useRecordService = () => {
       [`/records`, page, itemsPerPage],
       () => fetchRecords(page, itemsPerPage),
       {
-        revalidateOnFocus: true,
-        revalidateOnReconnect: true,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
         dedupingInterval: 5000,
       }
     );
