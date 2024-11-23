@@ -80,8 +80,9 @@ export const useRecordService = () => {
         isClosable: true,
         position: "top-right",
       });
+      await revalidateRecords();
     } catch (error) {
-      await mutate(`/records`);
+      console.error("Error during deletion:", error);
       toast({
         title: "Action failed",
         description: `Record deletion failed: ${
