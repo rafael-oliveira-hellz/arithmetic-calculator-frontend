@@ -45,7 +45,7 @@ const RecordsTable = (): React.JSX.Element => {
     try {
       await deleteRecord(recordId, currentPage - 1, itemsPerPage);
       await revalidateRecords();
-      router.refresh();
+      router.push("/records");
     } catch (error) {
       toast({
         title: "Action failed",

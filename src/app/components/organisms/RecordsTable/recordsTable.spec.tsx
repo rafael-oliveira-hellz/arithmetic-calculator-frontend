@@ -13,7 +13,7 @@ jest.mock("next/navigation", () => ({
 const mockDeleteRecord = jest.fn();
 const mockRevalidateRecords = jest.fn();
 const mockUseRecords = jest.fn();
-const mockRouterRefresh = jest.fn();
+const mockRouterPush = jest.fn();
 
 (useRecordService as jest.Mock).mockImplementation(() => ({
   useRecords: mockUseRecords,
@@ -22,7 +22,7 @@ const mockRouterRefresh = jest.fn();
 }));
 
 (useRouter as jest.Mock).mockReturnValue({
-  refresh: mockRouterRefresh,
+  push: mockRouterPush,
 });
 
 describe("RecordsTable Component", () => {
@@ -64,7 +64,7 @@ describe("RecordsTable Component", () => {
     expect(screen.queryByText("SUBTRACTION")).not.toBeInTheDocument();
   });
 
-  it("deletes a record, revalidates the data, and refreshes the page", async () => {
+  it("deletes a record, revalidates the data, and redirects to /records", async () => {
     render(<RecordsTable />);
 
     const deleteButton = screen.getAllByLabelText("Delete")[0];
@@ -74,7 +74,7 @@ describe("RecordsTable Component", () => {
       expect(mockDeleteRecord).toHaveBeenCalledWith("1", 0, 10)
     );
     expect(mockRevalidateRecords).toHaveBeenCalled();
-    expect(mockRouterRefresh).toHaveBeenCalled();
+    expect(mockRouterPush).toHaveBeenCalledWith("/records");
   });
 
   it("renders loading spinner when loading", () => {
