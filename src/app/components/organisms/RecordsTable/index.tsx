@@ -140,7 +140,6 @@ const RecordsTable = (): React.JSX.Element => {
         />
         <Tbody>
           {filteredRecords.map((record) => {
-            JSON.stringify(record, null, 2);
             return (
               <RecordTableRow
                 key={record.id}
