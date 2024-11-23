@@ -23,6 +23,7 @@ const CenteredRow = ({ children }: CenteredRowProps): React.JSX.Element => (
       mb="4"
       width="100%"
       textAlign="left"
+      verticalAlign="middle"
       color="#FFF"
     >
       {children}
