@@ -128,13 +128,16 @@ const RecordsTable = (): React.JSX.Element => {
           onSortChange={handleSortToggle}
         />
         <Tbody>
-          {filteredRecords.map((record) => (
-            <RecordTableRow
-              key={record.id}
-              record={record}
-              onDelete={handleDelete}
-            />
-          ))}
+          {filteredRecords.map((record) => {
+            JSON.stringify(record, null, 2);
+            return (
+              <RecordTableRow
+                key={record.id}
+                record={record}
+                onDelete={handleDelete}
+              />
+            );
+          })}
         </Tbody>
       </Table>
 
