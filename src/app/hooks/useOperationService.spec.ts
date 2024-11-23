@@ -170,11 +170,12 @@ describe("useOperationService", () => {
       });
 
       expect(mockToast).toHaveBeenCalledWith({
-        title: "Action failed",
         description: "Operation failed: Operation failed",
-        status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
+        status: "error",
+        title: "Action failed",
       });
     });
   });

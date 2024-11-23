@@ -36,7 +36,7 @@ describe("LoginBox", () => {
     const { getByText, getByPlaceholderText, getByRole } = render(<LoginBox />);
 
     expect(getByText(/Welcome back!/i)).toBeInTheDocument();
-    expect(getByPlaceholderText(/Type your e-mail/i)).toBeInTheDocument();
+    expect(getByPlaceholderText(/Type your username/i)).toBeInTheDocument();
     expect(getByPlaceholderText(/Type your password/i)).toBeInTheDocument();
     expect(getByRole("button", { name: /login/i })).toBeInTheDocument();
   });
@@ -44,7 +44,7 @@ describe("LoginBox", () => {
   it("should update username and password fields", () => {
     const { getByPlaceholderText } = render(<LoginBox />);
 
-    const usernameInput = getByPlaceholderText(/Type your e-mail/i);
+    const usernameInput = getByPlaceholderText(/Type your username/i);
     const passwordInput = getByPlaceholderText(/Type your password/i);
 
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
@@ -59,7 +59,7 @@ describe("LoginBox", () => {
 
     const { getByPlaceholderText, getByRole } = render(<LoginBox />);
 
-    fireEvent.change(getByPlaceholderText(/Type your e-mail/i), {
+    fireEvent.change(getByPlaceholderText(/Type your username/i), {
       target: { value: "testuser" },
     });
     fireEvent.change(getByPlaceholderText(/Type your password/i), {
@@ -85,7 +85,7 @@ describe("LoginBox", () => {
 
     const { getByPlaceholderText, getByRole } = render(<LoginBox />);
 
-    fireEvent.change(getByPlaceholderText(/Type your e-mail/i), {
+    fireEvent.change(getByPlaceholderText(/Type your username/i), {
       target: { value: "testuser" },
     });
     fireEvent.change(getByPlaceholderText(/Type your password/i), {
@@ -112,7 +112,7 @@ describe("LoginBox", () => {
 
     const { getByPlaceholderText, getByRole } = render(<LoginBox />);
 
-    fireEvent.change(getByPlaceholderText(/Type your e-mail/i), {
+    fireEvent.change(getByPlaceholderText(/Type your username/i), {
       target: { value: "testuser" },
     });
     fireEvent.change(getByPlaceholderText(/Type your password/i), {

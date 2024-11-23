@@ -17,21 +17,22 @@ import { useOperationService } from "@/app/hooks/useOperationService";
 import { mutate } from "swr";
 import { ValidationService } from "@/app/services/validation-service";
 import Text from "../../atoms/Text";
+import {
+  Errors,
+  OperationsFormProps,
+  Option,
+} from "@/shared/interfaces/operations";
 
 const OperationsForm = ({
   balance,
-}: {
-  balance: number;
-}): React.JSX.Element => {
-  const [selectedOperation, setSelectedOperation] = useState<string>("");
+}: OperationsFormProps): React.JSX.Element => {
+  const [selectedOperation, setSelectedOperation] = useState<Option | null>(
+    null
+  );
   const [value1, setValue1] = useState<string>("");
   const [value2, setValue2] = useState<string>("");
   const [result, setResult] = useState<string | undefined>(undefined);
-  const [errors, setErrors] = useState<{
-    value1?: string;
-    value2?: string;
-    general?: string;
-  }>({});
+  const [errors, setErrors] = useState<Errors>({});
   const [loading, setLoading] = useState<boolean>(false);
 
   const { performOperation, useOperations } = useOperationService();
@@ -43,14 +44,38 @@ const OperationsForm = ({
     [balance]
   );
 
+  const requiresTwoInputs = useMemo(
+    () => (operationType: string | undefined) =>
+      ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
+        operationType || ""
+      ),
+    []
+  );
+
+  const handleInputChange =
+    (
+      setter: React.Dispatch<React.SetStateAction<string>>,
+      key: "value1" | "value2"
+    ) =>
+    (value: string) => {
+      setter(value);
+      const error = validationService.validateInput(value);
+      setErrors((prev) => ({
+        ...prev,
+        [key]: error,
+      }));
+      handleValidation();
+    };
+
   const handleValidation = () => {
     const parsedValue1 = parseFloat(value1);
     const parsedValue2 = parseFloat(value2);
 
     const generalError = validationService.validateOperation(
-      selectedOperation,
+      selectedOperation?.type || "",
       parsedValue1,
-      parsedValue2
+      parsedValue2,
+      selectedOperation?.cost
     );
 
     setErrors((prev) => ({
@@ -68,55 +93,44 @@ const OperationsForm = ({
         position: "top-right",
       });
     }
+
+    return generalError;
   };
-
-  const requiresTwoInputs = (operationType: string) =>
-    ["ADDITION", "SUBTRACTION", "MULTIPLICATION", "DIVISION"].includes(
-      operationType
-    );
-
-  const handleInputChange =
-    (
-      setter: React.Dispatch<React.SetStateAction<string>>,
-      key: "value1" | "value2"
-    ) =>
-    (value: string) => {
-      setter(value);
-      const error = validationService.validateInput(value);
-      setErrors((prev) => ({
-        ...prev,
-        [key]: error,
-      }));
-      handleValidation();
-    };
 
   const isFormValid = (): boolean => {
     if (!selectedOperation) return false;
     if (!!errors.value1 || !!errors.value2 || !!errors.general) return false;
     if (loading) return false;
-    if (requiresTwoInputs(selectedOperation)) {
+    if (requiresTwoInputs(selectedOperation.type)) {
       return !!value1 && !!value2;
     }
     return !!value1;
   };
 
   const handleSubmit = async () => {
+    const validationError = handleValidation();
+
+    if (validationError) {
+      return;
+    }
+
     setLoading(true);
+
     const payload = {
       value1: parseFloat(value1),
-      value2: requiresTwoInputs(selectedOperation)
+      value2: requiresTwoInputs(selectedOperation?.type || "")
         ? parseFloat(value2)
         : undefined,
     };
+    console.log("Payload being submitted:", payload);
 
     try {
       const operationResult = await performOperation(
-        selectedOperation.toLowerCase(),
+        (selectedOperation?.type || "").toLowerCase(),
         payload
       );
 
       setResult(operationResult?.operationResponse);
-
       await mutate("/records");
     } catch (error) {
       toast({
@@ -133,7 +147,7 @@ const OperationsForm = ({
   };
 
   const resetState = () => {
-    setSelectedOperation("");
+    setSelectedOperation(null);
     setValue1("");
     setValue2("");
     setResult(undefined);
@@ -170,10 +184,10 @@ const OperationsForm = ({
           <OperationSelect
             options={operations}
             placeholder="Select an operation"
-            value={selectedOperation}
-            onChange={(value) => {
+            value={selectedOperation?.type || ""}
+            onChange={(option) => {
               resetState();
-              setSelectedOperation(value);
+              setSelectedOperation(option);
             }}
           />
         </GridItem>
@@ -185,6 +199,7 @@ const OperationsForm = ({
           <VStack spacing="4">
             <InputField
               id="input-field-1"
+              aria-label="Enter the first value"
               placeholder="Enter the first value"
               dataTestId="input-field-1"
               aria-invalid={!!errors.value1}
@@ -193,17 +208,19 @@ const OperationsForm = ({
               onChange={handleInputChange(setValue1, "value1")}
             />
 
-            {requiresTwoInputs(selectedOperation) && (
-              <InputField
-                id="input-field-2"
-                placeholder="Enter the second value"
-                dataTestId="input-field-2"
-                aria-invalid={!!errors.value2}
-                value={value2}
-                errorMessage={errors.value2}
-                onChange={handleInputChange(setValue2, "value2")}
-              />
-            )}
+            {selectedOperation &&
+              requiresTwoInputs(selectedOperation!.type) && (
+                <InputField
+                  id="input-field-2"
+                  aria-label="Enter the second value"
+                  placeholder="Enter the second value"
+                  dataTestId="input-field-2"
+                  aria-invalid={!!errors.value2}
+                  value={value2}
+                  errorMessage={errors.value2}
+                  onChange={handleInputChange(setValue2, "value2")}
+                />
+              )}
           </VStack>
         </GridItem>
 
@@ -213,10 +230,14 @@ const OperationsForm = ({
           </Text>
           <VStack spacing="4">
             <PreviewBox
-              operation={selectedOperation}
+              operation={selectedOperation?.type || ""}
               value1={value1}
               value2={value2}
-              requiresSecondInput={requiresTwoInputs(selectedOperation)}
+              requiresSecondInput={
+                selectedOperation
+                  ? requiresTwoInputs(selectedOperation.type)
+                  : false
+              }
             />
 
             {result && (

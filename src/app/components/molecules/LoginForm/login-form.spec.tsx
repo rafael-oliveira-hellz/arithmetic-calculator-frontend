@@ -22,7 +22,7 @@ describe("LoginForm Component", () => {
   it("renders the username and password input fields", () => {
     setup();
 
-    const usernameInput = screen.getByPlaceholderText("Type your e-mail");
+    const usernameInput = screen.getByPlaceholderText("Type your username");
     const passwordInput = screen.getByPlaceholderText("Type your password");
 
     expect(usernameInput).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("LoginForm Component", () => {
   it("triggers the onUsernameChange handler when typing in the username field", () => {
     setup();
 
-    const usernameInput = screen.getByPlaceholderText("Type your e-mail");
+    const usernameInput = screen.getByPlaceholderText("Type your username");
     fireEvent.change(usernameInput, { target: { value: "testuser" } });
 
     expect(mockOnUsernameChange).toHaveBeenCalledWith({

@@ -109,6 +109,7 @@ describe("useRecordService", () => {
         status: "success",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
     });
 
@@ -134,6 +135,7 @@ describe("useRecordService", () => {
         status: "error",
         duration: 5000,
         isClosable: true,
+        position: "top-right",
       });
 
       expect(mutate).toHaveBeenCalledWith("/records");

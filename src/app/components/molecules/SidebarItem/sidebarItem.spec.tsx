@@ -4,6 +4,18 @@ import "@testing-library/jest-dom";
 import SidebarItem from ".";
 import { FaHome } from "react-icons/fa";
 
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      push: jest.fn(),
+      pathname: "/",
+    };
+  },
+  usePathname() {
+    return "/";
+  },
+}));
+
 describe("SidebarItem Component", () => {
   const mockOnClick = jest.fn();
 
@@ -14,6 +26,7 @@ describe("SidebarItem Component", () => {
         label="Home"
         isExpanded={true}
         onClick={mockOnClick}
+        path="/"
       />
     );
 
@@ -30,6 +43,7 @@ describe("SidebarItem Component", () => {
         label="Home"
         isExpanded={false}
         onClick={mockOnClick}
+        path="/"
       />
     );
 
@@ -46,6 +60,7 @@ describe("SidebarItem Component", () => {
         label="Home"
         isExpanded={true}
         onClick={mockOnClick}
+        path="/"
       />
     );
 

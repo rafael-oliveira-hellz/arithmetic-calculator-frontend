@@ -1,19 +1,25 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { useRouter } from "next/navigation";
 import SidebarContent from ".";
 import { menuItems } from "../../config/menu-items";
 
+const mockPush = jest.fn();
+
 jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
+  useRouter() {
+    return {
+      push: mockPush,
+      pathname: "/",
+    };
+  },
+  usePathname() {
+    return "/";
+  },
 }));
 
 describe("SidebarContent Component", () => {
-  const mockPush = jest.fn();
-
   beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
     jest.clearAllMocks();
   });
 

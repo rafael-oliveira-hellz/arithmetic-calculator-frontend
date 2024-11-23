@@ -51,7 +51,9 @@ const renderWithProviders = (ui: React.ReactElement) => {
 describe("LoginPage", () => {
   it("should render the login page", () => {
     renderWithProviders(<LoginPage />);
-    expect(screen.getByPlaceholderText("Type your e-mail")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("Type your username")
+    ).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText("Type your password")
     ).toBeInTheDocument();
@@ -61,7 +63,7 @@ describe("LoginPage", () => {
   it("should update input fields when typing", () => {
     renderWithProviders(<LoginPage />);
 
-    const emailInput = screen.getByPlaceholderText("Type your e-mail");
+    const emailInput = screen.getByPlaceholderText("Type your username");
     const passwordInput = screen.getByPlaceholderText("Type your password");
 
     fireEvent.change(emailInput, { target: { value: "testuser@test.com" } });
@@ -79,7 +81,7 @@ describe("LoginPage", () => {
 
   it("should enable login button when fields are filled", () => {
     renderWithProviders(<LoginPage />);
-    const emailInput = screen.getByPlaceholderText("Type your e-mail");
+    const emailInput = screen.getByPlaceholderText("Type your username");
     const passwordInput = screen.getByPlaceholderText("Type your password");
     const loginButton = screen.getByRole("button", { name: "Login" });
 
@@ -92,7 +94,7 @@ describe("LoginPage", () => {
   it("should show an error message when login fails", async () => {
     renderWithProviders(<LoginPage />);
 
-    const emailInput = screen.getByPlaceholderText("Type your e-mail");
+    const emailInput = screen.getByPlaceholderText("Type your username");
     const passwordInput = screen.getByPlaceholderText("Type your password");
     const loginButton = screen.getByRole("button", { name: "Login" });
 

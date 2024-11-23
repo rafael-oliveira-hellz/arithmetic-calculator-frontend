@@ -11,7 +11,7 @@ interface OperationSelectProps {
   options: Option[];
   placeholder: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: (option: Option) => void;
 }
 
 const OperationSelect: React.FC<OperationSelectProps> = ({
@@ -44,7 +44,7 @@ const OperationSelect: React.FC<OperationSelectProps> = ({
         {options.map((option) => (
           <MenuItem
             key={option.id}
-            onClick={() => onChange(option.type)}
+            onClick={() => onChange(option)}
             _hover={{ bg: "gray.600" }}
             bg="gray.700"
             color="white"

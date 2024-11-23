@@ -1,3 +1,5 @@
+"use client";
+
 import { Flex, Icon } from "@chakra-ui/react";
 import { IconType } from "react-icons";
 import { twclsx } from "@/app/utils/twclsx";

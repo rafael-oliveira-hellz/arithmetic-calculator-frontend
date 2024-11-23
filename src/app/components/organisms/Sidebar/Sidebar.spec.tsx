@@ -1,26 +1,25 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import Sidebar from ".";
-import { useRouter } from "next/navigation";
 
 jest.mock("next/navigation", () => ({
-  useRouter: jest.fn(),
+  useRouter() {
+    return {
+      push: jest.fn(),
+      pathname: "/",
+    };
+  },
+  usePathname() {
+    return "/";
+  },
 }));
 
 describe("Sidebar component", () => {
-  beforeEach(() => {
-    (useRouter as jest.Mock).mockReturnValue({
-      push: jest.fn(),
-      pathname: "/",
-    });
-  });
-
   it("renders the sidebar with the correct initial width and aria-expanded attribute", () => {
     const { getByRole } = render(<Sidebar />);
     const sidebar = getByRole("navigation", { name: "Sidebar" });
     const toggleButton = getByRole("button", { name: "Toggle Sidebar" });
 
     expect(sidebar).toHaveStyle({ width: "60px" });
-
     expect(toggleButton).toHaveAttribute("aria-expanded", "false");
   });
 
@@ -42,10 +41,12 @@ describe("Sidebar component", () => {
   it("renders the correct icon in the toggle button based on the isExpanded state", () => {
     const { getByRole, container } = render(<Sidebar />);
     const toggleButton = getByRole("button", { name: "Toggle Sidebar" });
+
     expect(container.querySelector("svg")).toHaveAttribute(
       "data-icon",
       "MdOutlineMenu"
     );
+
     fireEvent.click(toggleButton);
     expect(container.querySelector("svg")).toHaveAttribute(
       "data-icon",
