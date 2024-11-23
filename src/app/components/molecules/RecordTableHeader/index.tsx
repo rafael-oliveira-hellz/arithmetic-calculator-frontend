@@ -42,7 +42,9 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
-        <Th>ACTIONS</Th>
+        <Th textAlign="center" verticalAlign="middle">
+          ACTIONS
+        </Th>
       </CenteredRow>
     </Thead>
   );
