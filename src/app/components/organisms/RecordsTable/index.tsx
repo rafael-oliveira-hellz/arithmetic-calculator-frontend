@@ -100,14 +100,7 @@ const RecordsTable = (): React.JSX.Element => {
   }
 
   return (
-    <Box
-      maxW="85%"
-      margin="0 auto"
-      mt="4"
-      bg="gray.800"
-      p="6"
-      borderRadius="md"
-    >
+    <Box width="85%" mt="4" bg="gray.800" p="6" borderRadius="md">
       <Flex justify="space-between" mb="4" alignItems="center">
         <Text fontSize="lg" fontWeight="bold">
           Operation Records
