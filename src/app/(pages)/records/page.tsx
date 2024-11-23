@@ -3,7 +3,6 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 import AuthGuard from "@/app/components/guards/auth-guard";
-import RecordsTable from "@/app/components/organisms/RecordsTable";
 
 const RecordsPage: React.FC = () => {
   return (
