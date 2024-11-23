@@ -30,7 +30,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
       >
         Previous Page
       </Button>
-      <Text color="#FFF">
+      <Text color="#FFF" mx="16">
         Page {currentPage} of {totalPages}
       </Text>
       <Button
