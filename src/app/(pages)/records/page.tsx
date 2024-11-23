@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Box } from "@chakra-ui/react";
-import RecordsTable from "@/app/components/organisms/RecordsTable";
 import AuthGuard from "@/app/components/guards/auth-guard";
+import RecordsTable from "@/app/components/organisms/RecordsTable";
 
 const RecordsPage: React.FC = () => {
   return (
@@ -12,8 +12,10 @@ const RecordsPage: React.FC = () => {
         bg="gray.800"
         borderRadius="md"
         boxShadow="md"
-        margin="0 auto"
+        marginInline="6"
         mt="6"
+        maxWidth="100%"
+        minHeight={"calc(100vh - 180px)"}
       >
         <RecordsTable />
       </Box>

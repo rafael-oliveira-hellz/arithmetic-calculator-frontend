@@ -99,7 +99,7 @@ const RecordsTable = (): React.JSX.Element => {
   }
 
   return (
-    <Box>
+    <Box mt="4" bg="gray.800" p="6" borderRadius="md" boxShadow="lg">
       <Flex justify="space-between" mb="4" alignItems="center">
         <Text fontSize="lg" fontWeight="bold">
           Operation Records
