@@ -23,7 +23,6 @@ import {
   Option,
 } from "@/shared/interfaces/operations";
 import { Record } from "@/shared/interfaces/records";
-import { cache } from "swr/_internal";
 
 const OperationsForm = ({
   balance,
@@ -170,8 +169,6 @@ const OperationsForm = ({
       </Box>
     );
   }
-
-  console.log(cache.get("/records"));
 
   return (
     <Box p="6" bg="gray.800" color="#FFF" borderRadius="md" shadow="md">

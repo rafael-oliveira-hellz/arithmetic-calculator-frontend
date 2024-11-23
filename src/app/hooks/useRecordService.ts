@@ -59,7 +59,8 @@ export const useRecordService = () => {
       await mutate(
         `/records`,
         async (data: RecordsResponse | undefined) => {
-          if (!data) return data;
+          console.log("Cache before mutation:", data);
+          if (!data || !data.content) return data;
           return {
             ...data,
             content: data.content.filter((record) => record.id !== recordId),
@@ -79,8 +80,6 @@ export const useRecordService = () => {
         isClosable: true,
         position: "top-right",
       });
-
-      await revalidateRecords();
     } catch (error) {
       await mutate(`/records`);
       toast({
