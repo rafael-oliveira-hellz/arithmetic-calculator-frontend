@@ -17,12 +17,14 @@ import PaginationControls from "../../molecules/PaginationControls";
 import Filters from "../../molecules/Filters";
 import { useRecordService } from "@/app/hooks/useRecordService";
 import ErrorMessage from "../../molecules/RecordsErrorMessage";
+import { useRouter } from "next/navigation";
 
 const RecordsTable = (): React.JSX.Element => {
   const { useRecords, deleteRecord, revalidateRecords, isDeleting } =
     useRecordService();
 
   const toast = useToast();
+  const router = useRouter();
 
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [filters, setFilters] = useState({ type: "", amount: "" });
@@ -43,6 +45,7 @@ const RecordsTable = (): React.JSX.Element => {
     try {
       await deleteRecord(recordId, currentPage - 1, itemsPerPage);
       await revalidateRecords();
+      router.refresh();
     } catch (error) {
       toast({
         title: "Action failed",
@@ -86,7 +89,7 @@ const RecordsTable = (): React.JSX.Element => {
 
   if (isLoading || isDeleting) {
     return (
-      <Flex justify="center" align="center" h="100%">
+      <Flex justify="center" align="center" height="100%">
         <Spinner size="lg" color="#14CFB1" role="status" />
       </Flex>
     );
