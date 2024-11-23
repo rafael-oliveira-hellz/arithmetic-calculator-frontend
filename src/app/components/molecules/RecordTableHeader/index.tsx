@@ -7,14 +7,6 @@ interface RecordTableHeaderProps {
   onSortChange: () => void;
 }
 
-const headers = [
-  { label: "TYPE", colSpan: 1 },
-  { label: "OPERATION COST", colSpan: 2 },
-  { label: "USER BALANCE", colSpan: 2 },
-  { label: "OPERATION RESPONSE", colSpan: 1 },
-  { label: "ACTIONS", colSpan: 1 },
-];
-
 const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
   sortOrder,
   onSortChange,
@@ -22,11 +14,14 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
   return (
     <Thead>
       <Tr>
-        {headers.map((header, index) => (
-          <Th key={index} colSpan={header.colSpan} textAlign="center">
-            {header.label}
-          </Th>
-        ))}
+        <Th textAlign="center">TYPE</Th>
+        <Th colSpan={2} textAlign="center">
+          OPERATION COST
+        </Th>
+        <Th colSpan={2} textAlign="center">
+          USER BALANCE
+        </Th>
+        <Th textAlign="center">OPERATION RESPONSE</Th>
         <Th textAlign="center">
           <Box
             display="flex"
@@ -50,6 +45,7 @@ const RecordTableHeader: React.FC<RecordTableHeaderProps> = ({
             />
           </Box>
         </Th>
+        <Th textAlign="center">ACTIONS</Th>
       </Tr>
     </Thead>
   );

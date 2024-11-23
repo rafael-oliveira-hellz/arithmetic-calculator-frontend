@@ -133,7 +133,7 @@ const RecordsTable = (): React.JSX.Element => {
 
       <Filters filters={filters} onFilterChange={handleFilterChange} />
 
-      <Table variant="simple" flex="1">
+      <Table variant="simple" width="100%" bg="gray.800" color="#FFF">
         <RecordTableHeader
           sortOrder={sortOrder}
           onSortChange={handleSortToggle}

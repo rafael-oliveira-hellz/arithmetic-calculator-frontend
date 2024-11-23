@@ -21,9 +21,7 @@ const CenteredRow = ({ children }: CenteredRowProps): React.JSX.Element => (
       p="4"
       borderRadius="md"
       mb="4"
-      width="100%"
       textAlign="left"
-      verticalAlign="middle"
       color="#FFF"
     >
       {children}

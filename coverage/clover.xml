@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732376838966" clover="3.2.0">
-  <project timestamp="1732376838966" name="All files">
-    <metrics statements="653" coveredstatements="611" conditionals="205" coveredconditionals="177" methods="151" coveredmethods="124" elements="1009" coveredelements="912" complexity="0" loc="653" ncloc="653" packages="51" files="58" classes="58"/>
+<coverage generated="1732387311838" clover="3.2.0">
+  <project timestamp="1732387311838" name="All files">
+    <metrics statements="653" coveredstatements="611" conditionals="205" coveredconditionals="177" methods="152" coveredmethods="125" elements="1010" coveredelements="913" complexity="0" loc="653" ncloc="653" packages="51" files="58" classes="58"/>
     <package name="app">
       <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="layout.tsx" path="E:\arithmetic-calculator-frontend\src\app\layout.tsx">
@@ -44,7 +44,7 @@
         <line num="5" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
       </file>
     </package>
     <package name="app.api">
@@ -92,8 +92,8 @@
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.tsx" path="E:\arithmetic-calculator-frontend\src\app\components\atoms\CenteredRow\index.tsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="20" count="18" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="34" count="10" type="stmt"/>
       </file>
     </package>
     <package name="app.components.atoms.Dropdown">
@@ -418,15 +418,16 @@
       </file>
     </package>
     <package name="app.components.molecules.RecordTableHeader">
-      <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+      <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
       <file name="index.tsx" path="E:\arithmetic-calculator-frontend\src\app\components\molecules\RecordTableHeader\index.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="53" count="8" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="26" count="40" type="stmt"/>
+        <line num="58" count="8" type="stmt"/>
       </file>
     </package>
     <package name="app.components.molecules.RecordTableRow">
@@ -643,9 +644,9 @@
       </file>
     </package>
     <package name="app.components.organisms.RecordsTable">
-      <metrics statements="46" coveredstatements="39" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
+      <metrics statements="45" coveredstatements="38" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
       <file name="index.tsx" path="E:\arithmetic-calculator-frontend\src\app\components\organisms\RecordsTable\index.tsx">
-        <metrics statements="46" coveredstatements="39" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
+        <metrics statements="45" coveredstatements="38" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
         <line num="3" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
@@ -655,8 +656,8 @@
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="23" count="6" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
         <line num="27" count="6" type="stmt"/>
         <line num="28" count="6" type="stmt"/>
         <line num="29" count="6" type="stmt"/>
@@ -685,13 +686,12 @@
         <line num="81" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="87" count="6" type="cond" truecount="3" falsecount="0"/>
         <line num="95" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="109" count="0" type="stmt"/>
-        <line num="115" count="20" type="stmt"/>
-        <line num="135" count="7" type="stmt"/>
-        <line num="136" count="7" type="stmt"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="152" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="159" count="5" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="123" count="20" type="stmt"/>
+        <line num="143" count="7" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="168" count="5" type="stmt"/>
       </file>
     </package>
     <package name="app.components.organisms.Sidebar">
