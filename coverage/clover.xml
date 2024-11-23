@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732403998875" clover="3.2.0">
-  <project timestamp="1732403998875" name="All files">
-    <metrics statements="655" coveredstatements="613" conditionals="205" coveredconditionals="177" methods="151" coveredmethods="124" elements="1011" coveredelements="914" complexity="0" loc="655" ncloc="655" packages="51" files="58" classes="58"/>
+<coverage generated="1732404538103" clover="3.2.0">
+  <project timestamp="1732404538103" name="All files">
+    <metrics statements="653" coveredstatements="611" conditionals="205" coveredconditionals="177" methods="151" coveredmethods="124" elements="1009" coveredelements="912" complexity="0" loc="653" ncloc="653" packages="51" files="58" classes="58"/>
     <package name="app">
       <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="layout.tsx" path="E:\arithmetic-calculator-frontend\src\app\layout.tsx">
@@ -643,9 +643,9 @@
       </file>
     </package>
     <package name="app.components.organisms.RecordsTable">
-      <metrics statements="48" coveredstatements="41" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
+      <metrics statements="46" coveredstatements="39" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
       <file name="index.tsx" path="E:\arithmetic-calculator-frontend\src\app\components\organisms\RecordsTable\index.tsx">
-        <metrics statements="48" coveredstatements="41" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
+        <metrics statements="46" coveredstatements="39" conditionals="16" coveredconditionals="8" methods="19" coveredmethods="11"/>
         <line num="3" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="14" count="1" type="stmt"/>
@@ -654,46 +654,44 @@
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="24" count="6" type="stmt"/>
-        <line num="26" count="6" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
         <line num="27" count="6" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
         <line num="29" count="6" type="stmt"/>
         <line num="30" count="6" type="stmt"/>
-        <line num="31" count="6" type="stmt"/>
         <line num="32" count="6" type="stmt"/>
-        <line num="34" count="6" type="stmt"/>
-        <line num="39" count="6" type="stmt"/>
-        <line num="40" count="1" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="44" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="47" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="61" count="6" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="65" count="6" type="stmt"/>
-        <line num="66" count="6" type="stmt"/>
-        <line num="68" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="73" count="6" type="stmt"/>
-        <line num="74" count="4" type="stmt"/>
-        <line num="78" count="6" type="stmt"/>
-        <line num="79" count="8" type="stmt"/>
-        <line num="81" count="8" type="cond" truecount="1" falsecount="1"/>
-        <line num="84" count="8" type="cond" truecount="2" falsecount="0"/>
-        <line num="90" count="6" type="cond" truecount="3" falsecount="0"/>
-        <line num="98" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="126" count="20" type="stmt"/>
-        <line num="146" count="7" type="stmt"/>
-        <line num="161" count="0" type="stmt"/>
-        <line num="163" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="171" count="5" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="59" count="6" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="63" count="6" type="stmt"/>
+        <line num="64" count="6" type="stmt"/>
+        <line num="66" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="6" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="76" count="6" type="stmt"/>
+        <line num="77" count="8" type="stmt"/>
+        <line num="79" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="82" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="88" count="6" type="cond" truecount="3" falsecount="0"/>
+        <line num="96" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="124" count="20" type="stmt"/>
+        <line num="144" count="7" type="stmt"/>
+        <line num="159" count="0" type="stmt"/>
+        <line num="161" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="169" count="5" type="stmt"/>
       </file>
     </package>
     <package name="app.components.organisms.Sidebar">
