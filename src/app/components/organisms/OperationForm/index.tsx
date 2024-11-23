@@ -14,6 +14,7 @@ import OperationSelect from "../../molecules/OperationSelect";
 import PreviewBox from "../../molecules/PreviewBox";
 import InputField from "../../molecules/InputField";
 import { useOperationService } from "@/app/hooks/useOperationService";
+import { mutate } from "swr";
 import { ValidationService } from "@/app/services/validation-service";
 import Text from "../../atoms/Text";
 import {
@@ -22,7 +23,6 @@ import {
   Option,
 } from "@/shared/interfaces/operations";
 import { Record } from "@/shared/interfaces/records";
-import { useRecordService } from "@/app/hooks/useRecordService";
 
 const OperationsForm = ({
   balance,
@@ -39,7 +39,6 @@ const OperationsForm = ({
   const { performOperation, useOperations } = useOperationService();
   const { operations, error, isLoading } = useOperations();
   const toast = useToast();
-  const { addRecord } = useRecordService();
 
   const validationService = useMemo(
     () => new ValidationService(balance),
@@ -132,7 +131,7 @@ const OperationsForm = ({
       );
 
       setResult(operationResult);
-      addRecord(operationResult);
+      await mutate("/records", operationResult, false);
     } catch (error) {
       toast({
         title: "Error performing operation",

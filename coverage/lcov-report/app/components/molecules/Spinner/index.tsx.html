@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,10 +100,10 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -114,7 +114,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -136,11 +136,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from <span class="cstat-no" title="statement not covered" >"react";</span>
-import SpinnerIcon from <span class="cstat-no" title="statement not covered" >"../../atoms/SpinnerIcon";</span>
-import Text from <span class="cstat-no" title="statement not covered" >"../../atoms/Text";</span>
-import { Box } from <span class="cstat-no" title="statement not covered" >"@chakra-ui/react";</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import SpinnerIcon from "../../atoms/SpinnerIcon";
+import Text from "../../atoms/Text";
+import { Box } from "@chakra-ui/react";
 &nbsp;
 interface SpinnerProps {
   loadingText?: string;
@@ -151,13 +151,13 @@ interface SpinnerProps {
   dataTestId?: string;
 }
 &nbsp;
-const Spinner: React.FC&lt;SpinnerProps&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
+const Spinner: React.FC&lt;SpinnerProps&gt; = ({
   loadingText,
   textStyle,
   className,
   width,
   height,
-  dataTestId = <span class="branch-0 cbranch-no" title="branch not covered" >"spinner",</span>
+  dataTestId = "spinner",
 }) =&gt; {
   return (
     &lt;Box
@@ -166,14 +166,14 @@ const Spinner: React.FC&lt;SpinnerProps&gt; = <span class="cstat-no" title="stat
       data-testid={dataTestId}
     &gt;
       &lt;SpinnerIcon width={width} height={height} data-testid="spinner-icon" /&gt;
-      {<span class="branch-0 cbranch-no" title="branch not covered" >loadingText &amp;&amp; (</span>
+      {loadingText &amp;&amp; (
         &lt;Text style={{ marginLeft: "8px", ...textStyle }}&gt;{loadingText}&lt;/Text&gt;
       )}
     &lt;/Box&gt;
   );
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default <span class="cstat-no" title="statement not covered" >S</span>pinner;</span>
+export default Spinner;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -181,7 +181,7 @@ const Spinner: React.FC&lt;SpinnerProps&gt; = <span class="cstat-no" title="stat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-23T13:46:22.184Z
+                at 2024-11-23T14:19:59.937Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

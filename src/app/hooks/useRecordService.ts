@@ -4,8 +4,8 @@ import useSWR, { mutate } from "swr";
 import useApi from "./useApi";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store/store";
-import { removeRecord, setRecords } from "../store/slices/record-slice";
-import { Record, RecordsResponse } from "@/shared/interfaces/records";
+import { removeRecord } from "../store/slices/record-slice";
+import { RecordsResponse } from "@/shared/interfaces/records";
 import { useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -37,19 +37,10 @@ export const useRecordService = () => {
       [`/records`, page, itemsPerPage],
       () => fetchRecords(page, itemsPerPage),
       {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
+        revalidateOnFocus: true,
+        revalidateOnReconnect: true,
         dedupingInterval: 5000,
       }
-    );
-
-    dispatch(
-      setRecords({
-        records: data?.content || [],
-        totalPages: data?.totalPages || 1,
-        isFirst: data?.first || true,
-        isLast: data?.last || false,
-      })
     );
 
     return {
@@ -67,8 +58,8 @@ export const useRecordService = () => {
     try {
       await mutate(
         `/records`,
-        (data: RecordsResponse | undefined) => {
-          if (!data || !data.content) return data;
+        async (data: RecordsResponse | undefined) => {
+          if (!data) return data;
           return {
             ...data,
             content: data.content.filter((record) => record.id !== recordId),
@@ -91,7 +82,7 @@ export const useRecordService = () => {
 
       await revalidateRecords();
     } catch (error) {
-      console.error("Error during deletion:", error);
+      await mutate(`/records`);
       toast({
         title: "Action failed",
         description: `Record deletion failed: ${
@@ -108,41 +99,10 @@ export const useRecordService = () => {
     }
   };
 
-  const addRecord = async (newRecord: Record): Promise<void> => {
-    try {
-      await mutate(
-        `/records`,
-        (data: RecordsResponse | undefined) => {
-          if (!data || !data.content) return data;
-          return {
-            ...data,
-            content: [newRecord, ...data.content],
-          };
-        },
-        false
-      );
-
-      await revalidateRecords();
-    } catch (error) {
-      console.error("Error adding record:", error);
-      toast({
-        title: "Action failed",
-        description: `Failed to add record: ${
-          error instanceof Error ? error.message : error
-        }`,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top-right",
-      });
-    }
-  };
-
   return {
     deleteRecord,
     useRecords,
     revalidateRecords,
     isDeleting,
-    addRecord,
   };
 };
