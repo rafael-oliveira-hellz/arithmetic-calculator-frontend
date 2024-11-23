@@ -98,7 +98,7 @@ describe("useRecordService", () => {
       const { result } = renderHook(() => useRecordService());
 
       await act(async () => {
-        await result.current.deleteRecord("1");
+        await result.current.deleteRecord("1", 0, 10);
       });
 
       expect(mockApi.delete).toHaveBeenCalledWith("/records/1");
@@ -122,7 +122,7 @@ describe("useRecordService", () => {
 
       await act(async () => {
         try {
-          await result.current.deleteRecord("1");
+          await result.current.deleteRecord("1", 0, 10);
         } catch (e) {
           expect(e).toBe(mockError);
         }

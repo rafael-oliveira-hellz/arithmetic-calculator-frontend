@@ -53,7 +53,11 @@ export const useRecordService = () => {
     };
   };
 
-  const deleteRecord = async (recordId: string): Promise<void> => {
+  const deleteRecord = async (
+    recordId: string,
+    page: number,
+    itemsPerPage: number
+  ): Promise<void> => {
     setIsDeleting(true);
     try {
       await mutate(
@@ -71,6 +75,10 @@ export const useRecordService = () => {
       await api.delete(`/records/${recordId}`);
       dispatch(removeRecord(recordId));
 
+      const updatedRecords = await fetchRecords(page, itemsPerPage);
+
+      mutate(`/records`, updatedRecords, false);
+
       toast({
         title: "Success",
         description: "Record deleted successfully",
@@ -79,8 +87,6 @@ export const useRecordService = () => {
         isClosable: true,
         position: "top-right",
       });
-
-      await revalidateRecords();
     } catch (error) {
       await mutate(`/records`);
       toast({

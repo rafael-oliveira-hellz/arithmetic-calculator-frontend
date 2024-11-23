@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732371600263" clover="3.2.0">
-  <project timestamp="1732371600263" name="All files">
-    <metrics statements="640" coveredstatements="596" conditionals="205" coveredconditionals="176" methods="149" coveredmethods="121" elements="994" coveredelements="893" complexity="0" loc="640" ncloc="640" packages="49" files="56" classes="56"/>
+<coverage generated="1732371924966" clover="3.2.0">
+  <project timestamp="1732371924966" name="All files">
+    <metrics statements="641" coveredstatements="599" conditionals="205" coveredconditionals="176" methods="149" coveredmethods="122" elements="995" coveredelements="897" complexity="0" loc="641" ncloc="641" packages="49" files="56" classes="56"/>
     <package name="app">
       <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="3"/>
       <file name="layout.tsx" path="E:\arithmetic-calculator-frontend\src\app\layout.tsx">
@@ -700,7 +700,7 @@
       </file>
     </package>
     <package name="app.hooks">
-      <metrics statements="111" coveredstatements="101" conditionals="26" coveredconditionals="21" methods="18" coveredmethods="13"/>
+      <metrics statements="112" coveredstatements="104" conditionals="26" coveredconditionals="21" methods="18" coveredmethods="14"/>
       <file name="useApi.ts" path="E:\arithmetic-calculator-frontend\src\app\hooks\useApi.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
@@ -785,7 +785,7 @@
         <line num="88" count="5" type="stmt"/>
       </file>
       <file name="useRecordService.ts" path="E:\arithmetic-calculator-frontend\src\app\hooks\useRecordService.ts">
-        <metrics statements="37" coveredstatements="30" conditionals="14" coveredconditionals="12" methods="8" coveredmethods="4"/>
+        <metrics statements="38" coveredstatements="33" conditionals="14" coveredconditionals="12" methods="8" coveredmethods="5"/>
         <line num="3" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
@@ -798,31 +798,32 @@
         <line num="15" count="10" type="stmt"/>
         <line num="16" count="10" type="stmt"/>
         <line num="18" count="10" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="31" count="10" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
         <line num="35" count="10" type="stmt"/>
         <line num="36" count="3" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
         <line num="46" count="3" type="stmt"/>
         <line num="56" count="10" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="58" count="2" type="stmt"/>
-        <line num="59" count="2" type="stmt"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="71" count="2" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
-        <line num="86" count="1" type="stmt"/>
-        <line num="96" count="1" type="stmt"/>
-        <line num="98" count="2" type="stmt"/>
-        <line num="102" count="10" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="62" count="2" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="66" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="75" count="2" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+        <line num="104" count="2" type="stmt"/>
+        <line num="108" count="10" type="stmt"/>
       </file>
     </package>
     <package name="app.providers">

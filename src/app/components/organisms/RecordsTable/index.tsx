@@ -40,7 +40,7 @@ const RecordsTable = (): React.JSX.Element => {
 
   const handleDelete = async (recordId: string) => {
     try {
-      await deleteRecord(recordId);
+      await deleteRecord(recordId, currentPage - 1, itemsPerPage);
       await revalidateRecords();
     } catch (error) {
       toast({

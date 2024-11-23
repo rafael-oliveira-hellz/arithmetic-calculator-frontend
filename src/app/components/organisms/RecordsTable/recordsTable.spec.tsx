@@ -61,7 +61,9 @@ describe("RecordsTable Component", () => {
     const deleteButton = screen.getAllByLabelText("Delete")[0];
     fireEvent.click(deleteButton);
 
-    await waitFor(() => expect(mockDeleteRecord).toHaveBeenCalledWith("1"));
+    await waitFor(() =>
+      expect(mockDeleteRecord).toHaveBeenCalledWith("1", 0, 10)
+    );
     expect(mockRevalidateRecords).toHaveBeenCalled();
   });
 
