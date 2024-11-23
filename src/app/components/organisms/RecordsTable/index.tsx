@@ -35,7 +35,7 @@ const RecordsTable = (): React.JSX.Element => {
 
   const handleFilterChange = useCallback((field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
-    setCurrentPage(0);
+    setCurrentPage(1);
   }, []);
 
   const handleDelete = async (recordId: string) => {

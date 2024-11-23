@@ -20,14 +20,14 @@ const PreviewBox: React.FC<PreviewBoxProps> = ({
         Preview
       </Text>
       <Text fontSize="md" mb="2">
-        <strong>Operação selecionada:</strong> {operation || "N/A"}
+        <strong>Selected operation:</strong> {operation || "N/A"}
       </Text>
       <Text fontSize="md">
-        <strong>Valor 1:</strong> {value1 || "N/A"}
+        <strong>Value 1:</strong> {value1 || "N/A"}
       </Text>
       {requiresSecondInput && (
         <Text fontSize="md">
-          <strong>Valor 2:</strong> {value2 || "N/A"}
+          <strong>Value 2:</strong> {value2 || "N/A"}
         </Text>
       )}
     </Box>

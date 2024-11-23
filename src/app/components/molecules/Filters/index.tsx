@@ -33,7 +33,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
           as={Button}
           rightIcon={<ChevronDownIcon />}
           bg="gray.700"
-          color="white"
+          color="#FFF"
           _hover={{ bg: "gray.600" }}
           _active={{ bg: "gray.600" }}
           minW="250px"
