@@ -10,6 +10,7 @@ const CenteredRow = ({ children }: CenteredRowProps): React.JSX.Element => (
       "& > td": {
         textAlign: "center",
         verticalAlign: "middle",
+        color: "#FFF",
       },
     }}
   >
