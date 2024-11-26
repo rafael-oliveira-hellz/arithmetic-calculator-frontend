@@ -107,8 +107,8 @@ const RecordsTable = (): React.JSX.Element => {
       borderRadius="md"
       display="flex"
       flexDirection="column"
-      minH="calc(100vh - 180px)" // Altura ajustada ao header/footer
-      overflowX="auto" // Evitar overflow horizontal
+      minH="calc(100vh - 180px)"
+      overflowX="auto"
     >
       <Flex justify="space-between" mb="4" alignItems="center">
         <Text fontSize="lg" fontWeight="bold" color="#FFF">
