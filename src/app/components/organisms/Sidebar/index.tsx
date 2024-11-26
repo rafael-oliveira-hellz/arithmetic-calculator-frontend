@@ -19,7 +19,7 @@ const Sidebar = (): React.JSX.Element => {
       as="nav"
       bg="gray.800"
       color="#FFF"
-      width={isExpanded ? "200px" : "60px"}
+      width={{ base: "60px", md: isExpanded ? "200px" : "60px" }}
       className={twclsx("min-h-full")}
       role="navigation"
       transition="width 0.3s ease-in-out"
@@ -31,11 +31,9 @@ const Sidebar = (): React.JSX.Element => {
           aria-expanded={isExpanded ? "true" : "false"}
           role="button"
           onClick={() => setIsExpanded(!isExpanded)}
-          className={twclsx("m-2")}
-          style={{
-            background: "transparent",
-            border: "1px solid #14CFB1",
-          }}
+          m="2"
+          bg="transparent"
+          border="1px solid #14CFB1"
         >
           {isExpanded ? (
             <MdMenuOpen fill="#14CFB1" size={40} data-icon="MdMenuOpen" />

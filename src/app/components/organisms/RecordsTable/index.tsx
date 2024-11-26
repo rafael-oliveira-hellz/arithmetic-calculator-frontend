@@ -107,16 +107,11 @@ const RecordsTable = (): React.JSX.Element => {
       borderRadius="md"
       display="flex"
       flexDirection="column"
-      minH="80vh"
+      minH="calc(100vh - 180px)" // Altura ajustada ao header/footer
+      overflowX="auto" // Evitar overflow horizontal
     >
-      <Flex
-        justify="space-between"
-        mb="4"
-        alignItems="center"
-        flexWrap="wrap"
-        gap="4"
-      >
-        <Text fontSize="lg" fontWeight="bold" color="#FFF" flex="1 1 auto">
+      <Flex justify="space-between" mb="4" alignItems="center">
+        <Text fontSize="lg" fontWeight="bold" color="#FFF">
           Operation Records
         </Text>
         <Select
@@ -125,7 +120,6 @@ const RecordsTable = (): React.JSX.Element => {
           bg="gray.700"
           color="#FFF"
           maxW="150px"
-          flex="0 0 auto"
         >
           {[10, 20, 30, 50, 100].map((size) => (
             <option
@@ -141,37 +135,25 @@ const RecordsTable = (): React.JSX.Element => {
 
       <Filters filters={filters} onFilterChange={handleFilterChange} />
 
-      <Box overflowX="auto">
-        <Table
-          variant="simple"
-          width="100%"
-          bg="gray.800"
-          color="#FFF"
-          minWidth="600px"
-        >
-          <RecordTableHeader
-            sortOrder={sortOrder}
-            onSortChange={handleSortToggle}
-          />
-          <Tbody>
-            {filteredRecords.map((record) => (
+      <Table variant="simple" width="100%" bg="gray.800" color="#FFF">
+        <RecordTableHeader
+          sortOrder={sortOrder}
+          onSortChange={handleSortToggle}
+        />
+        <Tbody>
+          {filteredRecords.map((record) => {
+            return (
               <RecordTableRow
                 key={record.id}
                 record={record}
                 onDelete={handleDelete}
               />
-            ))}
-          </Tbody>
-        </Table>
-      </Box>
+            );
+          })}
+        </Tbody>
+      </Table>
 
-      <Flex
-        mt="auto"
-        justify="center"
-        flexDirection={["column", "row"]}
-        alignItems="center"
-        gap="4"
-      >
+      <Flex mt="auto" justify="center">
         <PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}

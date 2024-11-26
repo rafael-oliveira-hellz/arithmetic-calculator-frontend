@@ -232,7 +232,26 @@
 <a name='L167'></a><a href='#L167'>167</a>
 <a name='L168'></a><a href='#L168'>168</a>
 <a name='L169'></a><a href='#L169'>169</a>
-<a name='L170'></a><a href='#L170'>170</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a>
+<a name='L172'></a><a href='#L172'>172</a>
+<a name='L173'></a><a href='#L173'>173</a>
+<a name='L174'></a><a href='#L174'>174</a>
+<a name='L175'></a><a href='#L175'>175</a>
+<a name='L176'></a><a href='#L176'>176</a>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -349,7 +368,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -375,7 +401,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -512,8 +550,14 @@ const RecordsTable = (): React.JSX.Element =&gt; {
       flexDirection="column"
       minH="80vh"
     &gt;
-      &lt;Flex justify="space-between" mb="4" alignItems="center"&gt;
-        &lt;Text fontSize="lg" fontWeight="bold" color="#FFF"&gt;
+      &lt;Flex
+        justify="space-between"
+        mb="4"
+        alignItems="center"
+        flexWrap="wrap"
+        gap="4"
+      &gt;
+        &lt;Text fontSize="lg" fontWeight="bold" color="#FFF" flex="1 1 auto"&gt;
           Operation Records
         &lt;/Text&gt;
         &lt;Select
@@ -522,6 +566,7 @@ const RecordsTable = (): React.JSX.Element =&gt; {
           bg="gray.700"
           color="#FFF"
           maxW="150px"
+          flex="0 0 auto"
         &gt;
           {[10, 20, 30, 50, 100].map((size) =&gt; (
             &lt;option
@@ -537,25 +582,37 @@ const RecordsTable = (): React.JSX.Element =&gt; {
 &nbsp;
       &lt;Filters filters={filters} onFilterChange={handleFilterChange} /&gt;
 &nbsp;
-      &lt;Table variant="simple" width="100%" bg="gray.800" color="#FFF"&gt;
-        &lt;RecordTableHeader
-          sortOrder={sortOrder}
-          onSortChange={handleSortToggle}
-        /&gt;
-        &lt;Tbody&gt;
-          {filteredRecords.map((record) =&gt; {
-            return (
+      &lt;Box overflowX="auto"&gt;
+        &lt;Table
+          variant="simple"
+          width="100%"
+          bg="gray.800"
+          color="#FFF"
+          minWidth="600px"
+        &gt;
+          &lt;RecordTableHeader
+            sortOrder={sortOrder}
+            onSortChange={handleSortToggle}
+          /&gt;
+          &lt;Tbody&gt;
+            {filteredRecords.map((record) =&gt; (
               &lt;RecordTableRow
                 key={record.id}
                 record={record}
                 onDelete={handleDelete}
               /&gt;
-            );
-          })}
-        &lt;/Tbody&gt;
-      &lt;/Table&gt;
+            ))}
+          &lt;/Tbody&gt;
+        &lt;/Table&gt;
+      &lt;/Box&gt;
 &nbsp;
-      &lt;Flex mt="auto" justify="center"&gt;
+      &lt;Flex
+        mt="auto"
+        justify="center"
+        flexDirection={["column", "row"]}
+        alignItems="center"
+        gap="4"
+      &gt;
         &lt;PaginationControls
           currentPage={currentPage}
           totalPages={totalPages}
@@ -577,7 +634,7 @@ export default RecordsTable;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-23T23:28:57.543Z
+                at 2024-11-26T00:15:48.504Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -20,7 +20,11 @@ const Footer = ({ className }: { className?: string }): React.JSX.Element => {
       aria-label="Footer"
       role="contentinfo"
       className={twclsx("bg-gray-800 text-white p-4", className)}
+      p="4"
       justify="center"
+      align="center"
+      textAlign="center"
+      flexDirection={{ base: "column", md: "row" }} // Coluna em telas menores
     >
       <Text aria-label="Copyright" aria-description="Copyright" variant="large">
         &copy; {currentYear} Arithmetic Calculator. All rights reserved.

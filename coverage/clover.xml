@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1732404538103" clover="3.2.0">
-  <project timestamp="1732404538103" name="All files">
+<coverage generated="1732580149030" clover="3.2.0">
+  <project timestamp="1732580149030" name="All files">
     <metrics statements="653" coveredstatements="611" conditionals="205" coveredconditionals="177" methods="151" coveredmethods="124" elements="1009" coveredelements="912" complexity="0" loc="653" ncloc="653" packages="51" files="58" classes="58"/>
     <package name="app">
       <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="3"/>
@@ -686,12 +686,12 @@
         <line num="82" count="8" type="cond" truecount="2" falsecount="0"/>
         <line num="88" count="6" type="cond" truecount="3" falsecount="0"/>
         <line num="96" count="5" type="cond" truecount="1" falsecount="0"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="124" count="20" type="stmt"/>
-        <line num="144" count="7" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="161" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="169" count="5" type="stmt"/>
+        <line num="124" count="0" type="stmt"/>
+        <line num="131" count="20" type="stmt"/>
+        <line num="158" count="7" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="180" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="188" count="5" type="stmt"/>
       </file>
     </package>
     <package name="app.components.organisms.Sidebar">

@@ -22,26 +22,25 @@ const Header = (): React.JSX.Element => {
   );
 
   return (
-    <>
-      <Flex
-        as="header"
-        role="banner"
-        justify="space-between"
-        align="center"
-        p="4"
-        bg="gray.800"
-        color="#FFF"
-      >
-        <HeaderContent appName="Arithmetic Calculator" />
-        {isAuthenticated && (
-          <UserActions
-            data-testid="user-actions"
-            username={user?.username ?? "Guest"}
-            onLogout={async () => await logoutUser()}
-          />
-        )}
-      </Flex>
-    </>
+    <Flex
+      as="header"
+      role="banner"
+      justify="space-between"
+      align="center"
+      p="4"
+      bg="gray.800"
+      color="#FFF"
+      flexWrap="wrap"
+    >
+      <HeaderContent appName="Arithmetic Calculator" />
+      {isAuthenticated && (
+        <UserActions
+          data-testid="user-actions"
+          username={user?.username ?? "Guest"}
+          onLogout={async () => await logoutUser()}
+        />
+      )}
+    </Flex>
   );
 };
 
