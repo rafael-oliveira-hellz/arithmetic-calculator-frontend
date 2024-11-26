@@ -30,7 +30,10 @@ const Header = (): React.JSX.Element => {
       p="4"
       bg="gray.800"
       color="#FFF"
-      flexWrap="wrap"
+      width="100%"
+      position="sticky"
+      top="0"
+      zIndex="1000"
     >
       <HeaderContent appName="Arithmetic Calculator" />
       {isAuthenticated && (
