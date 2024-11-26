@@ -19,7 +19,7 @@ const Sidebar = (): React.JSX.Element => {
       as="nav"
       bg="gray.800"
       color="#FFF"
-      width={{ base: "60px", md: isExpanded ? "200px" : "60px" }}
+      width={isExpanded ? "200px" : "60px"}
       className={twclsx("min-h-full")}
       role="navigation"
       transition="width 0.3s ease-in-out"
